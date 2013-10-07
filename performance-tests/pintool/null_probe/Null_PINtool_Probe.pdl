@@ -1,0 +1,10 @@
+module OASIS
+{
+module PIN
+{
+  [uuid (267bc946-31ab-4e55-87c8-2f7a705e1ea9); version(1.0)]
+  probe Null_PINtool_Probe
+  {
+  };
+}
+}

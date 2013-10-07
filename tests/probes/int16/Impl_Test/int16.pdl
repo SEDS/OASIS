@@ -1,0 +1,8 @@
+module OASIS
+{
+  [uuid (8BBA0BD5-877E-4400-B212-420566DEE715); version(1.0)]
+  probe Int16_SoftwareProbe
+  {
+    int16 value;
+  };
+}

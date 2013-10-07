@@ -1,0 +1,8 @@
+// $Id: oasis_softwareprobe.mpb 2235 2013-02-06 20:18:09Z dfeiock $
+
+project : boost_base, oasis, oasis_data_channel {
+  libs  += OASIS_SoftwareProbe_Core
+  after += OASIS_SoftwareProbe_Core
+
+  includes += $(OASIS_ROOT)/examples/probes
+}

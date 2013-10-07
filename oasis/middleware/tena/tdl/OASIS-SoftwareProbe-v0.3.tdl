@@ -1,0 +1,67 @@
+// -*- TDL -*-
+
+//=============================================================================
+/**
+ * @file          OASIS-SoftwareProbe-v0.3.tdl
+ *
+ * $Id: OASIS-SoftwareProbe-v0.3.tdl 1940 2011-09-28 18:25:24Z hillj $
+ *
+ * @author        James H. Hill
+ */
+//=============================================================================
+
+import <TENA-Time-v2.tdl>
+import <OASIS-UUID-v1.tdl>
+
+package OASIS
+{
+  package Middleware
+  {
+    /**
+     * @class SoftwareProbeMetadata
+     *
+     * Metadata describing the software probe and its data.
+     */
+    local class SoftwareProbeMetadata
+    {
+      UUID uuid;
+
+      string type;
+
+      octet version_major;
+
+      octet version_minor;
+
+      string schema;
+    };
+
+    /**
+     * @class SoftwareProbe
+     *
+     * Base class for all software probe SDOs. This SDO contains static
+     * informatin about the probe, such as its instance name, EI node,
+     * and metadata. It also contain dynamic data about the probe, such
+     * as the last timestamp of the data, its sequence number, and state.
+     */
+    class SoftwareProbe
+    {
+      /// Instance name of the software probe.
+      const string name;
+
+      /// EI node hosting software probe.
+      const UUID einode;
+
+      /// Metadata about the software probe instance.
+      const SoftwareProbeMetadata metadata;
+
+      /// Last timestamp of the software probe.
+      TENA::Time last_timestamp;
+
+      /// The current sequence number.
+      uint32 sequence_num;
+
+      /// State of the software probe.
+      int32 state;
+    };
+  };
+};

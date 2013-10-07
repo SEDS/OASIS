@@ -1,0 +1,14 @@
+// $Id: Smoke_Test.mpc 2211 2012-07-25 12:55:51Z dfeiock $
+
+project (OASIS_Int64_Smoke_Test) : aceexe, oasis_data_channel, oasis_einode_core, oasis_softwareprobe {
+  exename = OASIS_Int64_Smoke_Test
+  install = .
+
+  after += OASIS_Int64_Software_Probe_Test
+
+  Source_Files {
+    Smoke_Test.cpp
+    ../Impl_Test/int64Impl.cpp
+    ../Impl_Test/int64_Metadata.cpp
+  }
+}

@@ -1,0 +1,43 @@
+//$Id: Memory_Footprint.mpc 2245 2013-09-06 23:20:23Z hillj $
+
+project (OASIS_Memory_Footprint_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, oasis_perf_no_payload {
+  sharedname    = OASIS_Memory_Footprint_Probe_stub
+  dynamicflags += OASIS_MEMORY_FOOTPRINT_PROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_MEMORY_FOOTPRINT_PROBE_STUB_Export \
+              --export-file=Memory_Footprint_Probe_stub_export.h
+
+
+  PDL_Files {
+    Memory_Footprint_Probe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_Memory_Footprint_Probe) : oasis_pintool, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_Memory_Footprint_Probe
+  dynamicflags += MEMORY_FOOTPRINT_PROBE_IMPL_BUILD_DLL
+
+  after += OASIS_Memory_Footprint_Probe_stub
+  libs  += OASIS_Memory_Footprint_Probe_stub
+
+  Source_Files {
+    Memory_Footprint_Probe_Impl.cpp
+  }
+
+  Header_Files {
+
+  }
+
+  Template_Files {
+
+  }
+}

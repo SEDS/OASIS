@@ -1,0 +1,20 @@
+// $Id: PDL_FE.mpc 1896 2011-09-07 14:56:19Z hillj $
+
+project (OASIS_PDL_FE) : acelib, oasis_lib {
+  sharedname    = OASIS_PDL_FE
+  dynamicflags += OASIS_PDL_FE_BUILD_DLL
+
+  Source_Files {
+    PDL_Complex_Type.cpp
+    PDL_Configuration.cpp
+    PDL_Declaration.cpp
+    PDL_File.cpp
+    PDL_Module.cpp
+    PDL_Probe.cpp
+    PDL_Simple_Type.cpp
+    PDL_Struct.cpp
+    PDL_Type.cpp
+    PDL_Vector_Type.cpp
+    PDL_Visitor.cpp
+  }
+}

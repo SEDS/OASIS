@@ -1,0 +1,61 @@
+// -*- TDL -*-
+
+//=============================================================================
+/**
+ * @file          OASIS-SoftwareProbe-v0.0.1.tdl
+ *
+ * $Id: OASIS-SoftwareProbe-v0.2.tdl 1940 2011-09-28 18:25:24Z hillj $
+ *
+ * @author        James H. Hill
+ */
+//=============================================================================
+
+package OASIS
+{
+  package Middleware
+  {
+    local class TimeValue
+    {
+      uint64 sec;
+
+      uint64 usec;
+    };
+
+    local class UUID
+    {
+      uint32 data1;
+
+      uint16 data2;
+
+      uint16 data3;
+
+      vector <octet> data4;
+    };
+
+    local class SoftwareProbeMetadata
+    {
+      UUID uuid;
+
+      string type;
+
+      octet version_major;
+
+      octet version_minor;
+
+      string schema;
+    };
+
+    class SoftwareProbe
+    {
+      const SoftwareProbeMetadata metadata;
+
+      UUID source_einode;
+
+      TimeValue last_timestamp;
+
+      uint32 sequence_num;
+
+      int32 state;
+    };
+  };
+};

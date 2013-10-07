@@ -1,0 +1,64 @@
+#pragma version (1.4)
+
+module OASIS
+{
+  module System
+  {
+    module Memory
+    {
+      [uuid(ed970279-247d-42ca-aeaa-bef0239ca3b3); version(1.1)]
+      abstract probe MemoryProbe
+      {
+        uint64 physical_memory_avail;
+        uint64 physical_memory_total;
+
+        uint64 system_cache;
+
+        uint64 commit_limit;
+        uint64 commit_total;
+
+        uint64 virtual_total;
+        uint64 virtual_used;
+      };
+
+      [uuid(81DA0F4B-2712-4A7A-ABE4-F74C80A5C069); version(1.1)]
+      probe LinuxMemoryProbe : MemoryProbe
+      {
+        uint64 buffers;
+        uint64 swap_cache;
+
+        uint64 inactive;
+        uint64 active;
+
+        uint64 high_total;
+        uint64 high_free;
+
+        uint64 low_total;
+        uint64 low_free;
+
+        uint64 swap_total;
+        uint64 swap_free;
+
+        uint64 dirty;
+        uint64 write_back;
+
+        uint64 virtual_chunk;
+      };
+
+      [uuid(C78815F8-4A43-43BE-9E58-FE875E961B7D); version(1.1)]
+      probe WindowsMemoryProbe : MemoryProbe
+      {
+        uint64 page_file_total;
+        uint64 page_file_avail;
+
+        uint64 kernel_total;
+        uint64 kernel_paged;
+        uint64 kernel_nonpaged;
+
+        uint64 page_size;
+
+        uint64 commit_peak;
+      };
+    }
+  }
+}

@@ -1,0 +1,38 @@
+// $Id: HeartbeatProbe.mpc 1867 2011-08-22 21:14:42Z hillj $
+
+project (OASIS_HeartbeatProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_HeartbeatProbe_stub
+  dynamicflags += OASIS_HEARTBEATPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_HEARTBEATPROBE_STUB_Export \
+              --export-file=HeartbeatProbe_stub_export.h
+
+  PDL_Files {
+    HeartbeatProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_HeartbeatProbe) : boost_base, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_HeartbeatProbe
+  dynamicflags += HEARTBEATPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_HeartbeatProbe_stub
+  libs  += OASIS_HeartbeatProbe_stub
+
+  Source_Files {
+    HeartbeatProbe_Impl.cpp
+  }
+
+  Header_Files {
+
+  }
+}

@@ -1,0 +1,52 @@
+// $Id: MemoryProbe.mpc 1867 2011-08-22 21:14:42Z hillj $
+
+project (OASIS_MemoryProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_MemoryProbe_stub
+  dynamicflags += OASIS_MEMORYPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_MEMORYPROBE_STUB_Export \
+              --export-file=MemoryProbe_stub_export.h
+
+  PDL_Files {
+    MemoryProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_MemoryProbe) : boost_base, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_MemoryProbe
+  dynamicflags += MEMORYPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_MemoryProbe_stub
+  libs  += OASIS_MemoryProbe_stub
+
+  specific (prop:windows) {
+    lit_libs += Psapi
+  }
+
+  Source_Files {
+    MemoryProbe_Impl.cpp
+
+    conditional (!prop:windows) {
+      Meminfo_Parser.cpp
+    }
+  }
+
+  Header_Files {
+
+  }
+
+  Template_Files {
+    conditional (!prop:windows) {
+      Meminfo_Parser_Grammar.cpp
+    }
+  }
+}

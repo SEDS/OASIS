@@ -1,0 +1,72 @@
+DOCUMENT: QUICK START
+LAST UPDATE: September 24, 2012
+
+I. Quick Start with bczar
+-------------------------
+The easiest way to compile OASIS is to use the bczar script.  The
+following software must be installed for it to work:
+
+gcc or Visual Studio (VS2008 with all updates is recommended for win32)
+python 3
+perl
+svn command line utility
+
+II. Using bczar
+-------------------------
+If compiling with Visual Studio, always use a Visual Studio Command
+Prompt.
+
+1. Verify svn and perl are in your path
+2. Verify python 3 command using the '-V' argument
+3. svn checkout https://svn.cs.iupui.edu/repos/SEM/trunk/scripts/bczar
+4. Execute bczar.py with the '--include=OASIS download' arguments
+     This will only download the source for OASIS and all its dependencies.
+     A '--prefix=' argument can be used to specify where to put the
+     files; the default is the current working directory.
+5. Execute bczar.py with the '--include=OASIS build --versioned-namespace'
+   arguments
+     A '--prefix=' argument can be used to specify where to find the
+     files; the default is the current working directory.
+6. source or execute the configure script in the prefix directory
+7. Validate the following libs got built:
+     boost   ($BOOST_ROOT/lib)
+     ACE/TAO ($ACE_ROOT/lib)
+     ADBC    ($ADBC_ROOT/lib)
+     sqlite  ($SQLITE_ROOT/lib)
+     xerces  ($XERCESCROOT/lib)
+     oasis   ($OASIS_ROOT/lib)
+8. Modify the $OASIS_ROOT/default.features file.  Recommended
+   features are:
+     boost = 1
+     tao = 1
+     xerces3 = 1
+     sqlite3 = 1
+     examples = 1
+     tests = 1
+     versioned_namespace = 1
+     build = 0
+     tena = 0
+     performance_tests = 0
+     openssl = 0
+     snmp = 0
+9. Recompile OASIS using the new features
+     cd $OASIS_ROOT
+     perl $ACE_ROOT/bin/mwc.pl OASIS.mwc -type [gnuace, vc9, or vc10]
+     make boost=1 tao=1 xerces3=1 sqlite3=1 examples=1 tests=1 versioned_namespace=1 (or open OASIS.sln from command line and build)
+10. Run the OASIS tests via $OASIS_ROOT/tests/run_test_all.py
+      If you are running on windows, some of these tests might fail
+      due to library names in various per-test conf files.
+
+At this point, OASIS and all its dependencies should be built
+successfully. All checkouts can be updated manually using svn or
+the bczar script.
+
+Always be sure to run mwc before compiling OASIS as a result of code
+changes, as done in step 8, to insure proper linkage.
+
+Also, when working with OASIS be sure that you run the configure
+script to set required environment variables.
+
+A good place to get started for making your own software probes is
+to review the code for a simple probe (e.g.
+$OASIS_ROOT/tests/probes/int8/Impl_Test).

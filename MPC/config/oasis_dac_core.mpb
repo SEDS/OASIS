@@ -1,0 +1,6 @@
+// $Id: oasis_dac_core.mpb 1926 2011-09-26 20:37:40Z hillj $
+
+project : adbc_sqlite, oasis_softwareprobe {
+  after += OASIS_DAC_Core
+  libs  += OASIS_DAC_Core
+}

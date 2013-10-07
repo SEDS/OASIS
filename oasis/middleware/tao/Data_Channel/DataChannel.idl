@@ -1,0 +1,123 @@
+// -*- IDL -*-
+
+#ifndef _OASIS_DAC_DATA_CHANNEL_IDL_
+#define _OASIS_DAC_DATA_CHANNEL_IDL_
+
+#include "oasis/middleware/tao/OASIS_UUID.idl"
+#include "CommandChannel.idl"
+
+module OASIS
+{
+  /**
+   * @struct TimeValue
+   *
+   * Unix time-value structure.
+   */
+  struct TimeValue
+  {
+    /// The second portion of the time value.
+    unsigned long sec;
+
+    /// The microsecond portion of the time value.
+    unsigned long usec;
+  };
+
+  /// Type definition for binary data.
+  typedef sequence <octet> BinaryData;
+
+  /**
+   * @struct DataPacket
+   *
+   * Aggregate data sent between an EINode and DAC via the CORBA
+   * data channel.
+   */
+  struct DataPacket
+  {
+    UUID einode_uuid;
+
+    long byte_order;
+
+    BinaryData data;
+  };
+
+  /**
+   * @struct SoftwareProbeMetadata
+   *
+   * Metadata about the software probe. This information is used to
+   * register a software probe with the DAC using the exposed CORBA
+   * endpoint.
+   */
+  struct SoftwareProbeMetadata
+  {
+    /// Unique id of the software probe.
+    ::OASIS::UUID uuid;
+
+    /// The type name of the software probe.
+    string type;
+
+    /// Major version number of the software probe.
+    octet version_major;
+
+    /// Minor version number of the software probe.
+    octet version_minor;
+
+    /// The software probe's XML metadata.
+    string schema;
+  };
+
+  /**
+   * @struct SoftwareProbeEntry
+   *
+   * A single software probe entry. It includes both the instance name
+   * of the software probe and its metadata.
+   */
+  struct SoftwareProbeEntry
+  {
+    /// Instance name of the software probe.
+    string name;
+
+    /// Metadata about the software probe.
+    SoftwareProbeMetadata metadata;
+  };
+
+  /// Type definition for a collection of software probe entries.
+  typedef sequence <SoftwareProbeEntry> SoftwareProbeEntrySeq;
+
+  /**
+   * @struct EINodeRegistration
+   *
+   * Registration packet for an EINode. It contains details about the
+   * EINode, as well as the software probes collecting data.
+   */
+  struct EINodeRegistration
+  {
+    /// Unique id for the EINode.
+    ::OASIS::UUID uuid;
+
+    /// Human readable typename for the EINode.
+    string name;
+
+    /// Software probes registered with EINode.
+    SoftwareProbeEntrySeq probes;
+
+    /// Command channel for sending commands to probes.
+    CommandChannel cmd_channel;
+  };
+
+  /**
+   * @interface DataChannel
+   *
+   * The interface definition for the CORBA version of a DAC's
+   * data channel.
+   */
+  interface DataChannel
+  {
+    oneway void send_data (in DataPacket p);
+
+    void register_einode (in EINodeRegistration reg);
+
+    void unregister_einode (in ::OASIS::UUID uuid);
+  };
+};
+
+#endif

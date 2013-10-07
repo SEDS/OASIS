@@ -1,0 +1,48 @@
+// $Id: ProcessorProbe.mpc 2211 2012-07-25 12:55:51Z dfeiock $
+
+project (OASIS_ProcessorProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_ProcessorProbe_stub
+  dynamicflags += OASIS_PROCESSORPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_PROCESSORPROBE_STUB_Export \
+              --export-file=ProcessorProbe_stub_export.h
+
+  PDL_Files {
+    ProcessorProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_ProcessorProbe) : boost_base, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_ProcessorProbe
+  dynamicflags += PROCESSORPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_ProcessorProbe_stub
+  libs  += OASIS_ProcessorProbe_stub
+
+  Source_Files {
+    ProcessorProbe_Impl.cpp
+
+    conditional (!prop:windows) {
+      Procstat_Parser.cpp
+    }
+  }
+
+  Header_Files {
+
+  }
+
+  Template_Files {
+    conditional (!prop:windows) {
+      Procstat_Parser_Grammar.cpp
+    }
+  }
+}

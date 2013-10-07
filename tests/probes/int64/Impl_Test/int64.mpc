@@ -1,0 +1,16 @@
+// $Id: int64.mpc 2037 2011-11-02 13:43:02Z dfeiock $
+
+project (OASIS_Int64_Software_Probe_Test) : oasis_softwareprobe_test, oasis_data_channel  {
+  exename = OASIS_Int64_Software_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    int64.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

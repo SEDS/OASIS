@@ -1,0 +1,15 @@
+// $Id: oasis_common.mpb 2245 2013-09-06 23:20:23Z hillj $
+
+project : acedefaults {
+  includes += $(OASIS_ROOT)
+  libpaths += $(OASIS_ROOT)/lib
+}
+
+feature (oasis_inline) {
+  macros += __OASIS_INLINE__
+}
+
+feature (!oasis_inline) {
+  macros -= __OASIS_INLINE__
+}
+

@@ -1,0 +1,2 @@
+section DataChannels:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel:_make_OASIS_Tao_Data_Channel_Service() "-ORBEndpoint iiop://localhost:20000"

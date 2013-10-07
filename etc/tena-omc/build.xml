@@ -1,0 +1,14 @@
+<!-- $Id: build.xml 1824 2011-08-10 14:42:58Z hillj $ -->
+
+<project name="OASIS.OMC.Plugin" default="build" basedir=".">
+  <property name="plugin.version" value="0.1" />
+  <property name="plugin.jarfile" value="oasis_omc-v${plugin.version}.jar" />
+
+  <target name="build" depends="clean">
+    <jar jarfile="${plugin.jarfile}" basedir="src" />
+  </target>
+
+  <target name="clean">
+    <delete file="${plugin.jarfile}"/>
+  </target>
+</project>

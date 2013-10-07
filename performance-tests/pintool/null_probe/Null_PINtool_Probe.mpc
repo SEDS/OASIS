@@ -1,0 +1,44 @@
+//$Id: Null_PINtool_Probe.mpc 2240 2013-08-13 18:13:43Z dfeiock $
+
+project (OASIS_Null_PINtool_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, requires_performance_tests {
+  sharedname    = OASIS_Null_PINtool_Probe_stub
+  dynamicflags += OASIS_NULL_PINTOOL_PROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_NULL_PINTOOL_PROBE_STUB_Export \
+              --export-file=Null_PINtool_Probe_stub_export.h
+
+
+  PDL_Files {
+    Null_PINtool_Probe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_Null_PINtool_Probe) : oasis_pintool, oasis_softwareprobe,\
+                                     oasis_lib, requires_performance_tests {
+  sharedname    = OASIS_Null_PINtool_Probe
+  dynamicflags += NULL_PINTOOL_PROBE_IMPL_BUILD_DLL
+
+  after += OASIS_Null_PINtool_Probe_stub
+  libs  += OASIS_Null_PINtool_Probe_stub
+
+  Source_Files {
+    Null_PINtool_Probe_Impl.cpp
+  }
+
+  Header_Files {
+
+  }
+
+  Template_Files {
+
+  }
+}

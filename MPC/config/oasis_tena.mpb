@@ -1,0 +1,17 @@
+// $Id: oasis_tena.mpb 1980 2011-10-07 02:17:05Z hillj $
+
+project : tena_middleware, oasis_common, disable_versioned_namespace {
+  after += OASIS_Tena
+  libs  += OASIS_Tena
+
+  // Remove all references to ACE from trunk
+  libs -= ACE
+  includes -= $(ACE_ROOT)
+  libpaths -= $(ACE_ROOT)
+
+  verbatim (gnuace, extension) {
+    # remove all references to ACE from the repo
+    CPPFLAGS := $(filter-out -I$(ACE_ROOT), $(CPPFLAGS))
+  }
+}
+

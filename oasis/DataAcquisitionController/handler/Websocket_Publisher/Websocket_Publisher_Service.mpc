@@ -1,0 +1,30 @@
+// $Id: Websocket_Publisher_Service.mpc 2230 2013-01-24 14:47:29Z dfeiock $
+
+project (OASIS_DAC_Websocket_Publisher_Service) : requires_openssl, openssl, \
+                                                  oasis_softwareprobe, oasis_dac_core, \
+                                                  oasis_dac_data_handler, oasis_lib {
+
+  sharedname    = OASIS_DAC_Websocket_Publisher_Service
+  dynamicflags += OASIS_DAC_WEBSOCKET_PUBLISHER_SERVICE_BUILD_DLL
+
+  after += OASIS_Websock_Acceptor_Connector
+  libs  += OASIS_Websock_Acceptor_Connector
+
+  Source_Files {
+    Websocket_Client_Acceptor.cpp
+    Websocket_Client_Handler.cpp
+    Websocket_Publisher_Service.cpp
+    Websocket_Command_Factory.cpp
+    Websocket_Hertz_Command.cpp
+    Websocket_Registration_Command.cpp
+    Websocket_Unregistration_Command.cpp
+    Websocket_Send_Schema_Command.cpp
+  }
+
+  Inline_Files {
+  }
+
+  Header_Files {
+     Websocket_Command.h
+   }
+}

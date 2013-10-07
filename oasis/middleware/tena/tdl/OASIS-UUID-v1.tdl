@@ -1,0 +1,33 @@
+// -*- TDL -*-
+
+//=============================================================================
+/**
+ * @file          OASIS-UUID-v1.tdl
+ *
+ * $Id: OASIS-UUID-v1.tdl 1940 2011-09-28 18:25:24Z hillj $
+ *
+ * @author        James H. Hill
+ */
+//=============================================================================
+
+package OASIS
+{
+  package Middleware
+  {
+    /**
+     * @class UUID
+     *
+     * Binary representation of a UUID.
+     */
+    local class UUID
+    {
+      uint32 data1;
+
+      uint16 data2;
+
+      uint16 data3;
+
+      vector <octet> data4;
+    };
+  };
+};

@@ -1,0 +1,11 @@
+// $Id: probe.mpc 1888 2011-09-02 19:41:36Z hillj $
+
+project (Foo_Test_Probe) : oasis_pdl {
+  custom_only = 1
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    Foo.pdl
+  }
+}

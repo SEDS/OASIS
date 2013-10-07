@@ -1,0 +1,6 @@
+// $Id: oasis.mpb 1864 2011-08-19 18:59:58Z hillj $
+
+project : acelib, oasis_common {
+  after += OASIS
+  libs  += OASIS
+}

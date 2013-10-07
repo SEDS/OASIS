@@ -1,0 +1,6 @@
+// $Id: oasis_registrar_stub.mpb 1701 2010-11-18 17:22:41Z hillj $
+
+project : oasis_commandchannel_stub {
+  libs  += OASIS_Registrar_stub
+  after += OASIS_Registrar_stub
+}

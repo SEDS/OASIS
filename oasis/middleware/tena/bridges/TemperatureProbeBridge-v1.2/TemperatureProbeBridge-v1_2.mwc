@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// $Id: TemperatureProbeBridge-v1_2.mwc 2134 2012-02-15 18:32:19Z dfeiock $
+
+workspace (TemperatureProbeBridge-v1_2) {
+  cmdline += -include $OASIS_ROOT/MPC/config
+
+  TemperatureProbeBridge-v1_2.mpc
+}

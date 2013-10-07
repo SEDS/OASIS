@@ -1,0 +1,16 @@
+// $Id: inheritance.mpc 2046 2011-11-11 19:18:53Z dfeiock $
+
+project (OASIS_Inheritance_Software_Probe_Test) : oasis_data_channel, oasis_softwareprobe_test {
+  exename = OASIS_Inheritance_Software_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    inheritance.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

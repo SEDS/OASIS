@@ -1,0 +1,10 @@
+module OASIS
+{
+  [uuid (b2c387be-79c3-43b6-8a36-4a852b8add1f); version(1.0)]
+  probe LoggingProbe
+  {
+    int32 severity;
+    int32 thread_id;
+    string message;
+  };
+}

@@ -1,0 +1,31 @@
+module OASIS
+{
+  module System
+  {
+    module Processor
+    {
+      [uuid(7c3944f1-2176-4eaa-911c-ef5423a7e02d); version(1.0)]
+      abstract probe ProcessorProbe
+      {
+        uint64 idle_time;
+        uint64 system_time;
+        uint64 user_time;
+      };
+
+      [uuid(B049990B-17AA-4ca2-8806-E89329963788); version(1.0)]
+      probe LinuxProcessorProbe : ProcessorProbe
+      {
+        uint64 nice_time;
+        uint64 iowait_time;
+        uint64 irq_time;
+        uint64 soft_irq_time;
+      };
+
+      [uuid(5F0B088C-5C87-4be3-B3A4-0177AD169DD5); version(1.0)]
+      probe WindowsProcessorProbe : ProcessorProbe
+      {
+
+      };
+    }
+  }
+}

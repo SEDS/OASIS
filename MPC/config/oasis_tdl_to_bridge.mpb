@@ -1,0 +1,9 @@
+// $Id: oasis_tdl_to_bridge.mpb 1919 2011-09-16 13:34:08Z hillj $
+
+project : oasis_tdl {
+  Modify_Custom (TDL) {
+    commandflags += <%quote%>--selection=<%lt%>*<%gt%>.GenerateBridge<%quote%>
+
+    generic_outputext = .mwc, .mpc
+  }
+}

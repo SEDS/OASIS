@@ -1,0 +1,23 @@
+// $Id: Websock_Acceptor_Connector.mpc 2230 2013-01-24 14:47:29Z dfeiock $
+
+project (OASIS_Websock_Acceptor_Connector) : requires_openssl, openssl, \
+                                             oasis_lib {
+
+  sharedname    = OASIS_Websock_Acceptor_Connector
+  dynamicflags += OASIS_WEBSOCK_ACCEPTOR_CONNECTOR_BUILD_DLL
+
+  Source_Files {
+    Websock_Acceptor.cpp
+    Websock_Stream.cpp
+    Websock_Frame.cpp
+    Websock_Svc_Handler.cpp
+    Websock_Acceptor_Task.cpp
+  }
+
+  Inline_Files {
+  }
+
+  Header_Files {
+     Websocket_Command.h
+   }
+}

@@ -1,0 +1,8 @@
+module Test
+{
+  [uuid (0D1000D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe NoDataProbe
+  {
+
+  };
+}

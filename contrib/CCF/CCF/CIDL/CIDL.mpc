@@ -1,0 +1,15 @@
+//$Id: CIDL.mpc 86324 2009-08-02 18:43:39Z hillj $
+
+project(CIDL): ccf_common {
+  sharedname =
+  staticname = CIDL
+  libout     = ..
+
+  Source_Files {
+    .
+    ./SemanticGraph
+    ./Traversal
+    ./SemanticAction
+    ./SemanticAction/Impl
+  }
+}

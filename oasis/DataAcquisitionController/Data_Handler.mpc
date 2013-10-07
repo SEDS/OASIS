@@ -1,0 +1,10 @@
+// $Id: Data_Handler.mpc 1991 2011-10-10 02:05:19Z hillj $
+
+project (OASIS_DAC_Data_Handler) : oasis_lib {
+  sharedname    = OASIS_DAC_Data_Handler
+  dynamicflags += OASIS_DAC_DATA_HANDLER_BUILD_DLL
+
+  Source_Files {
+    Data_Handler.cpp
+  }
+}

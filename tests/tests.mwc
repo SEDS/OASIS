@@ -1,0 +1,8 @@
+// $Id: tests.mwc 1827 2011-08-12 15:38:20Z hillj $
+
+workspace (tests) {
+  cmdline += -include $OASIS_ROOT/MPC/config \
+             -include $XSC_ROOT/MPC/config \
+             -include $ADBC_ROOT/MPC/config \
+             -feature_file $OASIS_ROOT/default.features
+}

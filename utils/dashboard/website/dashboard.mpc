@@ -1,0 +1,8 @@
+// $Id: dashboard.mpc 2218 2012-10-17 19:21:14Z dfeiock $
+
+project (dashboard) {
+  // specify this as a web project
+  webapp = 1
+
+  after += dashboard.Web
+}

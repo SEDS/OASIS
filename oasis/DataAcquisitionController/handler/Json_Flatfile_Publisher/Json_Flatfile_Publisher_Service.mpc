@@ -1,0 +1,15 @@
+// $Id $
+
+project (OASIS_DAC_Json_Flatfile_Publisher_Service) : aceexe,oasis_softwareprobe, oasis_dac_core, \
+                                                      oasis_dac_data_handler, oasis_lib {
+  sharedname    = OASIS_DAC_Json_Flatfile_Publisher_Service
+  dynamicflags += OASIS_DAC_JSON_FLATFILE_PUBLISHER_SERVICE_BUILD_DLL
+
+  after += OASIS_ProcessorProbe_stub OASIS_ProcessorProbe OASIS_MemoryProbe_stub OASIS_MemoryProbe
+
+  libs  += OASIS_ProcessorProbe_stub OASIS_ProcessorProbe OASIS_MemoryProbe_stub OASIS_MemoryProbe
+
+  Source_Files {
+    Json_Flatfile_Publisher_Service.cpp
+  }
+}

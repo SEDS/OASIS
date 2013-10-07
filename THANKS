@@ -1,0 +1,41 @@
+ACKNOWLEDGEMENTS
+
+OASIS has been deeply influenced and improved by the following
+graduate studets in my research group at Indiana University-
+Purdue University Indianapolis in Indianapolis, IN.
+
+. Dennis Feiock <dfeiock at iupui dot edu>
+. Manjula Peiris <tmpeiris at cs dot iupui dot edu>
+. Tanomoy Pati <tpati at cs dot iupui dot edu>
+
+OASIS also has been influenced and improved by the following
+colleagues in my research group at Vanderbilt University in
+Nashville.
+
+. Will Otte <wotte at dre dot vanderbilt dot edu>
+
+I would also like to thank all the following people who have also
+contributed to CUTS---both directly and indirectly---over the years:
+
+. Gavin Puddy <gavin dot puddy at dsto dot defence dot gov dot au>
+. Robert Schafrik <robert dot schafrik at saic dot com>
+. Thomas Silveria <Thomas_Silveria at raytheon dot com>
+. John M. Slaby <John_M_Slaby at raytheon dot com>
+. Hunt A. Sutherland <sutherland at crd dot ge dot com>
+. Syed Suhaib <suhaib at ge dot com>
+
+In conclusion, our goal is to see OASIS continue to evolve
+and become a more comprehensive, robust, and well-documented
+open-source dynamic software instumentation middleware that is
+freely available to researchers and developers. If you have any
+improvements, suggestions, and or comments, we'd like to hear
+about it. Please see
+
+  $OASIS_ROOT/PROBLEM-REPORT-FORM
+
+for instructions on submitting suggestions or fixes.
+
+Thanks,
+
+James H. Hill
+hillj at cs dot iupui dot edu

@@ -1,0 +1,5 @@
+// $Id: disable_versioned_namespace.mpb 1980 2011-10-07 02:17:05Z hillj $
+
+feature (versioned_namespace) {
+  macros -= ACE_HAS_VERSIONED_NAMESPACE=1
+}

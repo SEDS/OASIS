@@ -1,0 +1,18 @@
+// $Id
+
+project (OASIS_System_Probe_Daemon) : aceexe, oasis_data_channel, oasis_einode_core, \
+                                      oasis_softwareprobe, oasis_bin {
+  exename = oasis_mon
+
+  after += OASIS_MemoryProbe_stub OASIS_MemoryProbe \
+           OASIS_ProcessorProbe_stub OASIS_ProcessorProbe
+
+  libs  += OASIS_MemoryProbe_stub OASIS_MemoryProbe \
+           OASIS_ProcessorProbe_stub OASIS_ProcessorProbe
+
+  Source_Files {
+    System_Probe_Daemon.cpp
+    Daemon_Loader.cpp
+  }
+}
+

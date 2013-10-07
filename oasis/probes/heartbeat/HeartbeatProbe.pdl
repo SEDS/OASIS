@@ -1,0 +1,8 @@
+module OASIS
+{
+  [uuid (FF521251-7D7F-49EC-96FF-9A474A8E714E); version(1.0)]
+  probe HeartbeatProbe
+  {
+
+  };
+}

@@ -1,0 +1,21 @@
+.svn/
+
+# Micrsoft Files
+
+*.dll
+*.vcproj
+*.vcproj.*
+*.sln
+*.suo
+*.ncb
+*.ilk
+*.pdb
+*.exe
+*.user
+
+Debug/
+Release/
+
+# Output Files
+
+*.out

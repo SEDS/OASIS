@@ -1,0 +1,5 @@
+Name: TestEINode
+Uuid: A0F1C229-135F-4047-BADD-2DE55C75FBC2
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client() "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel"

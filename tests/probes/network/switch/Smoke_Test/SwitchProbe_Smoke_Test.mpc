@@ -1,0 +1,10 @@
+// $Id: SwitchProbe_Smoke_Test.mpc 2214 2012-08-10 15:00:08Z dfeiock $
+
+project (OASIS_SwitchProbe_Smoke_Test) : aceexe, oasis_data_channel, oasis_einode_core, oasis_softwareprobe {
+  exename = OASIS_SwitchProbe_Smoke_Test
+  install = .
+
+  Source_Files {
+    Smoke_Test.cpp
+  }
+}

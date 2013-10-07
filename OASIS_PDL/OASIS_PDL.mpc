@@ -1,0 +1,22 @@
+// $Id: OASIS_PDL.mpc 1866 2011-08-22 13:06:27Z hillj $
+
+project (OASIS_PDL_EXE) : acelib, boost_base, \
+                          oasis_pdl_be, oasis_pdl_fe, \
+                          oasis_bin {
+  exename = oasis_pdl
+
+  libs  += OASIS_PDL_Tdl_Generator \
+           OASIS_PDL_Schema_Generator \
+           OASIS_PDL_Cpp_Generator
+
+  after += OASIS_PDL_Tdl_Generator \
+           OASIS_PDL_Schema_Generator \
+           OASIS_PDL_Cpp_Generator
+
+  Source_Files {
+    OASIS_PDL.cpp
+    OASIS_PDL_App.cpp
+    OASIS_PDL_Parser.cpp
+    OASIS_PDL_Symbol_Table.cpp
+  }
+}

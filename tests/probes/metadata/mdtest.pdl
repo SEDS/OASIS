@@ -1,0 +1,14 @@
+module OASIS
+{
+  [uuid (28c6948e-a2b4-43e9-acf7-5bbe71b77c3b); version(1.0)]
+  probe Test_Probe_Base
+  {
+    int32 value_a;
+  };
+
+  [uuid (e5d76992-7d08-485e-ab60-8edb379652c3); version(1.0)]
+  probe Test_Probe_Subclass
+  {
+    int32 value_b;
+  };
+}

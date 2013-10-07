@@ -1,0 +1,41 @@
+// $Id: TemperatureProbe.mpc 2055 2011-11-17 18:23:05Z dfeiock $
+
+project (OASIS_TemperatureProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_TemperatureProbe_stub
+  dynamicflags += OASIS_TEMPERATUREPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_TEMPERATUREPROBE_STUB_Export \
+              --export-file=TemperatureProbe_stub_export.h
+
+  PDL_Files {
+    TemperatureProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+
+project (OASIS_TemperatureProbe) : oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_TemperatureProbe
+  dynamicflags += TEMPERATUREPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_TemperatureProbe_stub
+  libs  += OASIS_TemperatureProbe_stub
+
+  Source_Files {
+    conditional (!prop:windows) {
+      Analog_TemperatureProbe_Impl.cpp
+    }
+  }
+
+  Header_Files {
+
+  }
+}

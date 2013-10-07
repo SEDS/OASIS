@@ -1,0 +1,162 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>OASIS_Dashboard</title>
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache"/>
+  
+  <script type="text/javascript" language = "javascript">
+    var prev_processor_response_length = 0; 
+	var prev_memory_response_length = 0;
+    
+    String.prototype.trim = function() {
+	   return this.replace(/^\s+|\s+$/g,"");
+    }
+    
+    function read_file ()
+    {
+        if (window.XMLHttpRequest)
+          {// code for IE7+, Firefox, Chrome, Opera, Safari
+            var processor_xhr=new XMLHttpRequest();
+			var memory_xhr = new XMLHttpRequest ();
+          }
+        else
+          {// code for IE6, IE5
+			var processor_xhr=new ActiveXObject("Microsoft.XMLHTTP");
+			var memory_xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        processor_xhr.onreadystatechange=function()
+          {
+            if (processor_xhr.readyState==4 || processor_xhr.readyState==3 )
+            {
+                handle_processor_info (processor_xhr.responseText);
+            }
+          }
+        processor_xhr.open("POST","http://boss.cs.iupui.edu/dashboard/Processor_Information.php",true);
+        processor_xhr.send();
+		
+		memory_xhr.onreadystatechange=function()
+          {
+            if (memory_xhr.readyState==4 || memory_xhr.readyState==3 )
+            {
+                handle_memory_info (memory_xhr.responseText);
+            }
+          }
+        memory_xhr.open("POST","http://boss.cs.iupui.edu/dashboard/Memory_Information.php",true);
+        memory_xhr.send();
+    }
+    
+    function handle_processor_info (input)
+    {
+        if (prev_processor_response_length < input.length)
+        {
+            prev_processor_response_length = input.length;
+            var response_array = input.split("<br/>");
+            var response = JSON.parse(response_array[response_array.length-2].trim());
+            document.getElementById("idle_time").innerHTML=response.idle_time;
+            document.getElementById("system_time").innerHTML=response.system_time;
+            document.getElementById("user_time").innerHTML=response.user_time;
+        }
+    }
+	
+	function handle_memory_info (input)
+    {
+        if (prev_memory_response_length < input.length)
+        {
+            prev_memory_response_length = input.length;
+            var response_array = input.split("<br/>");
+            var response = JSON.parse(response_array[response_array.length-2].trim());
+			
+			document.getElementById("physical_memory_avail").innerHTML=response.physical_memory_avail;
+			document.getElementById("physical_memory_total").innerHTML=response.physical_memory_total;
+			document.getElementById("system_cache").innerHTML=response.system_cache;
+			document.getElementById("commit_limit").innerHTML=response.commit_limit;
+			document.getElementById("commit_total").innerHTML=response.commit_total;
+			document.getElementById("virtual_total").innerHTML=response.virtual_total;
+			document.getElementById("virtual_used").innerHTML=response.virtual_used;
+        }
+    }
+  </script>
+
+</head>
+<body>
+  <p>
+    <input type="button" id="dtnSendRequest" value="Click for Information" onclick="read_file()"/>
+  </p>
+    <table border="1">
+        <th colspan="2">Processor Information</th>
+        <tr>
+          <td id="idle_time_header">Idle Time</td>
+          <td id="idle_time" width="200"></td>  
+        </tr>
+        
+        <tr>
+          <td id="system_time_header">System Time</td>
+          <td id="system_time" width="200"></td>  
+        </tr>
+		
+        <tr>
+          <td id="user_time_header">User Time</td>
+          <td id="user_time" width="200"></td>  
+        </tr>
+    </table>
+	
+	<table border = "1" style="position: absolute; top: 60px; left: 386px;">
+		<th colspan="2">
+        Memory Information
+      </th>
+      <tr>
+        <td id="physical_memory_avail_header">
+          Physical Memory Available
+        </td>
+        <td id="physical_memory_avail" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="physical_memory_total_header">
+          Physical Memory Total
+        </td>
+        <td id="physical_memory_total" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="system_cache_header">
+          System Cache
+        </td>
+        <td id="system_cache" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_limit_header">
+          Commit Limit
+        </td>
+        <td id="commit_limit" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_total_header">
+          Commit Total
+        </td>
+        <td id="commit_total" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_total_header">
+          Virtual Total
+        </td>
+        <td id="virtual_total" width="200">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_used_header">Virtual Used</td>
+        <td id="virtual_used" width="200"></td>
+      </tr>
+	  
+	</table>
+</body>
+</html>

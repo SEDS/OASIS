@@ -1,0 +1,34 @@
+// $Id: Processor_Tena_Pub_Sub_Test.mpc 2125 2012-01-25 15:56:46Z dfeiock $
+
+project (OASIS_Tena_Processor_Pub_Sub_Test) : oasis_data_channel, oasis_einode_core, oasis_softwareprobe {
+  exename = OASIS_Tena_Processor_Pub_Sub_Test
+  install = .
+
+  after += OASIS_ProcessorProbe_stub OASIS_ProcessorProbe
+  libs  += OASIS_ProcessorProbe_stub OASIS_ProcessorProbe
+
+  Source_Files {
+    driver.cpp
+  }
+}
+
+project (OASIS_Tena_Processor_Pub_Sub_Test_Subscriber) : oasis_tena_softwareprobe_v0_3 {
+  exename = OASIS_Tena_Processor_Pub_Sub_Test_Subscriber
+  install = .
+
+
+  after += OASIS_Tena_Processor_Pub_Sub_Test ProcessorProbeBridge-v1_6
+
+  includes += $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-ProcessorProbe-v1.0
+
+  specific (prop:windows) {
+    lit_libs += libOASIS-ProcessorProbe-v1.0-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  } else {
+    lit_libs += OASIS-ProcessorProbe-v1.0-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  }
+
+  Source_Files {
+    subscriber.cpp
+    Data_Observer.cpp
+  }
+}

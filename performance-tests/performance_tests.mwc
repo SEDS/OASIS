@@ -1,0 +1,8 @@
+// $Id: performance_tests.mwc 2142 2012-03-26 18:02:24Z dfeiock $
+
+workspace (tests) {
+  cmdline += -include $OASIS_ROOT/MPC/config \
+             -include $XSC_ROOT/MPC/config \
+             -include $ADBC_ROOT/MPC/config \
+             -feature_file $OASIS_ROOT/default.features
+}

@@ -1,0 +1,5 @@
+// $Id: requires_openssl.mpb 2140 2012-03-23 16:51:45Z dfeiock $
+
+project {
+  requires += openssl
+}

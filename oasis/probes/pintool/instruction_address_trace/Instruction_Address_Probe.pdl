@@ -1,0 +1,11 @@
+module OASIS
+{
+module PIN
+{
+  [uuid (1ff63f70-196a-4b91-8cc4-298d55587943); version(1.0)]
+  probe Instruction_Address_Probe
+  {
+      uint64 address;
+  };
+}
+}

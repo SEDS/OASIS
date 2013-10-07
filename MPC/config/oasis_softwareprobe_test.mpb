@@ -1,0 +1,6 @@
+// $Id: oasis_softwareprobe_test.mpb 1771 2011-03-02 20:56:37Z hillj $
+
+project : oasis_pdl, oasis_softwareprobe {
+  after += OASIS_Software_Probe_Test
+  libs  += OASIS_Software_Probe_Test
+}

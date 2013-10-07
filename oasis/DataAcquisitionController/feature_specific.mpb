@@ -1,0 +1,9 @@
+// $Id: feature_specific.mpb 2235 2013-02-06 20:18:09Z dfeiock $
+
+feature (tao) : oasis_tao, oasis_testexecutionmanager_stub, oasis_dac_skel, oasis_iortable_trait, oasis_dac_data_handler {
+  macros += OASIS_HAS_TAO_DAC_SERVANT
+
+  Source_Files {
+    DataAcquisitionController_i.cpp
+  }
+}

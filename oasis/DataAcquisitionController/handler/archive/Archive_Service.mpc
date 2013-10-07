@@ -1,0 +1,68 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      // $Id: Archive_Service.mpc 2238 2013-03-08 20:50:44Z tmpeiris $
+project (OASIS_DAC_Archive_Service) : feature_specific, boost_base, adbc_sqlite, \
+                                      oasis_softwareprobe, oasis_dac_core, \
+                                      oasis_dac_data_handler, oasis_lib, oasis_tao, oasis_dac_skel, oasis_tao_stub, oasis_tao_skel, valuetype, portableserver {
+  sharedname    = OASIS_DAC_Archive_Service
+  dynamicflags += OASIS_DAC_ARCHIVE_SERVICE_BUILD_DLL
+  libs += OASIS_DAC_Archive_Service_skel
+  libs += OASIS_DAC_Archive_Service_stub
+  libs += OASIS_DAC_stub
+  libs += OASIS_DAC_skel
+
+  Source_Files {
+    Archive_Service.cpp
+    Metrics_Table.cpp
+  }
+}
+
+project (OASIS_DAC_Archive_Service_IDL_Gen) : oasis_taoidldefaults, taoidldefaults, valuetype {
+  custom_only = 1
+  
+  idlflags += -Wb,stub_export_macro=OASIS_DAC_ARCHIVE_SERVICE_STUB_Export \
+              -Wb,stub_export_include=DAC_Archive_Service_stub_export.h \
+              -Wb,skel_export_macro=OASIS_DAC_ARCHIVE_SERVICE_SKEL_Export \
+              -Wb,skel_export_include=DAC_Archive_Service_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    Archive_Service.idl
+    Query.idl
+  }
+}
+
+project (OASIS_DAC_Archive_Service_stub) : oasis_tao_stub, taolib, avoids_minimum_corba, valuetype, oasis_lib  {
+  sharedname    = OASIS_DAC_Archive_Service_stub
+  dynamicflags += OASIS_DAC_ARCHIVE_SERVICE_STUB_BUILD_DLL
+  libs += OASIS_DAC_stub
+  
+  after += OASIS_DAC_Archive_Service_IDL_Gen
+  
+  Source_Files {
+    Archive_ServiceC.cpp
+    QueryC.cpp
+  }
+    
+  IDL_Files {
+  
+  }
+}
+
+project (OASIS_DAC_Archive_Service_skel) : portableserver, oasis_dac_stub, taolib, valuetype, avoids_minimum_corba, oasis_lib {
+  sharedname    = OASIS_DAC_Archive_Service_skel
+  dynamicflags += OASIS_DAC_ARCHIVE_SERVICE_SKEL_BUILD_DLL
+  
+  after += OASIS_DAC_Archive_Service_IDL_Gen
+  after += OASIS_DAC_Archive_Service_stub
+  libs += OASIS_DAC_Archive_Service_stub
+  libs += OASIS_DAC_stub
+  libs += OASIS_DAC_skel
+
+  Source_Files {
+    Archive_ServiceS.cpp
+    QueryS.cpp
+  }
+
+  IDL_Files {
+
+  }
+}

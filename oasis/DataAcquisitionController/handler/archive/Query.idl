@@ -1,0 +1,48 @@
+// -*- IDL -*-
+
+#ifndef _OASIS_DAC_ARCHIVE_SERVICE_OUERY_H_
+#define _OASIS_DAC_ARCHIVE_SERVICE_QUERY_H_
+
+module OASIS
+{
+  /**
+   * @valuetype Query
+   *
+   * Represent a Query object to query the archive service 
+   *
+   */
+  valuetype Query
+  {
+  };
+
+  valuetype ProbeQuery : Query
+  { 
+    public string name;
+  };
+
+  valuetype EINodeQuery : Query
+  {
+    public string name;
+  };
+
+  valuetype TimeQuery : Query
+  {
+  };
+
+  valuetype TimeAfterQuery : TimeQuery
+  {
+    public unsigned long sec;
+
+    public unsigned long usec;
+  };
+
+  valuetype TimeBeforeQuery : TimeQuery
+  {
+    public unsigned long sec;
+
+    public unsigned long usec;
+  };
+
+};
+
+#endif  // !defined _OASIS_DAC_ARCHIVE_SERVICE_OUERY_H_

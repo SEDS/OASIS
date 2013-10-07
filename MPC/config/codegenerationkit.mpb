@@ -1,0 +1,16 @@
+// $Id: codegenerationkit.mpb 1757 2011-02-21 16:15:03Z hillj $
+
+project {
+  after += CodeGenerationKit
+  
+  specific (prop:windows) {
+    libs += CodeGenerationKits
+  } else {
+    libs += CodeGenerationKit
+  }
+
+  includes += $(OASIS_ROOT)/contrib/CCF \
+              $(OASIS_ROOT)/contrib/utility
+
+  libpaths += $(OASIS_ROOT)/contrib/CCF/CCF
+}

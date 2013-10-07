@@ -1,0 +1,6 @@
+// $Id: oasis_dac_stub.mpb 1884 2011-08-28 20:14:39Z hillj $
+
+project : oasis_tao_stub {
+  after += OASIS_DAC_stub
+  libs  += OASIS_DAC_stub
+}

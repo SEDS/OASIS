@@ -1,0 +1,5 @@
+// $Id: requires_examples.mpb 1980 2011-10-07 02:17:05Z hillj $
+
+project {
+  requires += examples
+}

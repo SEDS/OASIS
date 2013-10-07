@@ -1,0 +1,11 @@
+// $Id: Connect_Task_Test.mpc 2091 2012-01-03 20:24:42Z dfeiock $
+
+project (OASIS_Einode_Connect_Task_Test) : aceexe, oasis_data_channel, \
+                                           oasis_einode_core, oasis_softwareprobe {
+  exename = OASIS_Einode_Connect_Task_Test
+  install = .
+
+  Source_Files {
+    Connect_Task_Test.cpp
+  }
+}

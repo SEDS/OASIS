@@ -1,0 +1,6 @@
+// $Id: oasis_commandchannel_stub.mpb 1863 2011-08-19 18:39:59Z hillj $
+
+project : oasis_tao_stub {
+  libs  += OASIS_CommandChannel_stub
+  after += OASIS_CommandChannel_stub
+}

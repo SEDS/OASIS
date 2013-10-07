@@ -1,0 +1,11 @@
+// $Id: oasis_tena_datachannel.mpb 1947 2011-09-30 16:09:02Z dfeiock $
+
+project : oasis_tena_softwareprobe_v0_3, oasis_tena_softwareprobe_v0_1 {
+  includes += $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-DataChannel-v0.2
+
+  specific (prop:microsoft) {
+    lit_libs += libOASIS-DataChannel-v0.2-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  } else {
+    libs += OASIS-DataChannel-v0.2-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  }
+}

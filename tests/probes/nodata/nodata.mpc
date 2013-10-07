@@ -1,0 +1,16 @@
+// $Id: nodata.mpc 1888 2011-09-02 19:41:36Z hillj $
+
+project (OASIS_No_Data_Software_Probe_Test) : oasis_data_channel, oasis_softwareprobe_test {
+  exename = OASIS_No_Data_Software_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    nodata.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

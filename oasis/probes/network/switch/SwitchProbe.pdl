@@ -1,0 +1,37 @@
+#pragma version (1.1)
+
+module OASIS
+{
+  module Network
+  {
+    module Switch
+    {
+      struct SwitchPort
+      {
+        string description;
+        int32 status;
+        uint64 speed;
+        uint64 type;
+
+        uint64 bytes_in;
+        uint64 discards_in;
+        uint64 errors_in;
+
+        uint64 bytes_out;
+        uint64 discards_out;
+        uint64 errors_out;
+        uint64 queue_length;
+      };
+
+      [uuid(0fe79a36-e6d1-46b8-a902-888dd298b758); version(1.0)]
+      probe SwitchProbe
+      {
+        vector <SwitchPort> ports;
+        uint64 uptime;
+        int32 cpu_load;
+        uint64 memory_total;
+        uint64 memory_used;
+      };
+    }
+  }
+}

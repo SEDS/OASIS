@@ -1,0 +1,1137 @@
+Mon May  7 18:30:16 UTC 2012  Dennis Feiock <dfeiock at iupui dot edu>
+
+        * oasis/middleware/tena/bridges/Software_Probe.cpp:
+
+          Added Software_Probe_Data_Preparer to resolve linker errors on win32.
+
+Sat May  5 21:35:31 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/output.txt:
+
+          added to capture cpu information.
+
+Fri May  4 19:39:30 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+
+          fixed a small bug causing memory corruption.
+
+Thu May  3 20:29:46 UTC 2012  Dennis Feiock <dfeiock at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.mpc:
+
+          Added requires_openssl base project to fix compilation errors when
+          the ssl headers are not available.
+
+Thu May  3 18:50:44 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.cpp:
+
+          Made changes to create singaly linked list using dummy node trick.
+
+Thu May  3 17:14:18 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Frame.cpp:
+
+          removed the unnecessary code.
+
+Thu May  3 17:02:56 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.cpp:
+
+          clean the code and add the support for fragmented web messages.
+
+Wed May  2 15:31:55 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Common_Home.htm:
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Linux_Home.htm:
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Windows_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Common_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Linux_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Windows_Home.htm:
+
+          updated the files to cope up with code changes in Cdr_Reader and Cdr_Writer.
+
+Wed May  2 15:14:16 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Cdr_Reader.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Cdr_Writer.js:
+        * performance-tests/dashboard/websocket/Websocket_Client/JavaScript/OASIS/Cdr_Reader.js:
+        * performance-tests/dashboard/websocket/Websocket_Client/JavaScript/OASIS/Cdr_Writer.js:
+
+          Updated the code for changes.
+
+Wed May  2 15:06:26 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Cdr_Reader.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Cdr_Writer.js:
+
+          Improved code version of Cdr_Reader and Cdr_Writer.
+
+Wed May  2 15:00:13 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.cpp:
+
+          Added modified handle hertz functionality.
+
+Tue May  1 18:23:05 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/AJAX_Server/Memory_Information.php:
+        * performance-tests/dashboard/ajax/AJAX_Server/Processor_Information.php:
+
+          Forgot to remove sleep(), now it is running like real httpstreaming.
+
+Tue May  1 17:48:13 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/AJAX_Server/Memory_Information.php:
+        * performance-tests/dashboard/ajax/AJAX_Server/Processor_Information.php:
+
+          added the header information to allow access to these script from any domain.
+
+Tue May  1 17:28:10 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Common_Home.htm:
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Linux_Home.htm:
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Windows_Home.htm:
+
+          made chnges to call php scripts on boss.
+
+        * performance-tests/dashboard/ajax/AJAX_Server/Memory_Information.php:
+        * performance-tests/dashboard/ajax/AJAX_Server/Processor_Information.php:
+
+          Small bug because of php version difference resolved.
+
+Tue May  1 16:54:14 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/AJAX_Server:
+        * performance-tests/dashboard/ajax/AJAX_Server/Memory_Information.php:
+        * performance-tests/dashboard/ajax/AJAX_Server/Processor_Information.php:
+
+          added php script for ajax server
+
+        * performance-tests/dashboard/websocket/the_DACS.dat:
+
+          fixed the typo.
+
+Tue May  1 16:28:58 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/run_DAC.pl:
+        * performance-tests/dashboard/websocket/run_DAC.pl:
+
+          Fixed the typos.
+
+Tue May  1 16:20:04 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax/Smoke_Test.einode:
+        * performance-tests/dashboard/ajax/run_DAC.pl:
+        * performance-tests/dashboard/ajax/the_DACS.dat:
+
+          Modified the files to work on boss.
+
+Tue May  1 16:12:45 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/ajax:
+        * performance-tests/dashboard/ajax/AJAX_Client:
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Common_Home.htm:
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Linux_Home.htm:
+        * performance-tests/dashboard/ajax/AJAX_Client/AJAX_Windows_Home.htm:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Cdr_Reader.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Cdr_Writer.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Linux_Memory_Probe.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Linux_Processor_Probe.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Memory_Probe.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/OASIS_Websocket.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Processor_Probe.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Software_Probe.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Software_Probe_Core.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Software_Probe_Header.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Software_Probe_Metadata.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Time_Value.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/UUID.js:
+        * performance-tests/dashboard/ajax/AJAX_Client/JavaScript/OASIS/Windows_Memory_Probe.js:
+        * performance-tests/dashboard/ajax/Smoke_Test.conf:
+        * performance-tests/dashboard/ajax/Smoke_Test.einode:
+        * performance-tests/dashboard/ajax/run_DAC.pl:
+        * performance-tests/dashboard/ajax/run_EINode.pl:
+        * performance-tests/dashboard/ajax/the_DACS.dat:
+
+          added necessary files to do testing of ajax system on boss.
+
+Tue May  1 13:33:28 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard/websocket/Smoke_Test.conf:
+        * performance-tests/dashboard/websocket/run_DAC.pl:
+        * performance-tests/dashboard/websocket/the_DACS.dat:
+
+          Updated the files to run testing along with Command Injector.
+
+Tue May  1 13:07:24 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.cpp:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.conf:
+
+          Add support for giving port and address from conf file.
+
+        * tests/tools/Command_Injector/client.cpp:
+
+          Fixed the small bug while instantiating probe name.
+
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Memory_Info.txt:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Processor_Info.txt:
+
+          Removed these files.
+
+Mon Apr 30 18:03:44 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * performance-tests/dashboard:
+        * performance-tests/dashboard/websocket:
+        * performance-tests/dashboard/websocket/Smoke_Test.conf:
+        * performance-tests/dashboard/websocket/Smoke_Test.einode:
+        * performance-tests/dashboard/websocket/Websocket_Client:
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Common_Home.htm:
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Linux_Home.htm:
+        * performance-tests/dashboard/websocket/Websocket_Client/Websocket_Windows_Home.htm:
+        * performance-tests/dashboard/websocket/run_DAC.pl:
+        * performance-tests/dashboard/websocket/run_EINode.pl:
+
+          Added this directory and files to do the testing on emulab.
+
+Fri Apr 27 13:31:30 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Linux_Home.htm:
+
+          Corrected some typos.
+
+Fri Apr 27 13:18:54 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Common_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Linux_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/Websocket_Windows_Home.htm:
+
+          Added new files with cleaner implementation.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Common_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Linux_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Windows_Home.htm:
+
+          Removed these files.
+
+Thu Apr 26 23:08:05 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Processor_Info.txt:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Smoke_Test.einode:
+
+          added to complete the test.
+
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Processsor_Info.txt:
+
+          It was a typo so removed this file.
+
+Thu Apr 26 22:35:31 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Common_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Linux_Home.htm:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Windows_Home.htm:
+
+          created three different clients for three platform dependent situation. This change will make performance testing easy
+
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Smoke_Test.mpc:
+
+          unnecesssary file removed.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Home.htm:
+
+          Split the file in above three different file for simlicity.
+
+Thu Apr 26 19:44:31 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Json_Flatfile_Publisher/Json_Flatfile_Publisher_Service.mpc:
+
+          Updated to accomodate memory probe.
+
+Thu Apr 26 18:55:37 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Json_Flatfile_Publisher/Json_Flatfile_Publisher_Service.h:
+        * oasis/DataAcquisitionController/handler/Json_Flatfile_Publisher/Json_Flatfile_Publisher_Service.cpp:
+        * oasis/DataAcquisitionController/handler/Json_Flatfile_Publisher/Json_Flatfile_Publisher_Service.mpc:
+        * oasis/DataAcquisitionController/handler/Json_Flatfile_Publisher/Json_Flatfile_Publisher_Service_export.h:
+
+          Added handler to export data to flat file.
+
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Memory_Info.txt:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Processsor_Info.txt:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Smoke_Test.conf:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/Smoke_Test.mpc:
+        * tests/DataAcquisitionController/handlers/JSON_Flatfile_Publisher/Smoke_Test/run_test.pl:
+
+          Added test to for flatfile handler.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Cdr_Reader.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Cdr_Writer.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Linux_Memory_Probe.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Linux_Processor_Probe.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Memory_Probe.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/OASIS_Websocket.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Processor_Probe.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Software_Probe.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Software_Probe_Core.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Software_Probe_Header.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Software_Probe_Metadata.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Time_Value.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/UUID.js:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/JavaScript/OASIS/Windows_Memory_Probe.js:
+
+          Added javascript files required to run the client.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Websocket_Client/OASIS_Dashboard_Home.htm:
+
+          This is the sample home page for OASIS Dashboard.
+
+Thu Apr 26 16:03:00 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor_Task.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor_Task.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.h:
+
+          Cleaned the code. There were lot of experimental code.
+
+        * oasis/probes/system/memory/MemoryProbe_Impl.cpp:
+
+          Fixed implementation to report pagefile information properly.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/run_test.pl:
+
+          Removed commented out code.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.cpp:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.mpc:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test_Probe.pdl:
+
+          Removed these files
+
+Mon Apr 16 20:20:49 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Frame.h:
+
+          Fixed windows-style path for include.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/run_test.pl:
+
+          Changed to use proper configuration file.
+
+Mon Apr 16 20:08:39 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/Data_Handler.h:
+        * oasis/DataAcquisitionController/Data_Packet.h:
+
+          Fixed missing export which caused linker errors on windows
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor_Task.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor_Task.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Frame.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Frame.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Frame.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Acceptor.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Acceptor.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.mpc:
+
+          Cleaned up repo to match local modifications.  Should build and execute properly now.
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/run_test.pl:
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Acceptor_Task.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Acceptor_Task.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Svc_Handler.cpp:
+
+          Removed these files.
+
+Mon Apr 16 18:58:30 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.cpp:
+
+          Fixed compilation errors with gcc.
+
+Tue Apr  3 16:41:23 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/middleware/tao/Data_Channel/DataChannel_i.cpp:
+
+          Removed dead code.  Thanks James for reminding me.
+
+Tue Apr  3 16:22:39 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * OASIS_PDL/be/cpp/Probe_Cpp_Generator_Visitor.cpp:
+
+          Removed init call from default constructor of probes.
+          Init must now be called manually.
+
+        * oasis/EINode/Standard_EINode.h:
+        * oasis/EINode/Standard_EINode.cpp:
+
+          Changed register_probe to only receive the probe.
+          Probes now completely control their own name, which must
+          be set by using the "--name=" argument.  Probes
+          must be initalized in order to flush their data to a DAC.
+
+        * oasis/probes/Software_Probe_Data_Packager.h:
+        * oasis/probes/Software_Probe_Data_Packager.cpp:
+
+          Changed init to receive the probe's name.  This helps
+          optimize the performance of flushing data.
+
+        * oasis/probes/Software_Probe_Impl.h:
+        * oasis/probes/Software_Probe_Impl.inl:
+        * oasis/probes/Software_Probe_Impl.cpp:
+
+          Moved instance_name to be protected.  Added "--name="
+          parameter to set the instance name.  Added an is_init_
+          flag with getter.  Added an overload to the init method
+          where the name is a seperate argument.
+
+        * oasis/tools/System_Probe_Daemon/System_Probe_Daemon.cpp:
+        * performance-tests/tput/data_handler/Sender_App.cpp:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/Handle_Data_Test/driver.cpp:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/Handle_Registration_Test/driver.cpp:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.cpp:
+        * tests/DataAcquisitionController/handlers/archive/Smoke_Test/Smoke_Test.cpp:
+        * tests/DataAcquisitionController/handlers/archive/String_Probe/String_Probe_Test.cpp:
+        * tests/DataAcquisitionController/handlers/publisher/Smoke_Test/Smoke_Test_App.cpp:
+        * tests/probes/complex/driver.cpp:
+        * tests/probes/hardware/temperature/Tena_Pub_Sub_Test/driver.cpp:
+        * tests/probes/int16/Impl_Test/driver.cpp:
+        * tests/probes/int16/Smoke_Test/Smoke_Test.cpp:
+        * tests/probes/int16/Smoke_Test/run_test.pl:
+        * tests/probes/int32/Smoke_Test/Smoke_Test.cpp:
+        * tests/probes/int64/Smoke_Test/Smoke_Test.cpp:
+        * tests/probes/int8/Smoke_Test/Smoke_Test.cpp:
+        * tests/probes/logging/ace/driver.cpp:
+        * tests/probes/nodata/driver.cpp:
+        * tests/probes/system/memory/Tena_Pub_Sub_Test/driver.cpp:
+        * tests/probes/system/network/Tena_Pub_Sub_Test/driver.cpp:
+        * tests/probes/system/processor/Tena_Pub_Sub_Test/driver.cpp:
+        * tests/tools/Command_Injector/client.cpp:
+
+          Fixed tests to comply with the changes to probe init/name.
+
+Fri Mar 30 13:51:43 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests/tput/data_handler/results/Emulab/Packager_Single_CDR/Packager_Single_CDR.xlsx:
+
+          Generated pivot table for previous results.
+
+Fri Mar 30 13:45:25 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests/tput/data_handler/results/Emulab/Packager_Single_CDR:
+        * performance-tests/tput/data_handler/results/Emulab/Packager_Single_CDR/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Emulab/Packager_Single_CDR/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Emulab/Packager_Single_CDR/no_dac.csv:
+
+          Added results of performance testing on Emulab for the new packager.
+
+Thu Mar 29 18:09:22 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/probes/Software_Probe.cpp:
+        * oasis/probes/Software_Probe_Data_Packager.h:
+        * oasis/probes/Software_Probe_Data_Packager.inl:
+        * oasis/probes/Software_Probe_Data_Packager.cpp:
+
+          Modified packager to use a single CDR stream
+
+        * performance-tests/tput/data_handler/results/Emulab/Baseline/Baseline.xlsx:
+        * performance-tests/tput/data_handler/results/Emulab/Data_Packet_Wrapper/Data_Packet_Wrapper.xlsx:
+
+          Compliled results for the Emulab performance testing.
+
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR:
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR/Packager_Single_CDR.xlsx:
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR/local_dac_tena_publisher.csv:
+        * performance-tests/tput/data_handler/results/Laptop/Packager_Single_CDR/no_dac.csv:
+
+          Ran performance tests for the change to the packager.
+
+Thu Mar 29 16:46:38 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests/tput/data_handler/results/Emulab/Baseline:
+        * performance-tests/tput/data_handler/results/Emulab/Baseline/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Emulab/Baseline/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Emulab/Baseline/no_dac.csv:
+
+          Added baseline results from Emulab.
+
+Wed Mar 28 19:09:07 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests/tput/data_handler/results/Laptop:
+        * performance-tests/tput/data_handler/results/Laptop/Baseline:
+        * performance-tests/tput/data_handler/results/Laptop/Data_Packet_Wrapper:
+
+          Moved previous results to Laptop to separate my vm results from the
+          Emulab results.
+
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/Data_Packet_wrapper.xlsx:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_tena_publisher.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/no_dac.csv:
+
+        * performance-tests/tput/data_handler/results/baseline:
+        * performance-tests/tput/data_handler/results/baseline/baseline.xlsx:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_tena_publisher.csv:
+        * performance-tests/tput/data_handler/results/baseline/no_dac.csv:
+
+        * performance-tests/tput/data_handler/OASIS_Data_Handler_Byte_Tput_Test:
+
+          Removed these files.
+
+Wed Mar 28 18:35:15 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests/tput/data_handler/results/Emulab:
+
+        * performance-tests/tput/data_handler/results/Emulab/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Emulab/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Emulab/no_dac.csv:
+
+        * performance-tests/tput/data_handler/OASIS_Data_Handler_Byte_Tput_Test:
+
+          Removed this file.
+
+Tue Mar 27 19:14:01 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/DataAcquisitionController/Data_Packet.inl:
+        * oasis/DataAcquisitionController/Data_Packet.cpp:
+
+          Forgot to add base implementation to the repo.
+
+Mon Mar 26 17:54:32 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * performance-tests:
+        * performance-tests/performance_tests.mwc:
+
+          Created structure for performance tests
+
+        * performance-tests/tput:
+        * performance-tests/tput/data_handler:
+        * performance-tests/tput/data_handler/OASIS_Data_Handler_Byte_Tput_Test:
+        * performance-tests/tput/data_handler/Sender.cpp:
+        * performance-tests/tput/data_handler/Sender_App.h:
+        * performance-tests/tput/data_handler/Sender_App.cpp:
+        * performance-tests/tput/data_handler/byte_0.einode:
+        * performance-tests/tput/data_handler/byte_128.einode:
+        * performance-tests/tput/data_handler/byte_16.einode:
+        * performance-tests/tput/data_handler/byte_256.einode:
+        * performance-tests/tput/data_handler/byte_32.einode:
+        * performance-tests/tput/data_handler/byte_64.einode:
+        * performance-tests/tput/data_handler/byte_8.einode:
+        * performance-tests/tput/data_handler/data_handler.mpc:
+        * performance-tests/tput/data_handler/data_handler.pdl:
+        * performance-tests/tput/data_handler/local_dac_no_handler.pl:
+        * performance-tests/tput/data_handler/local_dac_tao_publisher.pl:
+        * performance-tests/tput/data_handler/local_dac_tena_publisher.pl:
+        * performance-tests/tput/data_handler/no_dac.pl:
+        * performance-tests/tput/data_handler/no_handler.dac:
+        * performance-tests/tput/data_handler/tao_handler.dac:
+        * performance-tests/tput/data_handler/tenaPublisherService.config:
+        * performance-tests/tput/data_handler/tena_handler.dac:
+
+          Added simple performance tests for throughput for no dac,
+          dac with no handlers, dac with tao publisher, and dac with
+          tena publisher.
+
+        * performance-tests/tput/data_handler/results:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/Data_Packet_wrapper.xlsx:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/local_dac_tena_publisher.csv:
+        * performance-tests/tput/data_handler/results/Data_Packet_wrapper/no_dac.csv:
+
+          Results after modifying the Data_Packet (r2141)
+
+        * performance-tests/tput/data_handler/results/baseline:
+        * performance-tests/tput/data_handler/results/baseline/baseline.xlsx:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_no_handler.csv:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_tao_publisher.csv:
+        * performance-tests/tput/data_handler/results/baseline/local_dac_tena_publisher.csv:
+        * performance-tests/tput/data_handler/results/baseline/no_dac.csv:
+
+          Results for the baseline test (r2137)
+
+Fri Mar 23 17:48:49 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * oasis/DataAcquisitionController/Data_Packet.h:
+
+          Per James' suggestion, made the einode uuid an output
+          parameter.
+
+        * oasis/DataAcquisitionController/handler/Tao_Publisher/Tao_PublisherService_i.cpp:
+        * oasis/DataAcquisitionController/handler/archive/Archive_Service.cpp:
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.h:
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.inl:
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.cpp:
+
+          Modified to work with the new signature for the Data_Packet.
+
+Fri Mar 23 16:40:52 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * MPC/config/requires_openssl.mpb:
+
+          Added to control building the Websocket Handler
+
+        * MPC/config/requires_performance_tests.mpb:
+
+          Added to control building the performance tests
+
+        * OASIS.mwc:
+
+          Modified to use performance_tests.mwc
+
+        * etc/tena-omc/oasis_omc-v0.1.jar:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridge.cpp.ftl:
+
+          Modified bridge code to handle the change to Data_Packet
+
+        * oasis/DataAcquisitionController/DAC.mpc:
+        * oasis/DataAcquisitionController/Data_Packet.h:
+
+          Data_Packet is now an abstract class which wraps
+          data channel specific packets for handle_data.
+
+        * oasis/DataAcquisitionController/Execution_Context.h:
+        * oasis/DataAcquisitionController/Execution_Context.cpp:
+
+          Update to use proper methods for the Data_Packet
+
+        * oasis/DataAcquisitionController/handler/Tao_Publisher/Tao_PublisherService_i.cpp:
+        * oasis/DataAcquisitionController/handler/Tena_Publisher/Tena_Publisher_Service.cpp:
+
+          Update to use proper methods for the Data_Packet
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+
+          Fixed typo.
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.mpc:
+
+          Fixed typo, added requires_openssl as base project
+
+        * oasis/DataAcquisitionController/handler/archive/Archive_Service.cpp:
+
+          Update to use proper methods for the Data_Packet
+
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.inl
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.cpp
+        * oasis/middleware/tao/Data_Channel/Tao_Data_Packet.h
+
+          Created implementation of Data_Packet for the Tao
+          data channel.
+
+        * oasis/middleware/tao/Data_Channel/DataChannel.mpc:
+
+          Added Tao_Data_Packet to project
+
+        * oasis/middleware/tao/Data_Channel/DataChannel_i.cpp:
+
+          Update to use proper methods for the Tao_Data_Packet
+
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/MemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.cpp:
+
+          Regenerated bridge
+
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/NetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.cpp:
+
+          Regenerated bridge
+
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp:
+
+          Regenerated bridge
+
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/HardwareProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.cpp:
+
+          Regenerated bridge
+
+        * oasis/probes/Software_Probe_Data_Preparer.h:
+        * oasis/probes/Software_Probe_Data_Preparer.inl:
+
+          Update to use proper methods for the Data_Packet
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS/Foo_Bridge.cpp:
+
+          Regenerated bridge
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocet_Publisher_Service.mpc:
+
+          Removed this file.
+
+Thu Mar 22 19:18:58 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/DAC.db:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.conf:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.db:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.einode:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.cpp:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test.mpc:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/Smoke_Test_Probe.pdl:
+        * tests/DataAcquisitionController/handlers/Websocket_Publisher/Smoke_Test/run_test.pl:
+
+        This update include smoke test for Websocket_Publisher.
+
+Thu Mar 22 17:26:16 UTC 2012  Darshan Puranik  <dpuranik at iupui dot edu>
+
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocet_Publisher_Service.mpc:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Acceptor.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.inl:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websock_Stream.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Acceptor_Task.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Acceptor_Task.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Acceptor.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Acceptor.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Svc_Handler.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Client_Svc_Handler.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.h:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service.cpp:
+        * oasis/DataAcquisitionController/handler/Websocket_Publisher/Websocket_Publisher_Service_export.h:
+
+        This update include files for Websocket handler implementation.
+
+Thu Feb 16 15:35:20 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * etc/tena-omc/oasis_omc-v0.1.jar:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridge.cpp.ftl:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridge.h.ftl:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridgeManager.h.ftl:
+
+          Per James' suggestion, moved tena bridge headers into the bridges
+          directory.  Updated includes.
+
+        * oasis/DataAcquisitionController/handler/Tena_Publisher/Tena_Publisher_Service.cpp:
+
+          Updated includes.
+
+        * oasis/middleware/tena/bridges/Configuration_Exception.h:
+        * oasis/middleware/tena/bridges/Configuration_Group.h:
+        * oasis/middleware/tena/bridges/Configuration_Group.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Instance.h:
+        * oasis/middleware/tena/bridges/Configuration_Instance.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Manager.h:
+        * oasis/middleware/tena/bridges/Configuration_Manager.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Member.h:
+        * oasis/middleware/tena/bridges/Configuration_Member.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Member_Container.h:
+        * oasis/middleware/tena/bridges/Configuration_Member_Container.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Parser.h:
+        * oasis/middleware/tena/bridges/Configuration_Parser.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Parser_Grammar.h:
+        * oasis/middleware/tena/bridges/Configuration_Parser_Grammar.cpp:
+        * oasis/middleware/tena/bridges/Configuration_Value.h:
+        * oasis/middleware/tena/bridges/Configuration_Value.cpp:
+        * oasis/middleware/tena/bridges/Dereference_Var_T.h:
+        * oasis/middleware/tena/bridges/Initial_Value.cpp:
+        * oasis/middleware/tena/bridges/Initial_Value_T.h:
+        * oasis/middleware/tena/bridges/Software_Probe.cpp:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge.h:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge.inl:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge_T.h:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge_T.inl:
+        * oasis/middleware/tena/bridges/Software_Probe_Bridge_T.cpp:
+        * oasis/middleware/tena/bridges/Tena_Software_Probe.mpc:
+        * oasis/middleware/tena/bridges/Tena_Software_Probe_export.h:
+        * oasis/middleware/tena/bridges/Var_T.h:
+
+          Moved bridge base classes into the bridges directory from probes.
+
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/MemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/MemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/NetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/NetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/ProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/HardwareProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/HardwareProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/Software_Probe_Bridge_Manager.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS/Foo_Bridge.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS/Foo_Bridge.cpp:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/Software_Probe_Bridge_Manager.h:
+
+          Regenerated bridges to use the new include paths.
+
+        * tests/probes/tena/Configuration_Parser/driver.cpp:
+
+          Updated to use new include paths.
+
+        * oasis/middleware/tena/probes:
+        * oasis/middleware/tena/probes/Configuration_Exception.h:
+        * oasis/middleware/tena/probes/Configuration_Group.h:
+        * oasis/middleware/tena/probes/Configuration_Group.cpp:
+        * oasis/middleware/tena/probes/Configuration_Instance.h:
+        * oasis/middleware/tena/probes/Configuration_Instance.cpp:
+        * oasis/middleware/tena/probes/Configuration_Manager.h:
+        * oasis/middleware/tena/probes/Configuration_Manager.cpp:
+        * oasis/middleware/tena/probes/Configuration_Member.h:
+        * oasis/middleware/tena/probes/Configuration_Member.cpp:
+        * oasis/middleware/tena/probes/Configuration_Member_Container.h:
+        * oasis/middleware/tena/probes/Configuration_Member_Container.cpp:
+        * oasis/middleware/tena/probes/Configuration_Parser.h:
+        * oasis/middleware/tena/probes/Configuration_Parser.cpp:
+        * oasis/middleware/tena/probes/Configuration_Parser_Grammar.h:
+        * oasis/middleware/tena/probes/Configuration_Parser_Grammar.cpp:
+        * oasis/middleware/tena/probes/Configuration_Value.h:
+        * oasis/middleware/tena/probes/Configuration_Value.cpp:
+        * oasis/middleware/tena/probes/Dereference_Var_T.h:
+        * oasis/middleware/tena/probes/Initial_Value.cpp:
+        * oasis/middleware/tena/probes/Initial_Value_T.h:
+        * oasis/middleware/tena/probes/Software_Probe.cpp:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge.h:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge.inl:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge.cpp:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge_T.h:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge_T.inl:
+        * oasis/middleware/tena/probes/Software_Probe_Bridge_T.cpp:
+        * oasis/middleware/tena/probes/Tena_Software_Probe.mpc:
+        * oasis/middleware/tena/probes/Tena_Software_Probe_export.h:
+        * oasis/middleware/tena/probes/Var_T.h:
+
+          Removed these files.
+
+Wed Feb 15 18:24:33 UTC 2012  Dennis Feiock  <dfeiock at iupui dot edu>
+
+        * etc/tena-omc/oasis_omc-v0.1.jar:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridge.cpp.ftl:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridge.h.ftl:
+        * etc/tena-omc/src/softwareProbeBridge/softwareProbeBridgeManager.h.ftl:
+
+          Modified for the new location of tena related headers.
+          Also fixed bridges so they will not commit changes to the tena
+          servants if unpacking the probe data failes.
+
+        * oasis/DataAcquisitionController/handler/Tena_Publisher/Tena_Publisher_Service.cpp:
+
+          Modified for the new location of tena related headers.
+
+        * oasis/middleware/tena/bridges:
+
+          Moved all bridges into a centralized location.
+
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/MemoryProbeBridge-v1_4.mpc:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/MemoryProbeBridge-v1_4.mwc:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/component.xml:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/MemoryProbeBridge_v1_4_export.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/MemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/MemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/MemoryProbeBridge-v1.4/src/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/NetworkProbeBridge-v1_1.mpc:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/NetworkProbeBridge-v1_1.mwc:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/component.xml:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/NetworkProbeBridge_v1_1_export.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/NetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/NetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/NetworkProbeBridge-v1.1/src/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/ProcessorProbeBridge-v1_0.mpc:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/ProcessorProbeBridge-v1_0.mwc:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/component.xml:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/ProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/ProcessorProbeBridge_v1_0_export.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/ProcessorProbeBridge-v1.0/src/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/TemperatureProbeBridge-v1_2.mpc:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/TemperatureProbeBridge-v1_2.mwc:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/component.xml:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/HardwareProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/HardwareProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/Software_Probe_Bridge_Manager.h:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/Software_Probe_Bridge_Manager.cpp:
+        * oasis/middleware/tena/bridges/TemperatureProbeBridge-v1.2/src/TemperatureProbeBridge_v1_2_export.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/FooBridge-v1_1.mpc:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/FooBridge-v1_1.mwc:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/component.xml:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/FooBridge_v1_1_export.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS/Foo_Bridge.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/OASIS/Foo_Bridge.cpp:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/Software_Probe_Bridge_Manager.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.1/src/Software_Probe_Bridge_Manager.cpp:
+
+          Rebuilt all the bridges.  Version numbers now match the tena
+          tdl version.  Bumping versions and modifying configs as a result
+          is no longer necessary unless the tdl changes.
+
+        * oasis/middleware/tena/probes:
+
+          Moved tena specific probe classes into the middleware directory
+
+        * oasis/middleware/tena/probes/Software_Probe.cpp:
+
+          Fixed path for includes.
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/Handle_Data_Test/main.conf:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/Handle_Registration_Test/main.conf:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/Load_Service_Test/main.conf:
+        * tests/probes/hardware/temperature/Tena_Pub_Sub_Test/main.conf:
+        * tests/probes/system/memory/Tena_Pub_Sub_Test/main.conf:
+        * tests/probes/system/network/Tena_Pub_Sub_Test/main.conf:
+        * tests/probes/system/processor/Tena_Pub_Sub_Test/main.conf:
+        * tests/probes/tena/Configuration_Parser/driver.cpp:
+        * tests/tools/System_Probe_Daemon/Tena_Test/Daemon_Test.dac:
+
+          Fixed version numbers on bridges.
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3:
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/TemperatureProbeBridge-v1_3.mpc:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/TemperatureProbeBridge-v1_3.mwc:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/component.xml:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src:
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS:
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS/HardwareProbes:
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS/HardwareProbes/HardwareProbe_Bridge.h:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS/HardwareProbes/HardwareProbe_Bridge.cpp:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.h:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/OASIS/HardwareProbes/TemperatureProbe_Bridge.cpp:
+
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/Software_Probe_Bridge_Manager.h:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/Software_Probe_Bridge_Manager.cpp:
+        * oasis/probes/hardware/temperature/TemperatureProbeBridge-v1.3/src/TemperatureProbeBridge_v1_3_export.h:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/MemoryProbeBridge-v1_6.mpc:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/MemoryProbeBridge-v1_6.mwc:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/component.xml:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/MemoryProbeBridge_v1_6_export.h:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.h:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/LinuxMemoryProbe_Bridge.cpp:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/MemoryProbe_Bridge.h:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/MemoryProbe_Bridge.cpp:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.h:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/OASIS/System/Memory/WindowsMemoryProbe_Bridge.cpp:
+
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/Software_Probe_Bridge_Manager.h:
+        * oasis/probes/system/memory/MemoryProbeBridge-v1.6/src/Software_Probe_Bridge_Manager.cpp:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/NetworkProbeBridge-v1_5.mpc:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/NetworkProbeBridge-v1_5.mwc:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/component.xml:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/NetworkProbeBridge_v1_5_export.h:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.h:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/LinuxNetworkProbe_Bridge.cpp:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/NetworkProbe_Bridge.h:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/NetworkProbe_Bridge.cpp:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.h:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/OASIS/System/Network/WindowsNetworkProbe_Bridge.cpp:
+
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/Software_Probe_Bridge_Manager.h:
+        * oasis/probes/system/network/NetworkProbeBridge-v1.5/src/Software_Probe_Bridge_Manager.cpp:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/ProcessorProbeBridge-v1_6.mpc:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/ProcessorProbeBridge-v1_6.mwc:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/component.xml:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.h:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/ProcessorProbe_Bridge.h:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.h:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp:
+
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/ProcessorProbeBridge_v1_6_export.h:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/Software_Probe_Bridge_Manager.h:
+        * oasis/probes/system/processor/ProcessorProbeBridge-v1.6/src/Software_Probe_Bridge_Manager.cpp:
+
+        * oasis/probes/tena:
+
+        * oasis/probes/tena/Configuration_Exception.h:
+        * oasis/probes/tena/Configuration_Group.h:
+        * oasis/probes/tena/Configuration_Group.cpp:
+        * oasis/probes/tena/Configuration_Instance.h:
+        * oasis/probes/tena/Configuration_Instance.cpp:
+        * oasis/probes/tena/Configuration_Manager.h:
+        * oasis/probes/tena/Configuration_Manager.cpp:
+        * oasis/probes/tena/Configuration_Member.h:
+        * oasis/probes/tena/Configuration_Member.cpp:
+        * oasis/probes/tena/Configuration_Member_Container.h:
+        * oasis/probes/tena/Configuration_Member_Container.cpp:
+        * oasis/probes/tena/Configuration_Parser.h:
+        * oasis/probes/tena/Configuration_Parser.cpp:
+        * oasis/probes/tena/Configuration_Parser_Grammar.h:
+        * oasis/probes/tena/Configuration_Parser_Grammar.cpp:
+        * oasis/probes/tena/Configuration_Value.h:
+        * oasis/probes/tena/Configuration_Value.cpp:
+        * oasis/probes/tena/Dereference_Var_T.h:
+        * oasis/probes/tena/Initial_Value.cpp:
+        * oasis/probes/tena/Initial_Value_T.h:
+        * oasis/probes/tena/Software_Probe.cpp:
+        * oasis/probes/tena/Software_Probe_Bridge.h:
+        * oasis/probes/tena/Software_Probe_Bridge.inl:
+        * oasis/probes/tena/Software_Probe_Bridge.cpp:
+        * oasis/probes/tena/Software_Probe_Bridge_Manager.h:
+        * oasis/probes/tena/Software_Probe_Bridge_Manager.cpp:
+        * oasis/probes/tena/Software_Probe_Bridge_T.h:
+        * oasis/probes/tena/Software_Probe_Bridge_T.inl:
+        * oasis/probes/tena/Software_Probe_Bridge_T.cpp:
+        * oasis/probes/tena/Tena_Software_Probe.mpc:
+        * oasis/probes/tena/Tena_Software_Probe_export.h:
+        * oasis/probes/tena/Var_T.h:
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4:
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/FooBridge-v1_4.mpc:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/FooBridge-v1_4.mwc:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/component.xml:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src:
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/FooBridge_v1_4_export.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/OASIS:
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/OASIS/Foo_Bridge.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/OASIS/Foo_Bridge.cpp:
+
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/Software_Probe_Bridge_Manager.h:
+        * tests/DataAcquisitionController/handlers/Tena_Publisher/FooBridge-v1.4/src/Software_Probe_Bridge_Manager.cpp:
+
+          Removed these files.
+
+Wed Feb  1 16:43:38 UTC 2012  James H. Hill  <hillj at cs dot iupui dot edu>
+
+        * ChangeLog:
+        * ChangeLogs/ChangeLog-0.2:
+
+          Start of OASIS version 0.3

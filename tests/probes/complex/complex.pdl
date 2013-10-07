@@ -1,0 +1,22 @@
+module OASIS
+{
+  struct Point
+  {
+    int32 x;
+
+    int32 y;
+  };
+
+  struct Graph
+  {
+    vector <Point> points;
+  };
+
+  [uuid (7B186D20-87D9-4D7E-95C2-139CC51D63CE); version(1.0)]
+  probe ComplexSoftwareProbe
+  {
+    int64 value;
+
+    Graph p;
+  };
+}

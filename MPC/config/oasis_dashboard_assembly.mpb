@@ -1,0 +1,7 @@
+// $Id: oasis_dashboard_assembly.mpb 2219 2012-10-18 15:34:35Z dfeiock $
+
+project {
+  dllout = $(OASIS_ROOT)/utils/dashboard/website/bin
+
+  libpaths += $(IIOPNET_ROOT)/bin
+}

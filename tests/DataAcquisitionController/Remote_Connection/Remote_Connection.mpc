@@ -1,0 +1,10 @@
+// $Id: Remote_Connection.mpc 1897 2011-09-07 22:11:00Z hillj $
+
+project (OASIS_DAC_Remote_Connection_Test) : oasis_dac_stub, oasis_bin {
+  exename = OASIS_DAC_Remote_Connection_Test
+  install = .
+
+  Source_Files {
+    Remote_Connection.cpp
+  }
+}

@@ -1,0 +1,34 @@
+// $Id: OASIS.mwc 2245 2013-09-06 23:20:23Z hillj $
+
+workspace (OASIS) {
+  cmdline += -include $OASIS_ROOT/MPC/config \
+             -include $ADBC_ROOT/MPC/config \
+             -feature_file $OASIS_ROOT/default.features
+
+  oasis
+  OASIS_PDL/OASIS_PDL.mwc
+
+  static {
+    cmdline += -static
+
+    pin++
+  }
+
+  build_examples {
+    cmdline += -base requires_examples
+
+    examples
+  }
+
+  build_tests {
+    cmdline += -base requires_tests
+
+    tests
+  }
+
+  build_performance_tests {
+    cmdline += -base requires_performance_tests
+
+    performance-tests
+  }
+}

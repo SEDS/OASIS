@@ -1,0 +1,48 @@
+module Test
+{
+  [uuid (0D1000D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_0
+  {
+
+  };
+
+  [uuid (FD1000D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_8
+  {
+    int8 value;
+  };
+
+  [uuid (0D1520D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_16
+  {
+    uint16  value;
+  };
+
+  [uuid (0D1000D0-0CC4-4EC5-A366-E89C0B598ACD); version(1.0)]
+  probe Byte_32
+  {
+    uint32 value;
+  };
+
+  [uuid (0D1000D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_64
+  {
+    uint64 value;
+  };
+
+  [uuid (0D9000D0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_128
+  {
+    uint64 value_a;
+    uint64 value_b;
+  };
+
+  [uuid (0D1000A0-0CC4-4EC5-A366-E89C0B5F8ACD); version(1.0)]
+  probe Byte_256
+  {
+    uint64 value_a;
+    uint64 value_b;
+    uint64 value_c;
+    uint64 value_d;
+  };
+}

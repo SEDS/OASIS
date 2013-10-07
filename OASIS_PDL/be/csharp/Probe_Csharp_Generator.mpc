@@ -1,0 +1,25 @@
+// $Id: Probe_Csharp_Generator.mpc 2118 2012-01-13 20:29:17Z dpuranik $
+
+project (OASIS_PDL_Csharp_Generator) : codegenerationkit, oasis_pdl_be, oasis_lib {
+  sharedname    = OASIS_PDL_Csharp_Generator
+  dynamicflags += OASIS_PDL_CSHARP_GENERATOR_BUILD_DLL
+
+  after += OASIS_PDL_Schema_Generator
+  libs  += OASIS_PDL_Schema_Generator
+
+  Source_Files {
+  Var_Type_Generator.cpp
+  Probe_Csharp_Schema_Generator.cpp
+  Attribute_Generator.cpp
+  Csharp.cpp
+  Package_Data_Generator.cpp
+  Probe_Csharp_Generator.cpp
+  Probe_Csharp_Generator_Visitor.cpp
+  Recall_Generator.cpp
+  Flush_Generator.cpp
+  }
+
+  Header_Files {
+  
+  }
+}

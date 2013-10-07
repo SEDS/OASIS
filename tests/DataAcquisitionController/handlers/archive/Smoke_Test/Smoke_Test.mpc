@@ -1,0 +1,16 @@
+// $Id: Smoke_Test.mpc 2035 2011-11-01 14:08:23Z dfeiock $
+
+project (OASIS_DAC_Archive_Service_Smoke_Test) : oasis_data_channel, oasis_einode_core, oasis_softwareprobe_test {
+  exename = OASIS_DAC_Archive_Service_Smoke_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    Smoke_Test_Probe.pdl
+  }
+
+  Source_Files {
+    Smoke_Test.cpp
+  }
+}

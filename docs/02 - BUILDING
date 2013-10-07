@@ -1,0 +1,41 @@
+DOCUMENT: BUILDING
+LAST UPDATE: March 7, 2011
+
+I. Selecting Build Features
+----------------------------
+The first step in builing OASIS is to install the default features
+file for your configuration. The default features controls what
+parts of OASIS to build based on the selected features. To install
+the default features file, copy the default build features file
+template
+
+  $OASIS_ROOT/default.features.tmpl
+
+to the following location:
+
+  $OASIS_ROOT/default.features
+
+After installing the default build features file, next select what
+features to build. This is done by enabling features in the installed
+default featurs file. For example, to enable support for building
+TENA parts of OASIS, set tena=1 in the default features file. To
+disable a feature, set its feature to 0 (e.g., tena=0).
+
+It is assumed that you have all required libraries installed for a
+given feature. If the supporting libraries are not installed, then
+there is a chance that parts of OASIS based on the enabled feature
+will not build correctly.
+
+II. Building OASIS
+-------------------
+OASIS uses the Makefile Project Workspace Creator (MPC) to support
+cross-platform project generating and building. To build OASIS,
+just execute the following steps:
+
+%> $ACE_ROOT/bin/mwc.pl -type [build type] OASIS.mwc
+%> # build OASIS using generated workspace
+
+For a complete set of build types supported by MPC, please execute
+the following command:
+
+%> $ACE_ROOT/bin/mwc.pl -help

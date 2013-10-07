@@ -1,0 +1,27 @@
+DOCUMENT: SETUP
+LAST UPDATE: March 7, 2011
+
+I. Environment Setup
+---------------------
+Before you can build OASIS, you must first setup your environment.
+This means defining the correct environment variables so that all
+project in OASIS will build correctly. Outside of setting the
+environment variables for any third-party libraries that OASIS uses,
+the main environment variable that must be defined is:
+
+  OASIS_ROOT
+
+This environment variable should be set to the root directory of
+OASIS. For example on Windows, you define it as follows:
+
+  %> set OASIS_ROOT=<path to OASIS>
+
+You then need to update the PATH variable (and LD_LIBRARY_PATH
+and DYLD_LIBRARY_PATH on Linux and MacOS X, respectively) with
+the location of OASIS library and binary directories. This can
+be done as follows:
+
+  %> set PATH=%PATH%;%OASIS_ROOT%\bin;%OASIS_ROOT%\lib
+
+On non-Windows systems, %OASIS_ROOT%\lib should be added to
+either LD_LIBRARY_PATH on Linux or DYLD_LIBRARY_PATH on MacOS X.

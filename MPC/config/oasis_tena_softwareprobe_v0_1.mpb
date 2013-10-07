@@ -1,0 +1,11 @@
+// $Id: oasis_tena_softwareprobe_v0_1.mpb 1946 2011-09-30 15:42:13Z hillj $
+
+project : oasis_softwareprobe, oasis_tena {
+  includes += $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-SoftwareProbe-v0.1
+
+  specific (prop:windows) {
+    lit_libs += libOASIS-SoftwareProbe-v0.1-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  } else {
+    libs += OASIS-SoftwareProbe-v0.1-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  }
+}

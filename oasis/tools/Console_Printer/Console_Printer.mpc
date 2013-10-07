@@ -1,0 +1,12 @@
+// $Id: Console_Printer.mpc 2071 2011-12-01 15:48:16Z hillj $
+
+project (OASIS_Console_Printer) : oasis_tao, oasis_dac_skel, oasis_testexecutionmanager_stub, \
+                                  oasis_tao_publisher_service_skel, oasis_bin {
+  exename = OASIS_Console_Printer
+
+  Source_Files {
+    Console_Printer.cpp
+    Console_Printer_Tool.cpp
+    Console_Printer_DataSubscriber_i.cpp
+  }
+}

@@ -1,0 +1,6 @@
+// $Id: oasis_testexecutionmanager_skel.mpb 1863 2011-08-19 18:39:59Z hillj $
+
+project : oasis_dac_skel, oasis_testexecutionmanager_stub, oasis_tao_skel {
+  libs  += OASIS_TestExecutionManager_skel
+  after += OASIS_TestExecutionManager_skel
+}

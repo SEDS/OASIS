@@ -1,0 +1,78 @@
+// $Id: DataChannel.mpc 2220 2012-11-19 17:05:12Z dfeiock $
+
+project (OASIS_Tao_DataChannel_IDL_Gen) : oasis_taoidldefaults {
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=OASIS_TAO_DATACHANNEL_STUB_Export \
+              -Wb,stub_export_include=OASIS_Tao_DataChannel_stub_export.h \
+              -Wb,skel_export_macro=OASIS_TAO_DATACHANNEL_SKEL_Export \
+              -Wb,skel_export_include=OASIS_Tao_DataChannel_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    CommandChannel.idl
+    DataChannel.idl
+  }
+}
+
+project (OASIS_Tao_DataChannel_stub) : oasis_tao_stub, oasis_lib {
+  sharedname    = OASIS_Tao_DataChannel_stub
+  dynamicflags += OASIS_TAO_DATACHANNEL_STUB_BUILD_DLL
+
+  after += OASIS_Tao_DataChannel_IDL_Gen
+
+  Source_Files {
+    CommandChannelC.cpp
+    DataChannelC.cpp
+  }
+}
+
+project (OASIS_Tao_DataChannel_skel) : oasis_tao_datachannel_stub, oasis_tao_skel, oasis_lib {
+  sharedname    = OASIS_Tao_DataChannel_skel
+  dynamicflags += OASIS_TAO_DATACHANNEL_SKEL_BUILD_DLL
+
+  Source_Files {
+    CommandChannelS.cpp
+    DataChannelS.cpp
+  }
+
+  IDL_Files {
+
+  }
+}
+
+project (OASIS_Tao_DataChannel) : oasis_dac_core, oasis_tao_datachannel_skel, \
+                                  oasis_iortable_trait, oasis_tao, \
+                                  oasis_lib {
+  sharedname    = OASIS_Tao_DataChannel
+  dynamicflags += OASIS_TAO_DATACHANNEL_BUILD_DLL
+
+  Source_Files {
+    Command_Channel_Adapter.cpp
+    Data_Channel_Service.cpp
+    Tao_Data_Packet.cpp
+    DataChannel_i.cpp
+  }
+
+  IDL_Files {
+
+  }
+}
+
+project (OASIS_Tao_DataChannel_Client) : oasis_einode_core, \
+                                         oasis_tao_datachannel_skel, \
+                                         oasis_tao, oasis_lib, oasis_data_channel {
+
+  sharedname    = OASIS_Tao_DataChannel_Client
+  dynamicflags += OASIS_TAO_DATACHANNEL_CLIENT_BUILD_DLL
+
+  Source_Files {
+    Tao_CommandChannel_i.cpp
+    Tao_Software_Probe_Data_Packager.cpp
+    Tao_Data_Channel_Client.cpp
+  }
+
+  IDL_Files {
+
+  }
+}

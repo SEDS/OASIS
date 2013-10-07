@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<component name="FooBridge" version="1.1" componentType="userApplication">
+<property name="pluginVersion" value="1.0"/>
+<property name="pluginName" value="OASIS"/>
+<property name="objectModelName" value="OASIS-Foo-v1.1"/>
+<artifact kind="sourceFile" resource="src/OASIS/Foo_Bridge.cpp" feature="1"/>
+<artifact kind="sourceFile" resource="src/OASIS/Foo_Bridge.h" feature="1"/>
+<artifact kind="sourceFile" resource="src/FooBridge_v1_1_export.h" feature="0"/>
+<artifact kind="sourceFile" resource="src/Software_Probe_Bridge_Manager.cpp" feature="0"/>
+<artifact kind="sourceFile" resource="src/Software_Probe_Bridge_Manager.h" feature="0"/>
+<artifact kind="sourceFile" resource="./FooBridge-v1_1.mpc" feature="0"/>
+<artifact kind="sourceFile" resource="./FooBridge-v1_1.mwc" feature="0"/>
+<provides>
+<feature id="0" object="OASIS-Foo-v1.1" capability="oasis.GenerateBridge"/>
+<feature id="1" object="OASIS-Foo-v1.1.OASIS::Foo" capability="oasis.GenerateBridge"/>
+</provides>
+<requires/>
+<uses/>
+</component>

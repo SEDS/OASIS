@@ -1,0 +1,43 @@
+// -*- TDL -*-
+
+import <OASIS-SoftwareProbe-v0.1.tdl>
+
+package OASIS
+{
+  package Middleware
+  {
+    local class SoftwareProbeEntry
+    {
+      string name;
+
+      SoftwareProbeMetadata metadata;
+    };
+
+    local class EINodeRegistration
+    {
+      UUID uuid;
+
+      string name;
+
+      vector <SoftwareProbeEntry> probes;
+    };
+
+    local class DataPacket
+    {
+      UUID einode_uuid;
+
+      int32 byte_order;
+
+      vector <octet> data;
+    };
+
+    class DataChannel
+    {
+      const string name;
+
+      EINodeRegistration registration;
+
+      DataPacket data;
+    };
+  };
+};

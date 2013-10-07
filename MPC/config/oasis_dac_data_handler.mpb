@@ -1,0 +1,6 @@
+// $Id: oasis_dac_data_handler.mpb 1991 2011-10-10 02:05:19Z hillj $
+
+project {
+  libs  += OASIS_DAC_Data_Handler
+  after += OASIS_DAC_Data_Handler
+}

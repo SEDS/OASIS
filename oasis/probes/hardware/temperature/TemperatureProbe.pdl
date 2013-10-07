@@ -1,0 +1,14 @@
+#pragma version (1.1)
+
+module OASIS
+{
+  module HardwareProbes
+  {
+    [uuid(80E7579C-4BAB-4BC5-8502-F91FD038E24D); version(1.0)]
+    probe TemperatureProbe
+    {
+      real32 temperatureCelcius;
+    };
+  }
+}
+

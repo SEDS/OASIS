@@ -1,0 +1,9 @@
+module OASIS
+{
+  [uuid (6E1F2E3E-C7DF-4EDD-A903-175108F8D554); version(1.0)]
+  probe Int16_Vector_Probe
+  {
+    vector <int16> value;
+    vector <string> other_value;
+  };
+}

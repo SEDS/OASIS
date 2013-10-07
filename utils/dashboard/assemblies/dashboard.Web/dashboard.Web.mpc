@@ -1,0 +1,41 @@
+// $Id: dashboard.Web.mpc 2218 2012-10-17 19:21:14Z dfeiock $
+
+project (dashboard.Web) : oasis_dashboard_assembly {
+  sharedname = dashboard.Web
+
+  lit_libs   = IIOPChannel \
+               System \
+               System.Configuration \
+               System.Core \
+               System.Data \
+               System.Data.DataSetExtensions \
+               System.Drawing \
+               System.EnterpriseServices \
+               System.Web \
+               System.Web.Extensions \
+               System.Web.Mobile \
+               System.Web.Services \
+               System.XML \
+               System.XML.Linq \
+               TestExecutionManager
+
+  after += dashboard.TestExecutionManager
+
+  specific {
+    output_dir =
+  }
+
+  Source_Files {
+    Properties/AssemblyInfo.cs
+
+    // CS implementation of ashx pages
+    dashboard/Web/Menu_Data.ashx.cs
+    dashboard/Web/Probe_Schema.ashx.cs
+
+    // Helper classes
+    dashboard/Web/Helper_Classes/DAC.cs
+    dashboard/Web/Helper_Classes/Menu.cs
+    dashboard/Web/Helper_Classes/Probe.cs
+  }
+}
+

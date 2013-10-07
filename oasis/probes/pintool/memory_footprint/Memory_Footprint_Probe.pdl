@@ -1,0 +1,13 @@
+module OASIS
+{
+module PIN
+{
+  [uuid (8745dce1-610a-4a72-866e-90b6942b3f96); version(1.0)]
+  probe Memory_Footprint_Probe
+  {
+      uint64 code;
+      uint64 load;
+      uint64 store;
+  };
+}
+}

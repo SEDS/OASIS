@@ -1,0 +1,6 @@
+// $Id: oasis_dac_remoting_service_stub.mpb 1882 2011-08-24 15:09:05Z hillj $
+
+project : oasis_tao_stub {
+  libs  += OASIS_DAC_Remoting_Service_stub
+  after += OASIS_DAC_Remoting_Service_stub
+}

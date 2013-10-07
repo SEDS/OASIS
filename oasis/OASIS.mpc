@@ -1,0 +1,10 @@
+// $Id: OASIS.mpc 1864 2011-08-19 18:59:58Z hillj $
+
+project (OASIS) : acelib, oasis_lib {
+  sharedname    = OASIS
+  dynamicflags += OASIS_BUILD_DLL
+
+  Source_Files {
+    streams.cpp
+  }
+}

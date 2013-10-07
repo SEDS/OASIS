@@ -1,0 +1,34 @@
+// $Id: oasis_pdl.mpb 2211 2012-07-25 12:55:51Z dfeiock $
+
+project : oasis_common {
+  after += OASIS_PDL_EXE
+
+  specific {
+    oasis_pdl_dep = $(OASIS_ROOT)/bin/oasis_pdl
+  }
+
+  Define_Custom (PDL) {
+    automatic            = 1
+    dependent            = $(OASIS_PDL_DEP)
+    dependent_libs      += $(OASIS_ROOT)/lib/OASIS_PDL_FE $(OASIS_ROOT)/lib/OASIS_PDL_BE
+    libpath              = $(OASIS_ROOT)/lib
+    command              = $(OASIS_ROOT)/bin/oasis_pdl
+    inputext             = .pdl
+    source_pre_extension = , Impl, _Metadata
+    header_pre_extension = , Impl, _Metadata
+
+    keyword pdlflags  = commandflags
+
+    optional (source_outputext) {
+      commandflags (--backend=cpp) += .cpp
+    }
+
+    optional (header_outputext) {
+      commandflags (--backend=cpp) += .h
+    }
+
+    optional (generic_outputext) {
+      commandflags (--generate-schema) += .xsd
+    }
+  }
+}

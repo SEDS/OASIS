@@ -1,0 +1,16 @@
+// $Id: vector.mpc 2046 2011-11-11 19:18:53Z dfeiock $
+
+project (OASIS_Vector_Software_Probe_Test) : oasis_softwareprobe_test, oasis_data_channel {
+  exename = OASIS_Vector_Software_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    vector.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

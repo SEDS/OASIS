@@ -1,0 +1,47 @@
+#pragma version (1.1)
+
+module OASIS
+{
+  module System
+  {
+    module Network
+    {
+      [uuid(e4080cc5-c501-4a33-b72c-ad5dbc444fb9); version(1.0)]
+      abstract probe NetworkProbe
+      {
+        string nic;
+        uint64 recv_bytes;
+        uint64 recv_packets;
+        uint64 recv_errors;
+        uint64 recv_drop;
+        uint64 recv_multicast;
+
+        uint64 sent_bytes;
+        uint64 sent_packets;
+        uint64 sent_errors;
+        uint64 sent_drop;
+      };
+
+      [uuid(942266F1-5301-45be-B700-2D6E2DADBAB7); version(1.0)]
+      probe LinuxNetworkProbe : NetworkProbe
+      {
+        uint64 recv_compressed;
+        uint64 recv_fifo;
+        uint64 recv_frames;
+
+        uint64 sent_compressed;
+        uint64 sent_fifo;
+        uint64 sent_collision;
+        uint64 sent_carrier;
+      };
+
+      [uuid(997D59E4-A7A7-473c-8D4F-D55CF9E75206); version(1.0)]
+      probe WindowsNetworkProbe : NetworkProbe
+      {
+        uint64 recv_unknown;
+
+        uint64 outbound_queue_length;
+      };
+    }
+  }
+}

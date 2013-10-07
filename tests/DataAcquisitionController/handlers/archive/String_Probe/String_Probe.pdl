@@ -1,0 +1,8 @@
+module Test
+{
+  [uuid (4F4BF6A7-5B50-4358-A9D6-6D840C436FB7); version (1.0)]
+  probe String_Probe
+  {
+    string str_value;
+  };
+}

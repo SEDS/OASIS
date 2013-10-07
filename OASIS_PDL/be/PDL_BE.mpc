@@ -1,0 +1,11 @@
+// $Id: PDL_BE.mpc 1716 2010-11-29 00:53:50Z hillj $
+
+project (OASIS_PDL_BE) : acelib, oasis_lib {
+  sharedname    = OASIS_PDL_BE
+  dynamicflags += OASIS_PDL_BE_BUILD_DLL
+
+  Source_Files {
+    PDL_Backend.cpp
+    PDL_Backend_Manager.cpp
+  }
+}

@@ -1,0 +1,6 @@
+// $Id: oasis_iortable_trait.mpb 1712 2010-11-23 03:50:53Z hillj $
+
+project {
+  after += OASIS_IORTable_Trait
+  libs  += OASIS_IORTable_Trait
+}

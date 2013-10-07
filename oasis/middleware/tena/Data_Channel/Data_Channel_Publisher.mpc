@@ -1,0 +1,15 @@
+// $Id: Data_Channel_Publisher.mpc 1987 2011-10-07 17:45:06Z dfeiock $
+
+project (OASIS_Tena_DataChannel_Publisher) : disabled, oasis_tena_datachannel, \
+                                             oasis_einode_core, \
+                                             oasis_data_channel, \
+                                             oasis_lib {
+
+  sharedname    = OASIS_Tena_DataChannel_Publisher
+  dynamicflags += OASIS_TENA_DATACHANNEL_PUBLISHER_HAS_DLL OASIS_TENA_DATACHANNEL_PUBLISHER_BUILD_DLL
+
+  Source_Files {
+    Configuration.cpp
+    Data_Channel_Publisher.cpp
+  }
+}

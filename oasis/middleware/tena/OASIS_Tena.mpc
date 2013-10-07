@@ -1,0 +1,27 @@
+// $Id: OASIS_Tena.mpc 1988 2011-10-07 18:15:20Z dfeiock $
+
+project (OASIS_Tena) : tena_middleware, oasis_lib, disable_versioned_namespace {
+  sharedname    = OASIS_Tena
+
+  dynamicflags += OASIS_TENA_HAS_DLL OASIS_TENA_BUILD_DLL \
+                  OASIS_HAS_DLL OASIS_BUILD_DLL
+
+  // Remove all references to ACE on trunk. This should be placed
+  // in tena_middleware, but we are leaving it here since the TENA
+  // developers update MPC every blue moon. It is therefore unknown
+  // when they would pick up such a change.
+
+  libs -= ACE
+  libpaths -= $(ACE_ROOT)/lib
+  includes -= $(ACE_ROOT) $(ACE_ROOT)/ace
+
+  Source_Files {
+    Subscriber_Task.cpp
+    streams_impl.cpp
+  }
+
+  verbatim (gnuace, extension) {
+    # remove all references to ACE from the repo
+    CPPFLAGS := $(filter-out -I$(ACE_ROOT), $(CPPFLAGS))
+  }
+}

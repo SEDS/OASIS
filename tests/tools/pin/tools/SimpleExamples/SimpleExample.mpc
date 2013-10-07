@@ -1,0 +1,10 @@
+// $Id: SimpleExample.mpc 2246 2013-09-06 23:22:57Z hillj $
+
+project (pintool_icount) : oasis_pintool {
+  sharedname    = pintool_icount
+  dynamicflags += OASIS_PINTOOL_SIMPLE_EXAMPLE_BUILD_DLL
+
+  Source_Files {
+    icount.cpp
+  }
+}

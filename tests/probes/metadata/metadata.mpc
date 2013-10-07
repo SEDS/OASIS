@@ -1,0 +1,16 @@
+// $Id: metadata.mpc 2213 2012-08-01 14:05:58Z dfeiock $
+
+project (OASIS_Probe_Metadata_Test) : oasis_softwareprobe_test  {
+  exename = OASIS_Probe_Metadata_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    mdtest.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

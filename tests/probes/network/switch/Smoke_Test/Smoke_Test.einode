@@ -1,0 +1,6 @@
+Name: SwitchProbe_SmokeTest_Einode
+Uuid: 3a078e90-f018-11e0-be50-0800200c9a66
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"
+  probe s1 OASIS_SwitchProbe:create_OASIS_Network_Switch_SwitchProbe_Impl_Factory () "--host=192.168.2.254 --community=public --port=1 --port=2"

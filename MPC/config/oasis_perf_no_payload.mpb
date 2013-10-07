@@ -1,0 +1,5 @@
+// $Id: oasis_perf_no_payload.mpb 2242 2013-08-22 15:38:08Z dfeiock $
+
+feature (oasis_perf_no_payload) {
+  macros += OASIS_PERF_NO_PAYLOAD
+}

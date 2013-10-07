@@ -1,0 +1,114 @@
+// -*- IDL -*-
+
+//=============================================================================
+/**
+ *  @file         Remote_Service.idl
+ *
+ *  $Id: DataAcquisitionController.idl 2207 2012-06-08 20:02:32Z dfeiock $
+ *
+ *  @author       James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_DATA_ACQUISITION_CONTROLLER_IDL_
+#define _OASIS_DATA_ACQUISITION_CONTROLLER_IDL_
+
+#include "Remote_Service.idl"
+
+module OASIS
+{
+  /// Type definition for a collection of remote services.
+  typedef sequence <RemoteService> RemoteServiceList;
+
+  /**
+   * @class ServiceNotFound
+   *
+   * Exception thrown when a service is not found.
+   */
+  exception ServiceNotFound
+  {
+    /// Name of the service.
+    string name;
+  };
+
+  /**
+   * @class NoRemoteService
+   *
+   * Exception thrown when a service does not support remoting
+   * capabilities.
+   */
+  exception NoRemoteService
+  {
+    /// Name of the service.
+    string name;
+  };
+
+  /**
+   * @class ProbeNotFound
+   *
+   * Exception thrown when a probe is not found.
+   */
+  exception ProbeNotFound
+  {
+    /// Name of the probe.
+    string name;
+
+    /// name of the einode.
+    string einode;
+  };
+
+  /**
+    * @struct ProbeInstnace
+    *
+    * Struct which contains information about a software probe instance.
+    */
+  struct ProbeInstance
+  {
+    string inst_name;
+    string inst_uuid;
+    string inst_type_name;
+    string einode_name;
+  };
+
+  /// Type definition for a collection of ProbeIDs.
+  typedef sequence <ProbeInstance> ProbeInstanceList;
+
+  /**
+   * @interface DataAcquisitionController
+   */
+  interface DataAcquisitionController
+  {
+    /// Get the DAC's name.
+    readonly attribute string name;
+
+    /**
+     * Send a command to the DAC for processing. The DAC will locate
+     * the corrent Einode, and forward the command along.
+     *
+     * @param[in]       einode          Target Einode
+     * @param[in]       cmdstr          The command string
+     */
+    void send_command (in string einode, in string cmdstr);
+
+    /**
+     * Get a remote service by name.
+     *
+     * @param[in]       name            Name of the service
+     */
+    RemoteService get_service (in string name)
+      raises (ServiceNotFound, NoRemoteService);
+
+    /// Get a list of the services installed on this DAC.
+    RemoteServiceList get_services ();
+
+    /// Get a list of the probes registered with this DAC.
+    ProbeInstanceList get_probe_instances ();
+
+    /// Get the schema for the provided probe
+    string get_schema (in string name, in string einode)
+      raises (ProbeNotFound);
+  };
+};
+
+
+#endif  // !defined _OASIS_DAC_REMOTE_SERVICE_IDL_H_

@@ -1,0 +1,8 @@
+// $Id: oasis_pdl_fe.mpb 1716 2010-11-29 00:53:50Z hillj $
+
+project {
+  after += OASIS_PDL_FE
+  libs  += OASIS_PDL_FE
+
+  includes += $(OASIS_ROOT)/OASIS_PDL
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<eisa:einode xmlns:eisa="http://www.ge.com/eisa" xmlns="http://www.ge.com/eisa"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.ge.com/eisa einode.xsd">
+
+  <uuid>A0F1C229-135F-4047-BADD-2DE55C75FBC2</uuid>
+  <name>TestEINode</name>
+  <version>1.0</version>
+  <company>Indiana University-Purdue University Indianapolis (IUPUI)</company>
+  <comment>Example illustrating an EINode's configuration</comment>
+
+  <datachannel>OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client() "-ORBInitRef DataChannel=corbaloc:iiop:localhost:30000/DataChannel"</datachannel>
+</eisa:einode>

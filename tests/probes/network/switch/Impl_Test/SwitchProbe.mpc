@@ -1,0 +1,13 @@
+// $Id: SwitchProbe.mpc 2217 2012-10-02 19:34:45Z dfeiock $
+
+project (OASIS_SwitchProbe_Test) : oasis_data_channel, oasis_softwareprobe, requires_snmp {
+  exename = driver
+  install = .
+
+  after += OASIS_SwitchProbe_stub OASIS_SwitchProbe
+  libs  += OASIS_SwitchProbe_stub OASIS_SwitchProbe
+
+  Source_Files {
+    driver.cpp
+  }
+}

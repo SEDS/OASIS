@@ -1,0 +1,14 @@
+// $Id: Data_Channel.mpc 2224 2012-12-10 06:35:58Z dfeiock $
+
+project (OASIS_Data_Channel) : oasis, oasis_lib {
+  sharedname    = OASIS_Data_Channel
+  dynamicflags += OASIS_DATA_CHANNEL_BUILD_DLL
+
+  Source_Files {
+    Data_Channel.cpp
+    Latest_Local_Data_Channel.cpp
+    Local_Data_Channel.cpp
+    Software_Probe_Data_Packager.cpp
+    Standard_Software_Probe_Data_Packager.cpp
+  }
+}

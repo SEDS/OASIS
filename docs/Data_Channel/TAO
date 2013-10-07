@@ -1,0 +1,36 @@
+DOCUMENT: TAO
+LAST UPDATE: September 30, 2011
+
+Table of Contents
+========================
+1. Overview
+2. Command-line Parameters
+
+1. Overview
+----------------------------
+The ACE ORB (TAO) data channel provides network communication
+between the Data Acquisition Controller (DAC) and the Embedded
+Instrumentation (EI) node using the TAO middleware. The source
+code for each endpoint of the TAO data channel is in the following
+directories:
+
+  $OASIS_ROOT/oasis/EINode/channel/tao
+  $OASIS_ROOT/oasis/DataAcquisitionController/channel/tao
+
+2. Command-line Parameters
+----------------------------
+Both endpoints of the TAO data channel accept the standard TAO
+command-line options. In addition, each endpoint accepts command-line
+options specific to OASIS.
+
+The following are command-line options accepted by the EI node
+endpoint of the TAO data channel:
+
+ --no-orb           Do not run a private ORB. This is useful when
+                    sharing an existing ORB in the process.
+
+The following are command-line options accepted by the DAC
+endpoint of the TAO data channel:
+
+ -r,--run-orb       Run a private ORB. This endpoint will not use
+                    the ORB created by the DAC, if one exists.

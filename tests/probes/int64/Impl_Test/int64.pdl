@@ -1,0 +1,8 @@
+module OASIS
+{
+  [uuid (469B9E52-C048-4203-AE99-B0B925FE4929); version(1.0)]
+  probe Int64_SoftwareProbe
+  {
+    int64 value;
+  };
+}

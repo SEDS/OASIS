@@ -1,0 +1,7 @@
+// $Id: Dummy_Probe.pdl 1971 2011-10-03 20:07:30Z hillj $
+
+[uuid (82E730A5-2027-4538-98EB-CC9A4DA8AC67); version (1.0)]
+probe Dummy_Probe
+{
+
+};

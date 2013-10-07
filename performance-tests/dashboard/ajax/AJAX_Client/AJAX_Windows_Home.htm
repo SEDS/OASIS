@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+  <title>OASIS_Dashboard</title>
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="pragma" content="no-cache"/>
+  
+  <script type="text/javascript" language = "javascript">
+    var prev_processor_response_length = 0; 
+	var prev_memory_response_length = 0;
+    
+    String.prototype.trim = function() {
+	   return this.replace(/^\s+|\s+$/g,"");
+    }
+    
+    function read_file ()
+    {
+        if (window.XMLHttpRequest)
+          {// code for IE7+, Firefox, Chrome, Opera, Safari
+            var processor_xhr=new XMLHttpRequest();
+			var memory_xhr = new XMLHttpRequest ();
+          }
+        else
+          {// code for IE6, IE5
+			var processor_xhr=new ActiveXObject("Microsoft.XMLHTTP");
+			var memory_xhr = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+        processor_xhr.onreadystatechange=function()
+          {
+            if (processor_xhr.readyState==4 || processor_xhr.readyState==3 ) //&& xmlhttp.status==200)
+            {
+                handle_processor_info (processor_xhr.responseText);
+            }
+          }
+        processor_xhr.open("POST","http://boss.cs.iupui.edu/dashboard/Processor_Information.php",true);
+        processor_xhr.send();
+		
+		memory_xhr.onreadystatechange=function()
+          {
+            if (memory_xhr.readyState==4 || memory_xhr.readyState==3 ) //&& xmlhttp.status==200)
+            {
+                handle_memory_info (memory_xhr.responseText);
+            }
+          }
+        memory_xhr.open("POST","http://boss.cs.iupui.edu/dashboard/Memory_Information.php",true);
+        memory_xhr.send();
+    }
+    
+    function handle_processor_info (input)
+    {
+        if (prev_processor_response_length < input.length)
+        {
+            prev_processor_response_length = input.length;
+            var response_array = input.split("<br/>");
+            var response = JSON.parse(response_array[response_array.length-2].trim());
+            document.getElementById("idle_time").innerHTML=response.idle_time;
+            document.getElementById("system_time").innerHTML=response.system_time;
+            document.getElementById("user_time").innerHTML=response.user_time;
+			document.getElementById("nice_time").innerHTML=response.nice_time;
+			document.getElementById("iowait_time").innerHTML=response.iowait_time;
+			document.getElementById("irq_time").innerHTML=response.irq_time;
+			document.getElementById("soft_irq_time").innerHTML=response.soft_irq_time;
+        }
+    }
+	
+	function handle_memory_info (input)
+    {
+        if (prev_memory_response_length < input.length)
+        {
+            prev_memory_response_length = input.length;
+            var response_array = input.split("<br/>");
+            var response = JSON.parse(response_array[response_array.length-2].trim());
+			
+			document.getElementById("physical_memory_avail").innerHTML=response.physical_memory_avail;
+			document.getElementById("physical_memory_total").innerHTML=response.physical_memory_total;
+			document.getElementById("system_cache").innerHTML=response.system_cache;
+			document.getElementById("commit_limit").innerHTML=response.commit_limit;
+			document.getElementById("commit_total").innerHTML=response.commit_total;
+			document.getElementById("virtual_total").innerHTML=response.virtual_total;
+			document.getElementById("virtual_used").innerHTML=response.virtual_used;	
+			document.getElementById("buffers").innerHTML=response.buffers;
+			document.getElementById("swap_cache").innerHTML=response.swap_cache;
+			document.getElementById("inactive").innerHTML=response.inactive;
+			document.getElementById("active").innerHTML=response.inactive;
+			document.getElementById("high_total").innerHTML=response.high_total;
+			document.getElementById("high_free").innerHTML=response.high_free;
+			document.getElementById("low_total").innerHTML=response.low_total;
+			document.getElementById("low_free").innerHTML=response.low_free;
+			document.getElementById("swap_total").innerHTML=response.swap_total;
+			document.getElementById("swap_free").innerHTML=response.swap_free;
+			document.getElementById("dirty").innerHTML=response.dirty;
+			document.getElementById("write_back").innerHTML=response.write_back;
+			document.getElementById("virtual_chunk").innerHTML=response.virtual_chunk;
+        }
+    }
+  </script>
+
+</head>
+<body>
+  <p>
+    <input type="button" id="dtnSendRequest" value="Click for Information" onclick="read_file()"/>
+  </p>
+    <table border="1">
+        <th colspan="2">Processor Information</th>
+        <tr>
+          <td id="idle_time_header">Idle Time</td>
+          <td id="idle_time"></td>  
+        </tr>
+        
+        <tr>
+          <td id="system_time_header">System Time</td>
+          <td id="system_time"></td>  
+        </tr>
+		
+        <tr>
+          <td id="user_time_header">User Time</td>
+          <td id="user_time"></td>  
+        </tr>
+		
+		<tr>
+			<td id="Td4">Nice Time</td>
+			<td id="nice_time"></td>
+		</tr>
+
+		<tr>
+			<td id="Td12">IO Wait Time</td>
+			<td id="iowait_time"></td>
+		</tr>
+
+		<tr>
+			<td id="Td17">Irq Time</td>
+			<td id="irq_time"></td>
+		</tr>
+
+		<tr>
+			<td id="Td21">Soft Irq Time</td>
+			<td id="soft_irq_time"></td>
+		</tr>
+		
+    </table>
+	
+	<table border = "1" style="position: fixed; top: 60px; left: 386px; height: 600px;">
+		<th colspan="2">
+        Memory Information
+      </th>
+
+      <!--Common Memory Information -->
+      <tr>
+        <td id="physical_memory_avail_header">
+          Physical Memory Available
+        </td>
+        <td id="physical_memory_avail">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="physical_memory_total_header">
+          Physical Memory Total
+        </td>
+        <td id="physical_memory_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="system_cache_header">
+          System Cache
+        </td>
+        <td id="system_cache">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_limit_header">
+          Commit Limit
+        </td>
+        <td id="commit_limit">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_total_header">
+          Commit Total
+        </td>
+        <td id="commit_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_total_header">
+          Virtual Total
+        </td>
+        <td id="virtual_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_used_header">Virtual Used</td>
+        <td id="virtual_used"></td>
+      </tr>
+	  
+	  <tr>
+        <td id="Td2">
+          Buffers
+        </td>
+        <td id="buffers">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td6">
+          Swap Cache
+        </td>
+        <td id="swap_cache">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td10">
+          Inactive
+        </td>
+        <td id="inactive">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td14">
+          Active
+        </td>
+        <td id="active">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td16">
+          High Total
+        </td>
+        <td id="high_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td18">
+          High Free
+        </td>
+        <td id="high_free">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td20">
+          Low Total
+        </td>
+        <td id="low_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td22">
+          Low Free
+        </td>
+        <td id="low_free">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td24">
+          Swap Total
+        </td>
+        <td id="swap_total">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td26">
+          Swap Free
+        </td>
+        <td id="swap_free">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td28">
+          Dirty
+        </td>
+        <td id="dirty">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td30">
+          Write Back
+        </td>
+        <td id="wirte_back">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td32">
+          Virtual Chunk
+        </td>
+        <td id="virtual_chunk">
+        </td>
+      </tr>
+	</table>
+</body>
+</html>

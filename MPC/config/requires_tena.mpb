@@ -1,0 +1,5 @@
+// $Id: requires_tena.mpb 1791 2011-04-11 01:57:04Z hillj $
+
+project {
+  requires += tena
+}

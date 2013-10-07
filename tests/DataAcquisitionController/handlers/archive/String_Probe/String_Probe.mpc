@@ -1,0 +1,16 @@
+// $Id: String_Probe.mpc 2035 2011-11-01 14:08:23Z dfeiock $
+
+project (OASIS_DAC_Archive_Service_String_Probe_Test) : oasis_data_channel, oasis_einode_core, oasis_softwareprobe_test {
+  exename = OASIS_DAC_Archive_Service_String_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    String_Probe.pdl
+  }
+
+  Source_Files {
+    String_Probe_Test.cpp
+  }
+}

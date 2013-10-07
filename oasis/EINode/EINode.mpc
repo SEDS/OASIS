@@ -1,0 +1,19 @@
+// $Id: EINode.mpc 2088 2012-01-03 14:37:31Z dfeiock $
+
+project (OASIS_EINode) : boost_base, oasis_softwareprobe, \
+                         oasis_data_channel, oasis_lib, \
+                         oasis_middleware {
+  sharedname    = OASIS_EINode
+  dynamicflags += OASIS_EINODE_CORE_BUILD_DLL
+
+  Header_Files {
+    Data_Channel.h
+  }
+
+  Source_Files {
+    Configuration.cpp
+    LocalDataChannel_i.cpp
+    EINode_Connect_Task.cpp
+    Standard_EINode.cpp
+  }
+}

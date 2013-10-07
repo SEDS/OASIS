@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// $Id: ProcessorProbeBridge-v1_0.mwc 2134 2012-02-15 18:32:19Z dfeiock $
+
+workspace (ProcessorProbeBridge-v1_0) {
+  cmdline += -include $OASIS_ROOT/MPC/config
+
+  ProcessorProbeBridge-v1_0.mpc
+}

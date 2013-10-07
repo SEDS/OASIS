@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<component name="ProcessorProbeBridge" version="1.0" componentType="userApplication">
+<property name="pluginVersion" value="1.0"/>
+<property name="pluginName" value="OASIS"/>
+<property name="objectModelName" value="OASIS-ProcessorProbe-v1.0"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp" feature="1"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp" feature="2"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp" feature="3"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/ProcessorProbe_Bridge.h" feature="1"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.h" feature="2"/>
+<artifact kind="sourceFile" resource="src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.h" feature="3"/>
+<artifact kind="sourceFile" resource="src/ProcessorProbeBridge_v1_0_export.h" feature="0"/>
+<artifact kind="sourceFile" resource="src/Software_Probe_Bridge_Manager.cpp" feature="0"/>
+<artifact kind="sourceFile" resource="src/Software_Probe_Bridge_Manager.h" feature="0"/>
+<artifact kind="sourceFile" resource="./ProcessorProbeBridge-v1_0.mpc" feature="0"/>
+<artifact kind="sourceFile" resource="./ProcessorProbeBridge-v1_0.mwc" feature="0"/>
+<provides>
+<feature id="0" object="OASIS-ProcessorProbe-v1.0" capability="oasis.GenerateBridge"/>
+<feature id="1" object="OASIS-ProcessorProbe-v1.0.OASIS::System::Processor::ProcessorProbe" capability="oasis.GenerateBridge"/>
+<feature id="2" object="OASIS-ProcessorProbe-v1.0.OASIS::System::Processor::LinuxProcessorProbe" capability="oasis.GenerateBridge"/>
+<feature id="3" object="OASIS-ProcessorProbe-v1.0.OASIS::System::Processor::WindowsProcessorProbe" capability="oasis.GenerateBridge"/>
+</provides>
+<requires/>
+<uses/>
+</component>

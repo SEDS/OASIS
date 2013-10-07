@@ -1,0 +1,18 @@
+// $Id: dashboard.mwc 2218 2012-10-17 19:21:14Z dfeiock $
+
+workspace (dashboard) {
+  cmdline += -include $OASIS_ROOT/MPC/config
+
+  // web application (i.e., webapp = 1)
+  website/dashboard.mpc
+
+  csharp {
+    cmdline += -language csharp
+
+    assemblies/dashboard.Web
+  }
+
+  cplusplus {
+    assemblies/dashboard.TestExecutionManager
+  }
+}

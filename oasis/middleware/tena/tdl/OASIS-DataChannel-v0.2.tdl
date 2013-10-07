@@ -1,0 +1,73 @@
+// -*- TDL -*-
+
+import <OASIS-SoftwareProbe-v0.1.tdl>
+
+package OASIS
+{
+  package Middleware
+  {
+    /**
+     * @class ChannelBase
+     *
+     * The base class for all channels. This class contains only one attribute,
+     * which is the name of the channel. The name is used to filter what channel
+     * a subscriber is able to receive information.
+     */
+    class ChannelBase
+    {
+      /// Name assigned to channel.
+      const string name;
+    };
+
+    local class SoftwareProbeEntry
+    {
+      string name;
+
+      SoftwareProbeMetadata metadata;
+    };
+
+    /**
+     * @class RegistrationChannel
+     *
+     * Registration information for an EINode. This contains the EINode's
+     * unique id, as well as the registered software probes. This class
+     * also extends the ChannelBase, which provides the channel's name.
+     */
+    class RegistrationChannel : extends ChannelBase
+    {
+      /// Unique id assigned to this channel.
+      const UUID uuid;
+
+      /// Collection of registered/known software probes. This changes
+      /// as an EINode loads/unloads software probes.
+      vector <SoftwareProbeEntry> probes;
+    };
+
+    /**
+     * @class DataPacket
+     *
+     * Raw data sent between an EINode and a DAC.
+     */
+    local class DataPacket
+    {
+      /// The source EINode for the data packet.
+      UUID einode;
+
+      /// The byte order of the data.
+      int8 byte_order;
+
+      /// The actual data contents.
+      vector <octet> data;
+    };
+
+    /**
+     * @class DataChannel
+     */
+    class DataChannel : extends ChannelBase
+    {
+      /// The latest data packet sent from the EINode. This can be a
+      /// single data value, or it can be multiple data values.
+      DataPacket data;
+    };
+  };
+};

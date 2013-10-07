@@ -1,0 +1,10 @@
+// $Id: Software_Probe_Test.mpc 2217 2012-10-02 19:34:45Z dfeiock $
+
+project (OASIS_Software_Probe_Test) : oasis_lib, oasis_softwareprobe {
+  sharedname    = OASIS_Software_Probe_Test
+  dynamicflags += OASIS_SOFTWARE_PROBE_TEST_BUILD_DLL
+
+  Source_Files {
+    Software_Probe_Test_Task.cpp
+  }
+}

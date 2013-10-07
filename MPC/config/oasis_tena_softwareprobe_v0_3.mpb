@@ -1,0 +1,20 @@
+// $Id: oasis_tena_softwareprobe_v0_3.mpb 1987 2011-10-07 17:45:06Z dfeiock $
+
+project : oasis_tena {
+  includes += $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-SoftwareProbe-v0.3 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-UUID-v1 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/TENA-Time-v2 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/impls/TENA-Time-v2-fullConversion-v2
+
+  specific (prop:windows) {
+    lit_libs += libOASIS-SoftwareProbe-v0.3-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libOASIS-UUID-v1-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libTENA-Time-v2-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libTENA-Time-v2-fullConversion-v2-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  } else {
+    libs += OASIS-SoftwareProbe-v0.3-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+            OASIS-UUID-v1-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+            TENA-Time-v2-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+            TENA-Time-v2-fullConversion-v2-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  }
+}

@@ -1,0 +1,5 @@
+// $Id: requires_tests.mpb 1983 2011-10-07 15:18:04Z dfeiock $
+
+project {
+  requires += tests
+}

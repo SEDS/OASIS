@@ -1,0 +1,44 @@
+// $Id: OASIS_Tao.mpc 1863 2011-08-19 18:39:59Z hillj $
+
+project (OASIS_Tao_IDL_gen) : oasis_taoidldefaults {
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=OASIS_TAO_STUB_Export \
+              -Wb,stub_export_include=OASIS_Tao_stub_export.h \
+              -Wb,skel_export_macro=OASIS_TAO_SKEL_Export \
+              -Wb,skel_export_include=OASIS_Tao_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    OASIS_Common.idl
+    OASIS_UUID.idl
+  }
+}
+
+project (OASIS_Tao_stub) : requires_tao, taolib, oasis_lib {
+  sharedname    = OASIS_Tao_stub
+  dynamicflags += OASIS_TAO_STUB_BUILD_DLL
+
+  after += OASIS_Tao_IDL_gen
+
+  Source_Files {
+    OASIS_CommonC.cpp
+    OASIS_UUIDC.cpp
+  }
+}
+
+project (OASIS_Tao) : oasis_tao_stub, oasis_lib {
+  sharedname    = OASIS_Tao
+  dynamicflags += OASIS_TAO_BUILD_DLL
+
+  Source_Files {
+    IOR_File_Trait.cpp
+    ORB_Server_Task.cpp
+    UUID.cpp
+  }
+
+  Template_Files {
+    Servant_Manager_T.cpp
+    Servant_Traits_T.cpp
+  }
+}

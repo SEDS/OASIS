@@ -1,0 +1,12 @@
+module OASIS
+{
+module PIN
+{
+  [uuid (111a8c9b-cab6-44cd-8de9-022d62325a46); version(1.0)]
+  probe Instruction_Counter_Probe
+  {
+      int32 all;
+      int32 predicated;
+  };
+}
+}

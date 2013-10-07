@@ -1,0 +1,15 @@
+// $Id: ACE_Logging_Software_Probe_Test.mpc 2035 2011-11-01 14:08:23Z dfeiock $
+
+project (OASIS_ACE_Logging_Software_Probe_Test) : oasis_softwareprobe_test, \
+                                                  oasis_einode_core, \
+                                                  oasis_data_channel {
+
+  exename = OASIS_ACE_Logging_Software_Probe_Test
+  install = .
+  after += OASIS_LoggingProbe_stub OASIS_ACE_Logging_Software_Probe
+  libs  += OASIS_LoggingProbe_stub OASIS_ACE_Logging_Software_Probe
+
+  Source_Files {
+    driver.cpp
+  }
+}

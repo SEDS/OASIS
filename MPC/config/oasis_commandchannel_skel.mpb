@@ -1,0 +1,6 @@
+// $Id: oasis_commandchannel_skel.mpb 1893 2011-09-04 22:46:35Z hillj $
+
+project : portableserver, oasis_commandchannel_stub, oasis_tao_skel {
+  libs  += OASIS_CommandChannel_skel
+  after += OASIS_CommandChannel_skel
+}

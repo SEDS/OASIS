@@ -1,0 +1,22 @@
+// $Id: LoggingProbe.mpc 1892 2011-09-03 07:45:49Z hillj $
+
+project (OASIS_LoggingProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_LoggingProbe_stub
+  dynamicflags += OASIS_LOGGINGPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_LOGGINGPROBE_STUB_Export \
+              --export-file=LoggingProbe_stub_export.h
+
+  PDL_Files {
+    LoggingProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}

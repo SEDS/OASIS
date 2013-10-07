@@ -1,0 +1,73 @@
+DOCUMENT: EINODE
+LAST UPDATE: September 30, 2011
+
+Table of Contents:
+=======================
+1. Configuration File Format
+2. Loading Configuration via Command-line
+3. Manually Loading Configuration
+4. Known Data Channel Directives
+
+
+1. Configuration File Format
+-------------------------------------
+The embedded instrumentation (EI) node can be configured using
+a standard text file. This configuration file has the following
+format:
+
+  Name: [name]
+  Uuid: [UUID]
+
+  DataChannel:
+    [data channel implementation]
+    [software probe implementation]*
+
+The Uuid: field is a user-defined Universal Unique Identifier for
+the EI node. The host operating system usually has an application
+that can be use to generate a UUID. The Name: field is the human
+readable name of the EI node. We recommend that you do not use spaces
+when defining the EI node's name.
+
+The DataChannel: section is where you define the different data
+channels supported by the EI node, and what software probes are
+assigned to a given data channel. Currently, you can only have one
+data channel section in an EI nodes configuration. Future versions
+will support multiple data channels.
+
+Both the data channel and software probe implementation section are
+defined using ACE service configuration directives. The format of
+a directive is as follows:
+
+  dynamic [name] Service_Object * [library]:[symbol] () "[args]"
+
+where:
+
+  name - Unique name of service that contains no spaces
+  library - shared library were object is contained
+  symbol - export symbol/factory for creating service
+  args - initialization arguments for probe
+
+2. Loading Configuration via Command-line
+-----------------------------------------------
+Given a configuration, it is possible to configure an EI node via
+the command-line. This is done when init (...) is called on the
+EI node. If the command-line contains the following option:
+
+  -c, --config=CONFIG
+
+then the EI node loads the specified configuratation. This means
+you do not have to manually invoke the load_configuration () method,
+see below.
+
+3. Manually Loading Configuration
+------------------------------------
+The other approach for configuring an EI node is to manually invoke
+the load_configuration () method passing as a parameter the location
+of the EI node's configuration file.
+
+4. Known Data Channel Directives
+------------------------------------
+The following are directives for known data channels that are
+provided with the OASIS distribution:
+
+ Tao: dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () " "

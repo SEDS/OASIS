@@ -1,0 +1,57 @@
+// -*- IDL -*-
+
+//=============================================================================
+/**
+ * @file        EISA_Types.idl
+ *
+ * $Id: OASIS_Common.idl 1863 2011-08-19 18:39:59Z hillj $
+ *
+ * @author      James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_COMMON_IDL_
+#define _OASIS_COMMON_IDL_
+
+module OASIS
+{
+  /// The EINode attempted to register itself more than once.
+  exception DuplicateRegistration { };
+
+  /// The registration process failed
+  exception RegistrationFailed { };
+
+  /// The provided data was invalid.
+  exception InvalidData { };
+
+  exception InvalidFormat {};
+
+  /// The UUID is NIL.
+  exception NilUUID { };
+
+  /// The specified item was not found.
+  exception NotFound { };
+
+  /// Type definition for a sequence of characters
+  typedef sequence <char> CharStream;
+
+  /// Type definition for a sequence of raw data.
+  typedef sequence <octet> BinaryStream;
+
+  /**
+   * @struct TimeStamp
+   *
+   * Data structure for transmitting a timestamp. It has fields
+   * for the seconds and microseconds of a time value.
+   */
+  struct TimeStamp
+  {
+    /// The seconds field of the timestamp.
+    unsigned long sec;
+
+    /// The microseconds of the timestamp.
+    unsigned long usec;
+  };
+};
+
+#endif  // !defined _OASIS_COMMON_IDL_

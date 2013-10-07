@@ -1,0 +1,5 @@
+Name: OASIS_System_Probe_Daemon_Einode
+Uuid: 323da480-064b-11e1-be50-0800200c9a66
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"

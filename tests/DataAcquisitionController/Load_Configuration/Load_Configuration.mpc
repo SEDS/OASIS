@@ -1,0 +1,13 @@
+// $Id: Load_Configuration.mpc 1991 2011-10-10 02:05:19Z hillj $
+
+project (OASIS_DAC_Load_Configuration_Test) : oasis_dac_data_handler, oasis_dac_core {
+  sharedname    = OASIS_DAC_Load_Configuration_Test
+  dynamicflags += OASIS_LOAD_CONFIGURATION_TEST_BUILD_DLL LOAD_CONFIGURATION_BUILD_DLL
+
+  dllout = .
+  libout = .
+
+  Source_Files {
+    Dummy_Service.cpp
+  }
+}

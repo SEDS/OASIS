@@ -1,0 +1,6 @@
+// $Id: oasis_registrar_skel.mpb 1701 2010-11-18 17:22:41Z hillj $
+
+project : oasis_registrar_stub, oasis_skel {
+  libs  += OASIS_Registrar_skel
+  after += OASIS_Registrar_skel
+}

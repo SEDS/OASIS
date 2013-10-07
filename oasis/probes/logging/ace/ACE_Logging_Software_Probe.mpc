@@ -1,0 +1,13 @@
+// $Id: ACE_Logging_Software_Probe.mpc 1892 2011-09-03 07:45:49Z hillj $
+
+project (OASIS_ACE_Logging_Software_Probe) : oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_ACE_Logging_Software_Probe
+  dynamicflags += OASIS_ACE_LOGGING_SOFTWARE_PROBE_BUILD_DLL
+
+  libs  += OASIS_LoggingProbe_stub
+  after += OASIS_LoggingProbe_stub
+
+  Source_Files {
+    ACE_Logging_Software_Probe.cpp
+  }
+}

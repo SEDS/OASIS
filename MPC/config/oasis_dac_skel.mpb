@@ -1,0 +1,10 @@
+// $Id4
+
+project : portableserver, oasis_tao_skel, oasis_dac_stub {
+  after += OASIS_DAC_skel
+  libs  += OASIS_DAC_skel
+
+  IDL_Files {
+
+  }
+}

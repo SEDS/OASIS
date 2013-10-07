@@ -1,0 +1,6 @@
+// $Id: oasis_tao.mpb 2085 2011-12-31 07:49:04Z hillj $
+
+project : oasis_middleware, oasis_tao_stub {
+  after += OASIS_Tao
+  libs  += OASIS_Tao
+}

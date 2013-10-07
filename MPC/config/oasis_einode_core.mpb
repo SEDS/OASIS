@@ -1,0 +1,6 @@
+// $Id: oasis_einode_core.mpb 2089 2012-01-03 19:04:31Z dfeiock $
+
+project : oasis_common, oasis_middleware {
+  libs  += OASIS_EINode
+  after += OASIS_EINode
+}

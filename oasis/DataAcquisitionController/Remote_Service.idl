@@ -1,0 +1,32 @@
+// -*- IDL -*-
+
+//=============================================================================
+/**
+ *  @file         Remote_Service.idl
+ *
+ *  $Id: Remote_Service.idl 1884 2011-08-28 20:14:39Z hillj $
+ *
+ *  @author       James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_DAC_REMOTE_SERVICE_IDL_H_
+#define _OASIS_DAC_REMOTE_SERVICE_IDL_H_
+
+module OASIS
+{
+  /**
+   * @interface RemoteService
+   *
+   * Interface that all third-party applications to remotely communicate
+   * with it.
+   */
+  interface RemoteService
+  {
+    /// Name of the remote service.
+    readonly attribute string name;
+  };
+};
+
+
+#endif  // !defined _OASIS_DAC_REMOTE_SERVICE_IDL_H_

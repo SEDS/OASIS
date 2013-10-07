@@ -1,0 +1,16 @@
+// $Id: string.mpc 1991 2011-10-10 02:05:19Z hillj $
+
+project (OASIS_String_Software_Probe_Test) : oasis_softwareprobe_test, oasis_data_channel {
+  exename = OASIS_String_Software_Probe_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    String_Probe.pdl
+  }
+
+  Source_Files {
+    driver.cpp
+  }
+}

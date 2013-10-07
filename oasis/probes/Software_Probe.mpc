@@ -1,0 +1,26 @@
+// $Id: Software_Probe.mpc 2224 2012-12-10 06:35:58Z dfeiock $
+
+project (OASIS_SoftwareProbe_Core) : oasis, oasis_lib {
+  sharedname    = OASIS_SoftwareProbe_Core
+  dynamicflags += OASIS_SOFTWAREPROBE_CORE_BUILD_DLL
+
+  Header_Files {
+    Data_Types.h
+    Software_Probe_Factory.h
+  }
+
+  Source_Files {
+    Software_Probe.cpp
+    Software_Probe_Metadata.cpp
+    Software_Probe_Instance.cpp
+    Software_Probe_Task.cpp
+    Software_Probe_Impl.cpp
+    Software_Probe_Data_Preparer.cpp
+    Software_Probe_Header.cpp
+  }
+
+  Template_Files {
+    Data_Streams_T.cpp
+    Software_Probe_Factory_T.cpp
+  }
+}

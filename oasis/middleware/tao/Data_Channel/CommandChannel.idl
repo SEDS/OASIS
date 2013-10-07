@@ -1,0 +1,35 @@
+// $Id: CommandChannel.idl 1965 2011-10-03 15:05:32Z hillj $
+
+//=============================================================================
+/**
+ *  @file       CommandChannel.idl
+ *
+ *  $Id: CommandChannel.idl 1965 2011-10-03 15:05:32Z hillj $
+ *
+ *  @author     James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_COMMAND_CHANNEL_IDL_
+#define _OASIS_COMMAND_CHANNEL_IDL_
+
+module OASIS
+{
+  /**
+   * @interface CommandChannel
+   *
+   * Interface for getting access to the command channel.
+   */
+  interface CommandChannel
+  {
+    /**
+     * Send the command to the object. This is a oneway method in
+     * that the server does not acknowledge receipt of the data.
+     *
+     * @param[in]       data          Data to send
+     */
+    void handle_command (in string command);
+  };
+};
+
+#endif  // !defined _OASIS_COMMAND_CHANNEL_IDL_

@@ -1,0 +1,11 @@
+// $Id: ccf_root.mpb 1903 2011-09-14 18:39:17Z hillj $
+
+project {
+  specific {
+    CCF_ROOT = $(OASIS_ROOT)/contrib/CCF
+  }
+
+  verbatim (gnuace, top) {
+    CCF_ROOT = $(OASIS_ROOT)/contrib/CCF
+  }
+}

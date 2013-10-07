@@ -1,0 +1,6 @@
+// $Id: oasis_dac_remoting_service_skel.mpb 1882 2011-08-24 15:09:05Z hillj $
+
+project : portableserver, oasis_dac_remoting_service_stub, oasis_tao_skel {
+  libs  += OASIS_DAC_Remoting_Service_skel
+  after += OASIS_DAC_Remoting_Service_skel
+}

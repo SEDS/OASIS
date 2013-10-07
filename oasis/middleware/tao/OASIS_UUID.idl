@@ -1,0 +1,44 @@
+// $Id: OASIS_UUID.idl 1863 2011-08-19 18:39:59Z hillj $
+
+//=============================================================================
+/**
+ *  @file       OASIS_UUID.idl
+ *
+ *  $Id: OASIS_UUID.idl 1863 2011-08-19 18:39:59Z hillj $
+ *
+ *  @author     James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_UUID_IDL_
+#define _OASIS_UUID_IDL_
+
+module OASIS
+{
+  /// Type definition for the last 8-bytes of a UUID.
+  typedef sequence <octet, 8> chunk;
+
+  /**
+   * @struct UUID
+   *
+   * UUID used for identifing a registered EINode. The UUID is
+   * assigned by the DAC and used, instead of a variable string,
+   * to identify the EINode at runtime.
+   */
+  struct UUID
+  {
+    /// 32-bits of data.
+    unsigned long data1;
+
+    /// 16-bits of data.
+    unsigned short data2;
+
+    /// 16-bits of data.
+    unsigned short data3;
+
+    /// 64-bits of data.
+    chunk data4;
+  };
+};
+
+#endif  // !defined _OASIS_UUID_IDL_

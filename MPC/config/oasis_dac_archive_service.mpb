@@ -1,0 +1,6 @@
+// $Id: oasis_dac_archive_service.mpb 1800 2011-06-03 01:39:37Z hillj $
+
+project : oasis_dac_stub {
+  libs  += OASIS_DAC_Archive_Service
+  after += OASIS_DAC_Archive_Service
+}

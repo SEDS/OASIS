@@ -1,0 +1,109 @@
+// -*- IDL -*-
+
+//=============================================================================
+/**
+ * @file          Tao_Publisher_Service.idl
+ *
+ * $Id: Tao_Publisher_Service.idl 2069 2011-11-30 23:57:59Z hillj $
+ *
+ * @author        James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_TAO_PUBLISHER_SERVICE_IDL_
+#define _OASIS_TAO_PUBLISHER_SERVICE_IDL_
+
+#include "oasis/DataAcquisitionController/Remote_Service.idl"
+#include "oasis/middleware/tao/Data_Channel/CommandChannel.idl"
+#include "oasis/middleware/tao/OASIS_UUID.idl"
+
+module OASIS
+{
+  /// Type definition for the probe's data.
+  typedef sequence <octet> SoftwareProbeData;
+
+  /**
+   * @struct SubscriberDataPacket
+   *
+   * Latest software probe data sent to a DataSubscriber. The subscriber
+   * is responsible for recalling the data using a strongly typed software
+   * probe object.
+   */
+  struct SubscriberDataPacket
+  {
+    /// Byte order of the contained data.
+    boolean byte_order;
+
+    /// Unique id of the software probe.
+    UUID einode;
+
+    /// Software probe data in binary format.
+    SoftwareProbeData data;
+  };
+
+  /**
+   * @interface DataSubscriber
+   *
+   * Interface implemented by performance analysis tools that want to
+   * received real-time notification of data. This interface is provided
+   * to the DAC when the object registers for a probes data.
+   */
+  interface DataSubscriber
+  {
+    /// Human readable name of the subscriber.
+    readonly attribute string name;
+
+    /**
+     * Handle a new data packet. This method is invoke each time the
+     * DAC receives data from a software probe. The implementation of
+     * this method should return as quickly as possible.
+     *
+     * @param[in]       packet        The data packet.
+     */
+    void handle_data (in SubscriberDataPacket packet);
+  };
+
+  /**
+   * @valuetype SubscriberCookie
+   *
+   * Cookie returned by the DataAcquisitionControllerPublisher. The cookie
+   * contains subscription information used to unsubscribe a subscriber.
+   */
+  /**valuetype SubscriberCookie
+  {
+    private DataAcquisitionControllerPublisher publisher;
+
+    private UUID probe;
+
+    private DataSubscriber subscriber;
+  };*/
+
+  /**
+   * @interface PublisherService
+   *
+   * Publisher interface that is implemented by the service. This
+   * interface enables clients (e.g., performance analysis tools) to
+   * register for real-time updates to software probe data.
+   */
+  interface PublisherService : RemoteService
+  {
+    /**
+     * Register a subscriber. The subscriber will recieve real-time updates
+     * for the specific software probe as the DAC receives new data.
+     */
+    void
+      register_subscriber (in UUID probe_uuid,
+                           in DataSubscriber subscriber);
+
+    /**
+     * Unregister the subscriber. The value of the cookie must be one that
+     * was previously returned by the register_subscriber () method.
+     *
+     * @param[in]         c           Registration cookie
+     */
+    void unregister_subscriber (in UUID probe_uuid,
+                                in DataSubscriber subscriber);
+  };
+};
+
+#endif  // !defined _EISA_DAC_IDL_

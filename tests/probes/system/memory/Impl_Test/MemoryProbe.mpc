@@ -1,0 +1,13 @@
+// $Id: MemoryProbe.mpc 1978 2011-10-06 14:33:56Z dfeiock $
+
+project (OASIS_MemoryProbe_Test) : oasis_data_channel, oasis_softwareprobe {
+  exename = driver
+  install = .
+
+  after += OASIS_MemoryProbe_stub OASIS_MemoryProbe
+  libs  += OASIS_MemoryProbe_stub OASIS_MemoryProbe
+
+  Source_Files {
+    driver.cpp
+  }
+}

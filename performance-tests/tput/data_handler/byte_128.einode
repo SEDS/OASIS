@@ -1,0 +1,6 @@
+Name: Einode_128
+Uuid: 6429FC2A-0B50-4BB5-BF7F-A0FB19B8BFA8
+Reconnect-Timeout: 500
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"

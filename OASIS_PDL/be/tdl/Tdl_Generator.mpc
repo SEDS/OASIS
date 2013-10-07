@@ -1,0 +1,14 @@
+// $Id: Tdl_Generator.mpc 1819 2011-08-02 18:46:55Z hillj $
+
+project (OASIS_PDL_Tdl_Generator) : oasis_pdl_be, oasis_lib {
+  sharedname    = OASIS_PDL_Tdl_Generator
+  dynamicflags += OASIS_PDL_TDL_GENERATOR_BUILD_DLL
+
+  Source_Files {
+    Tdl_Generator.cpp
+    Tdl_Generator_Visitor.cpp
+    Tdl_Probe_Generator.cpp
+    Tdl_Stream.cpp
+    Tdl_Type_Generator.cpp
+  }
+}

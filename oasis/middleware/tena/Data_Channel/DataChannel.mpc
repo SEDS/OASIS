@@ -1,0 +1,12 @@
+// $Id: DataChannel.mpc 1987 2011-10-07 17:45:06Z dfeiock $
+
+project (OASIS_Tena_DataChannel_Subscriber) : disabled, oasis_tena_datachannel, oasis_dac_core, oasis_lib {
+  sharedname    = OASIS_Tena_DataChannel_Subscriber
+  dynamicflags += OASIS_TENA_DATACHANNEL_SUBSCRIBER_HAS_DLL OASIS_TENA_DATACHANNEL_SUBSCRIBER_BUILD_DLL
+
+  Source_Files {
+    Configuration.cpp
+    Data_Channel_Subscriber.cpp
+    EINode_Observer.cpp
+  }
+}

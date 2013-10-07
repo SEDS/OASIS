@@ -1,0 +1,12 @@
+// $Id: Probe_Schema_Generator.mpc 1768 2011-03-01 01:04:39Z hillj $
+
+project (OASIS_PDL_Schema_Generator) : oasis_pdl_be, oasis_lib {
+  sharedname    = OASIS_PDL_Schema_Generator
+  dynamicflags += OASIS_PDL_SCHEMA_GENERATOR_BUILD_DLL
+
+  Source_Files {
+    Probe_Schema_Generator.cpp
+    Probe_Schema_Generator_Visitor.cpp
+    Schema_Type_Generator.cpp
+  }
+}

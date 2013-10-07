@@ -1,0 +1,10 @@
+// $Id: requires_pin.mpb 2245 2013-09-06 23:20:23Z hillj $
+
+project {
+  requires += pin
+}
+
+feature (pin) : pin {
+
+}
+

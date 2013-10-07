@@ -1,0 +1,14 @@
+// $Id: Command_Injector.mpc 1971 2011-10-03 20:07:30Z hillj $
+
+project (OASIS_Command_Injector) : oasis_testexecutionmanager_stub, \
+                                   oasis_dac_stub, boost_base, \
+                                   oasis_bin {
+
+  exename = oasis_cmd
+
+  Source_Files {
+    Command_Injector.cpp
+    Command_Injector_App.cpp
+    Command_Parser.cpp
+  }
+}

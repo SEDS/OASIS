@@ -1,0 +1,46 @@
+// -*- IDL -*-
+
+#ifndef _OASIS_DAC_ARCHIVE_SERVICE_IDL_H_
+#define _OASIS_DAC_ARCHIVE_SERVICE_IDL_H_
+
+#include "oasis/DataAcquisitionController/Remote_Service.idl"
+#include "oasis/DataAcquisitionController/handler/archive/Query.idl"
+
+module OASIS
+{
+  /**
+   * @interface Cursor
+   *
+   * Interface to navigate arcive data
+   */
+  interface Cursor
+  {
+	  /// Move the cursor to the next record
+	  void advance ();
+	
+	  /// Check whether the iterations are complete
+	  boolean is_done ();
+  };
+  
+  /**
+   * @interface MetricCursor
+   *
+   * Interface to navigate arcive data in metric table
+   */
+  interface MetricCursor : Cursor
+  {
+	  unsigned long get_data_size ();
+  };
+  
+  /**
+   * @interface ArchiveService
+   *
+   * Interface to communicate with Archive Service
+   */
+  interface ArchiveService : RemoteService
+  {
+    Cursor get_data (in Query query);   
+  };
+};
+
+#endif  // !defined _OASIS_DAC_ARCHIVE_SERVICE_IDL_H_

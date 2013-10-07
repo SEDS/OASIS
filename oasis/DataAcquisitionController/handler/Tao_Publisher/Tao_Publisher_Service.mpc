@@ -1,0 +1,60 @@
+// $Id: Tao_Publisher_Service.mpc 2069 2011-11-30 23:57:59Z hillj $
+
+project (OASIS_Tao_Publisher_Service_IDL_Gen) : oasis_taoidldefaults {
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=OASIS_TAO_PUBLISHER_SERVICE_STUB_Export \
+              -Wb,stub_export_include=Tao_Publisher_Service_stub_export.h \
+              -Wb,skel_export_macro=OASIS_TAO_PUBLISHER_SERVICE_SKEL_Export \
+              -Wb,skel_export_include=Tao_Publisher_Service_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    Tao_Publisher_Service.idl
+  }
+}
+
+project (OASIS_Tao_Publisher_Service_stub) : oasis_dac_stub, \
+                                             oasis_tao_datachannel_stub, oasis_lib {
+
+  sharedname    = OASIS_Tao_Publisher_Service_stub
+  dynamicflags += OASIS_TAO_PUBLISHER_SERVICE_STUB_BUILD_DLL
+
+  after += OASIS_Tao_Publisher_Service_IDL_Gen
+
+  Source_Files {
+    Tao_Publisher_ServiceC.cpp
+  }
+}
+
+project (OASIS_Tao_Publisher_Service_skel) : \
+  oasis_dac_skel, oasis_tao_datachannel_stub, oasis_tao_publisher_service_stub, oasis_lib {
+
+  sharedname    = OASIS_Tao_Publisher_Service_skel
+  dynamicflags += OASIS_TAO_PUBLISHER_SERVICE_SKEL_BUILD_DLL
+
+  Source_Files {
+    Tao_Publisher_ServiceS.cpp
+  }
+}
+
+project (OASIS_Tao_Publisher_Service) : \
+  oasis_softwareprobe, oasis_tao_publisher_service_skel, \
+  oasis_dac_skel, oasis_dac_data_handler, oasis_dac_core, oasis_tao, oasis_lib {
+
+  sharedname    = OASIS_Tao_Publisher_Service
+  dynamicflags += OASIS_TAO_PUBLISHER_SERVICE_BUILD_DLL
+
+  Source_Files {
+    Tao_PublisherService_i.cpp
+    Tao_Publisher_Service.cpp
+  }
+
+  Header_Files {
+
+  }
+
+  IDL_Files {
+
+  }
+}

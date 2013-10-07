@@ -1,0 +1,8 @@
+// -*- MPC -*-
+// $Id: NetworkProbeBridge-v1_1.mwc 2134 2012-02-15 18:32:19Z dfeiock $
+
+workspace (NetworkProbeBridge-v1_1) {
+  cmdline += -include $OASIS_ROOT/MPC/config
+
+  NetworkProbeBridge-v1_1.mpc
+}

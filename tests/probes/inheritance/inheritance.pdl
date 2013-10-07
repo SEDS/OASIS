@@ -1,0 +1,20 @@
+[uuid (A0F230DF-8CAF-4B72-BE14-FE4BBCAD1ACA); version (1.0)]
+probe A
+{
+  int32 a_value;
+};
+
+module Test
+{
+  [uuid (FDFD5CEA-11C8-429C-8D79-68A0930E37B7); version(1.0)]
+  probe B : ::A
+  {
+    int32 b_value;
+  };
+
+  [uuid (2634666C-EB69-4A49-B9A6-C1F35CF86BE6); version (1.0)]
+  probe C : B
+  {
+    int32 c_value;
+  };
+}

@@ -1,0 +1,6 @@
+Name: MemoryProbe_SmokeTest_Einode
+Uuid: 3a078e90-f018-11e0-be50-0800200c9a66
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"
+  probe m1 OASIS_MemoryProbe:create_OASIS_System_Memory_MemoryProbe_Impl_Factory () " "

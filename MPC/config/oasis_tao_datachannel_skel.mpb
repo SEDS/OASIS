@@ -1,0 +1,6 @@
+// $Id: oasis_tao_datachannel_skel.mpb 1975 2011-10-04 19:31:34Z dfeiock $
+
+project : oasis_tao_datachannel_stub, oasis_tao_skel {
+  libs  += OASIS_Tao_DataChannel_skel
+  after += OASIS_Tao_DataChannel_skel
+}

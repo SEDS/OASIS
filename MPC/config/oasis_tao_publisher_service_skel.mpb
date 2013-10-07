@@ -1,0 +1,6 @@
+// $Id: oasis_tao_publisher_service_skel.mpb 1885 2011-08-28 21:18:08Z hillj $
+
+project : portableserver, oasis_tao_publisher_service_stub {
+  after += OASIS_Tao_Publisher_Service_skel
+  libs  += OASIS_Tao_Publisher_Service_skel
+}

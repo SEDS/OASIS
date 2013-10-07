@@ -1,0 +1,14 @@
+// $Id: dashboard.TestExecutionManager.mpc 2218 2012-10-17 19:21:14Z dfeiock $
+
+project (dashboard.TestExecutionManager) : iiopnet {
+  specific {
+    iiopnetflags += -idir $(OASIS_ROOT) \
+                    -idir $(OASIS_ROOT)/oasis \
+                    -o $(OASIS_ROOT)/utils/dashboard/website/bin \
+                    TestExecutionManager
+  }
+
+  IDL_Files {
+    $(OASIS_ROOT)/oasis/TestExecutionManager/TestExecutionManager.idl
+  }
+}

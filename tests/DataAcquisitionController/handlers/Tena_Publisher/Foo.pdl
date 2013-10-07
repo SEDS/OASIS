@@ -1,0 +1,10 @@
+#pragma version (1.0)
+
+module OASIS
+{
+  [uuid (F45690E5-EDC9-4FAC-8BF2-599ADB790183); version (1.0)]
+  probe Foo
+  {
+
+  };
+}

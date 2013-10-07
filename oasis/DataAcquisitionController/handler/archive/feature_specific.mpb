@@ -1,0 +1,13 @@
+// $Id: feature_specific.mpb 2238 2013-03-08 20:50:44Z tmpeiris $
+
+feature (tao) : oasis_tao, oasis_testexecutionmanager_stub, oasis_dac_skel, oasis_iortable_trait {
+  macros += OASIS_HAS_TAO
+
+  Source_Files {
+    TAO_Archive_Service.cpp
+    Archive_Service_i.cpp
+    Metric_Cursor_i.cpp
+    Query_i.cpp
+    Query_Visitor.cpp
+  }
+}

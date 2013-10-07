@@ -1,0 +1,18 @@
+// $Id: data_handler.mpc 2142 2012-03-26 18:02:24Z dfeiock $
+
+project (OASIS_Data_Handler_Tput_Test) : aceexe, oasis_data_channel, oasis_einode_core, oasis_softwareprobe_test {
+  exename = OASIS_Data_Handler_Byte_Tput_Test
+  install = .
+
+  pdlflags += --backend=cpp
+
+  PDL_Files {
+    data_handler.pdl
+  }
+
+
+  Source_Files {
+    Sender.cpp
+    Sender_App.cpp
+  }
+}

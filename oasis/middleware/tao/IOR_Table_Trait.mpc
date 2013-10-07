@@ -1,0 +1,23 @@
+// $Id: IOR_Table_Trait.mpc 1863 2011-08-19 18:39:59Z hillj $
+
+project (OASIS_IORTable_Trait) : requires_tao, iortable, oasis_lib {
+  sharedname    = OASIS_IORTable_Trait
+  dynamicflags += OASIS_IORTABLE_TRAIT_BUILD_DLL
+
+  Source_Files {
+    IOR_Table_Trait.cpp
+  }
+
+  Header_Files {
+
+  }
+
+  Inline_Files {
+
+  }
+
+  Template_Files {
+
+  }
+}
+

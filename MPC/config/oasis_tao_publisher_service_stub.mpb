@@ -1,0 +1,6 @@
+// $Id: oasis_tao_publisher_service_stub.mpb 1873 2011-08-23 13:41:07Z hillj $
+
+project : oasis_tao_stub {
+  after += OASIS_Tao_Publisher_Service_stub
+  libs  += OASIS_Tao_Publisher_Service_stub
+}

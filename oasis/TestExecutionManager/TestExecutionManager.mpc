@@ -1,0 +1,54 @@
+// $Id: TestExecutionManager.mpc 1966 2011-10-03 15:30:53Z hillj $
+
+project (OASIS_TestExecutionMangaer_IDL_gen) : oasis_taoidldefaults {
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=OASIS_TESTEXECUTIONMANAGER_STUB_Export \
+              -Wb,stub_export_include=TestExecutionManager_stub_export.h \
+              -Wb,skel_export_macro=OASIS_TESTEXECUTIONMANAGER_SKEL_Export \
+              -Wb,skel_export_include=TestExecutionManager_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    TestExecutionManager.idl
+  }
+}
+
+project (OASIS_TestExecutionManager_stub) : oasis_dac_stub, oasis_lib {
+  sharedname    = OASIS_TestExecutionManager_stub
+  dynamicflags += OASIS_TESTEXECUTIONMANAGER_STUB_BUILD_DLL
+
+  after += OASIS_TestExecutionMangaer_IDL_gen
+
+  Source_Files {
+    TestExecutionManagerC.cpp
+  }
+}
+
+project (OASIS_TestExecutionManager_skel) : oasis_dac_skel, oasis_testexecutionmanager_stub, oasis_lib {
+  sharedname    = OASIS_TestExecutionManager_skel
+  dynamicflags += OASIS_TESTEXECUTIONMANAGER_SKEL_BUILD_DLL
+
+  Source_Files {
+    TestExecutionManagerS.cpp
+  }
+}
+
+project (OASIS_TestExecutionManager_Impl) : portableserver, oasis_iortable_trait, \
+                                            oasis_tao, oasis_testexecutionmanager_skel, \
+                                            oasis_bin {
+  exename = oasis_tem
+
+  Source_Files {
+    manager.cpp
+    Manager_App.cpp
+    TestExecutionManager_i.cpp
+  }
+
+  Header_Files {
+  }
+
+  IDL_Files {
+
+  }
+}

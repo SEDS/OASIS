@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+  <!---------------------------------------------OASIS files---------------------------------------------------------->
+  <script src="JavaScript/OASIS/Cdr_Reader.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Cdr_Writer.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/UUID.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Time_Value.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Software_Probe_Header.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Software_Probe_Metadata.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Software_Probe.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Processor_Probe.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Linux_Processor_Probe.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Memory_Probe.js" language="javascript" type="text/javascript"></script>
+  <script src="JavaScript/OASIS/Linux_Memory_Probe.js" language="javascript" type="text/javascript"></script>
+
+    <script language="javascript" type="text/javascript">
+      String.prototype.trim = function()
+      {
+        return this.replace(/^\s+|\s+$/g, "");
+      }
+
+      var ws;
+	  var MAX_MESSAGE_LENGTH = 256;
+      var PROCESSOR_PROBE_UUID = "7c3944f1-2176-4eaa-911c-ef5423a7e02d";
+      var MEMORY_PROBE_UUID = "ed970279-247d-42ca-aeaa-bef0239ca3b3";
+      var PROCESSOR_PROBE_NAME = "ProcessorProbe_SmokeTest";
+      var MEMORY_PROBE_NAME = "MemoryProbe_SmokeTest";
+
+      function get_info()
+      {
+        if ("WebSocket" in window)
+        {
+          ws = new WebSocket("ws://boss.emulab.cs.iupui.edu:8080/");
+          ws.binaryType = "arraybuffer";
+
+          ws.onopen = function()
+          {
+            alert("Connection Open......");
+          };
+
+          ws.onmessage = function(evt)
+          {
+            var probe = new Software_Probe();
+            probe.recall(evt.data, true);
+
+            var probe_name = probe.name();
+
+            if (PROCESSOR_PROBE_NAME == probe_name)
+            {
+              var linux_processor_probe = new Linux_Processor_Probe();
+              linux_processor_probe.recall(evt.data, true);
+
+              //Probe data is available to update the table.
+
+              //processor information for linux only
+              document.getElementById("idle_time").innerHTML = linux_processor_probe.idle_time_;
+              document.getElementById("system_time").innerHTML = linux_processor_probe.system_time_;
+              document.getElementById("user_time").innerHTML = linux_processor_probe.user_time_;
+              document.getElementById("nice_time").innerHTML = linux_processor_probe.nice_time_;
+              document.getElementById("iowait_time").innerHTML = linux_processor_probe.iowait_time_;
+              document.getElementById("irq_time").innerHTML = linux_processor_probe.irq_time_;
+              document.getElementById("soft_irq_time").innerHTML = linux_processor_probe.soft_irq_time_;
+            }
+            else if (MEMORY_PROBE_NAME == probe_name)
+            {
+              var linux_memory_probe = new Linux_Memory_Probe();
+              linux_memory_probe.recall(evt.data, true);
+
+              //Probe data is available to update the table.
+
+              // Memory information for Linux only
+              document.getElementById("physical_memory_avail").innerHTML = linux_memory_probe.physical_memory_avail_;
+              document.getElementById("physical_memory_total").innerHTML = linux_memory_probe.physical_memory_total_;
+              document.getElementById("system_cache").innerHTML = linux_memory_probe.system_cache_;
+              document.getElementById("commit_limit").innerHTML = linux_memory_probe.commit_limit_;
+              document.getElementById("commit_total").innerHTML = linux_memory_probe.commit_total_;
+              document.getElementById("virtual_total").innerHTML = linux_memory_probe.virtual_total_;
+              document.getElementById("virtual_used").innerHTML = linux_memory_probe.virtual_used_;
+              document.getElementById("buffers").innerHTML = linux_memory_probe.buffers_;
+              document.getElementById("swap_cache").innerHTML = linux_memory_probe.swap_cache_;
+              document.getElementById("inactive").innerHTML = linux_memory_probe.inactive_;
+              document.getElementById("active").innerHTML = linux_memory_probe.active_;
+              document.getElementById("high_total").innerHTML = linux_memory_probe.high_total_;
+              document.getElementById("high_free").innerHTML = linux_memory_probe.high_free_;
+              document.getElementById("low_total").innerHTML = linux_memory_probe.low_total_;
+              document.getElementById("low_free").innerHTML = linux_memory_probe.low_free_;
+              document.getElementById("swap_total").innerHTML = linux_memory_probe.swap_total_;
+              document.getElementById("swap_free").innerHTML = linux_memory_probe.swap_free_;
+              document.getElementById("dirty").innerHTML = linux_memory_probe.dirty_;
+              document.getElementById("write_back").innerHTML = linux_memory_probe.write_back_;
+              document.getElementById("virtual_chunk").innerHTML = linux_memory_probe.virtual_chunk_;
+            }
+          }
+        }
+      } // end of get_processor_info()
+
+      function change_processor_probe_hertz()
+      {
+        var txtHertzCtrl = document.getElementById("txtProcessorProbeHertz");
+        var tableid = txtHertzCtrl.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+        var hertz = txtHertzCtrl.value.toString();
+
+        var message = new Uint8Array(MAX_MESSAGE_LENGTH);
+		var writer = new Cdr_Writer(message.buffer, true);
+		writer.write_int8 (0x03);
+		writer.write_string (tableid,tableid.length);
+		writer.write_string (hertz, hertz.length);
+		try
+        {
+          ws.send(message.buffer);
+        }
+        catch (exception)
+        {
+          alert(exception.message);
+        }
+      } //end of change_processor_probe_hertz ()
+
+      function change_memory_probe_hertz()
+      {
+        var txtHertzCtrl = document.getElementById("txtMemoryProbeHertz");
+        var tableid = txtHertzCtrl.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
+        var hertz = txtHertzCtrl.value.toString();
+
+        var message = new Uint8Array(MAX_MESSAGE_LENGTH);
+		var writer = new Cdr_Writer(message.buffer, true);
+		writer.write_int8 (0x03);
+		writer.write_string (tableid,tableid.length);
+		writer.write_string (hertz, hertz.length);
+		try
+        {
+          ws.send(message.buffer);
+        }
+        catch (exception)
+        {
+          alert(exception.message);
+        }
+      } //end of change_memory_probe_hertz ()
+    </script>
+</head>
+<body style="overflow-y: scroll; height: 100%; width: 100%">
+  <p>
+    <input type="button" id="btnGetInformation" value="Get Information"
+           onclick="get_info()" />
+  </p>
+  <p>
+  <table border="1" id="SmokeTest ProcessorProbe_SmokeTest">
+    <th colspan="3">
+      Processor Information
+    </th>
+
+    <tr>
+      <td id="idle_time_header">
+        Idle Time
+      </td>
+      <td id="idle_time" width="200" colspan= "2">
+      </td>
+    </tr>
+
+    <tr>
+      <td id="system_time_header">
+        System Time
+      </td>
+      <td id="system_time" width="200" colspan= "2">
+      </td>
+    </tr>
+
+    <tr>
+      <td id="user_time_header">User Time </td>
+      <td id="user_time" width="200" colspan="2"></td>
+    </tr>
+
+    <!-- Linux spacific processor information-->
+    <tr>
+      <td id="Td4">
+        Nice Time
+      </td>
+      <td id="nice_time" width="200" colspan="2">
+      </td>
+    </tr>
+
+    <tr>
+      <td id="Td12">
+        IO Wait Time
+      </td>
+      <td id="iowait_time" width="200" colspan="2">
+      </td>
+    </tr>
+
+    <tr>
+      <td id="Td17">
+        Irq Time
+      </td>
+      <td id="irq_time" width="200" colspan="2">
+      </td>
+    </tr>
+
+    <tr>
+      <td id="Td21">
+        Soft Irq Time
+      </td>
+      <td id="soft_irq_time" width="200" colspan="2">
+      </td>
+    </tr>
+    <tr>
+      <td id="tTxtProcessorHertz">Insert Hertz </td>
+      <td id="tInputTxtProcessorHertz">
+        <input type="text" id="txtProcessorProbeHertz" size="10" />
+      </td>
+      <td id="tInputBtnProcessorHertz">
+        <input type="button" id="btnChangeProcessorHertz" value="Change Hertz" onclick="change_processor_probe_hertz()" />
+      </td>
+    </tr>
+
+  </table>
+
+    <table border="1" id="SmokeTest MemoryProbe_SmokeTest"
+      style="position: absolute;top: 58px; left: 386px">
+      <th colspan="3">
+        Memory Information
+      </th>
+
+      <!--Common Memory Information -->
+      <tr>
+        <td id="physical_memory_avail_header">
+          Physical Memory Available
+        </td>
+        <td id="physical_memory_avail" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="physical_memory_total_header">
+          Physical Memory Total
+        </td>
+        <td id="physical_memory_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="system_cache_header">
+          system_cache
+        </td>
+        <td id="system_cache" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_limit_header">
+          Commit Limit
+        </td>
+        <td id="commit_limit" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="commit_total_header">
+          Commit Total
+        </td>
+        <td id="commit_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_total_header">
+          Virtual Total
+        </td>
+        <td id="virtual_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="virtual_used_header">
+          Virtual Used
+        </td>
+        <td id="virtual_used" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <!-- Linux Specific Memory Information -->
+      <tr>
+        <td id="Td2">
+          Buffers
+        </td>
+        <td id="buffers" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td6">
+          Swap Cache
+        </td>
+        <td id="swap_cache" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td10">
+          Inactive
+        </td>
+        <td id="inactive" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td14">
+          Active
+        </td>
+        <td id="active" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td16">
+          High Total
+        </td>
+        <td id="high_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td18">
+          High Free
+        </td>
+        <td id="high_free" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td20">
+          Low Total
+        </td>
+        <td id="low_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td22">
+          Low Free
+        </td>
+        <td id="low_free" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td24">
+          Swap Total
+        </td>
+        <td id="swap_total" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td26">
+          Swap Free
+        </td>
+        <td id="swap_free" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td28">
+          Dirty
+        </td>
+        <td id="dirty" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td30">
+          Write Back
+        </td>
+        <td id="write_back" width="200" colspan="2">
+        </td>
+      </tr>
+
+      <tr>
+        <td id="Td32">
+          Virtual Chunk
+        </td>
+        <td id="virtual_chunk" width="200" colspan="2">
+        </td>
+      </tr>
+      <tr>
+        <td id="tTxtMemoryHetz">Insert Hertz</td>
+        <td id="tInputTxtMemoryHertz">
+          <input type="text" id="txtMemoryProbeHertz" size="10" />
+        </td>
+        <td id="tInputBtnMemoryHertz">
+          <input type="button" id="btnChangeMemoryHertz" value="Change Hertz" onclick="change_memory_probe_hertz()" />
+        </td>
+      </tr>
+    </table>
+  </p>
+</body>
+</html>

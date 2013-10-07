@@ -1,0 +1,78 @@
+// $Id: DAC.mpc 2140 2012-03-23 16:51:45Z dfeiock $
+
+project (OASIS_DAC_Core) : oasis_softwareprobe, xerces, \
+                           adbc_sqlite, acelib, boost_base, oasis_lib {
+
+  sharedname    = OASIS_DAC_Core
+  dynamicflags += OASIS_DAC_CORE_BUILD_DLL
+
+  Source_Files {
+    Command_Channel.cpp
+    Database.cpp
+    Data_Channel.cpp
+    Execution_Context.cpp
+    Metametrics_Table.cpp
+    Metametrics_Hierarchy_Table.cpp
+    EINodes_Table.cpp
+    Instances_Table.cpp
+    Xml_Error_Handler.cpp
+    Xml_String.cpp
+    Data_Packet.cpp
+  }
+
+  Header_Files {
+    Data_Packet.h
+    Registration_Packet.h
+  }
+}
+
+project (OASIS_DAC_IDL_Gen) : oasis_taoidldefaults {
+  custom_only = 1
+
+  idlflags += -Wb,stub_export_macro=OASIS_DAC_STUB_Export \
+              -Wb,stub_export_include=DAC_stub_export.h \
+              -Wb,skel_export_macro=OASIS_DAC_SKEL_Export \
+              -Wb,skel_export_include=DAC_skel_export.h \
+              -Gxhst -Gxhsk
+
+  IDL_Files {
+    DataAcquisitionController.idl
+    Remote_Service.idl
+  }
+}
+
+project (OASIS_DAC_stub) : oasis_tao_stub, oasis_lib {
+  sharedname    = OASIS_DAC_stub
+  dynamicflags += OASIS_DAC_STUB_BUILD_DLL
+
+  after += OASIS_DAC_IDL_Gen
+
+  Source_Files {
+    DataAcquisitionControllerC.cpp
+    Remote_ServiceC.cpp
+  }
+}
+
+project (OASIS_DAC_skel) : portableserver, oasis_dac_stub, oasis_lib {
+  sharedname    = OASIS_DAC_skel
+  dynamicflags += OASIS_DAC_SKEL_BUILD_DLL
+
+  Source_Files {
+    DataAcquisitionControllerS.cpp
+    Remote_ServiceS.cpp
+  }
+
+  IDL_Files {
+
+  }
+}
+
+project (OASIS_DAC) : feature_specific, oasis_dac_core, boost_base, oasis_bin {
+  exename = oasis_dac
+
+  Source_Files {
+    Configuration.cpp
+    Standard_DAC.cpp
+    Standard_DAC_App.cpp
+  }
+}

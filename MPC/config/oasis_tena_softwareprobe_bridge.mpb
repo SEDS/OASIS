@@ -1,0 +1,7 @@
+// $Id: oasis_tena_softwareprobe_bridge.mpb 2052 2011-11-17 16:46:42Z dfeiock $
+
+project : boost_base, oasis_softwareprobe, oasis_lib, oasis_tena {
+  dynamicflags += OASIS_TENA_SOFTWARE_PROBE_HAS_DLL
+  after        += OASIS_Tena_Software_Probe_Bridge
+  libs         += OASIS_Tena_Software_Probe_Bridge
+}

@@ -1,0 +1,52 @@
+// -*- C++ -*-
+
+#ifndef FOOBRIDGE_V1_1_EXPORT_H
+#define FOOBRIDGE_V1_1_EXPORT_H
+
+#include "ace/config-all.h"
+
+#if defined (ACE_AS_STATIC_LIBS) && !defined (FOOBRIDGE_V1_1_HAS_DLL)
+#  define FOOBRIDGE_V1_1_HAS_DLL 0
+#endif /* ACE_AS_STATIC_LIBS && FOOBRIDGE_V1_1_HAS_DLL */
+
+#if !defined (FOOBRIDGE_V1_1_HAS_DLL)
+#  define FOOBRIDGE_V1_1_HAS_DLL 1
+#endif /* ! FOOBRIDGE_V1_1_HAS_DLL */
+
+#if defined (FOOBRIDGE_V1_1_HAS_DLL) && (FOOBRIDGE_V1_1_HAS_DLL == 1)
+#  if defined (FOOBRIDGE_V1_1_BUILD_DLL)
+#    define FOOBRIDGE_V1_1_Export ACE_Proper_Export_Flag
+#    define FOOBRIDGE_V1_1_SINGLETON_DECLARATION(T) ACE_EXPORT_SINGLETON_DECLARATION (T)
+#    define FOOBRIDGE_V1_1_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_EXPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#  else /* FOOBRIDGE_V1_1_BUILD_DLL */
+#    define FOOBRIDGE_V1_1_Export ACE_Proper_Import_Flag
+#    define FOOBRIDGE_V1_1_SINGLETON_DECLARATION(T) ACE_IMPORT_SINGLETON_DECLARATION (T)
+#    define FOOBRIDGE_V1_1_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_IMPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#  endif /* FOOBRIDGE_V1_1_BUILD_DLL */
+#else /* FOOBRIDGE_V1_1_HAS_DLL == 1 */
+#  define FOOBRIDGE_V1_1_Export
+#  define FOOBRIDGE_V1_1_SINGLETON_DECLARATION(T)
+#  define FOOBRIDGE_V1_1_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#endif /* FOOBRIDGE_V1_1_HAS_DLL == 1 */
+
+// Set FOOBRIDGE_V1_1_NTRACE = 0 to turn on library specific tracing even if
+// tracing is turned off for ACE.
+#if !defined (FOOBRIDGE_V1_1_NTRACE)
+#  if (ACE_NTRACE == 1)
+#    define FOOBRIDGE_V1_1_NTRACE 1
+#  else /* (ACE_NTRACE == 1) */
+#    define FOOBRIDGE_V1_1_NTRACE 0
+#  endif /* (ACE_NTRACE == 1) */
+#endif /* !FOOBRIDGE_V1_1_NTRACE */
+
+#if (FOOBRIDGE_V1_1_NTRACE == 1)
+#  define FOOBRIDGE_V1_1_TRACE(X)
+#else /* (FOOBRIDGE_V1_1_NTRACE == 1) */
+#  if !defined (ACE_HAS_TRACE)
+#    define ACE_HAS_TRACE
+#  endif /* ACE_HAS_TRACE */
+#  define FOOBRIDGE_V1_1_TRACE(X) ACE_TRACE_IMPL(X)
+#  include "ace/Trace.h"
+#endif /* (FOOBRIDGE_V1_1_NTRACE == 1) */
+
+#endif /* FOOBRIDGE_V1_1_EXPORT_H */

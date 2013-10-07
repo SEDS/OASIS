@@ -1,0 +1,10 @@
+// $Id:
+
+project (OASIS_Tena_Configuration_Parser_Test) : oasis_tena_softwareprobe_bridge {
+  exename = driver
+  install = .
+
+  Source_Files {
+    driver.cpp
+  }
+}

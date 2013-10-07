@@ -1,0 +1,66 @@
+// -*- IDL -*-
+
+//=============================================================================
+/**
+ *  @file       TestExecutionManager.idl
+ *
+ *  $Id: TestExecutionManager.idl 2190 2012-05-31 18:13:59Z dfeiock $
+ *
+ *  @author     James H. Hill
+ */
+//=============================================================================
+
+#ifndef _OASIS_TESTEXECUTIONMANAGER_IDL_
+#define _OASIS_TESTEXECUTIONMANAGER_IDL_
+
+#include "oasis/DataAcquisitionController/DataAcquisitionController.idl"
+
+module OASIS
+{
+  /// Type definition for a sequence of data acquisition controller.
+  typedef sequence <DataAcquisitionController> DataAcquisitionControllerSeq;
+
+  /**
+   * @interface TestExecutionManagerViewer
+   *
+   * Interface for the viewing the test and execution manager. This interface
+   * allows tools to access the data acquisition controller (DAC)
+   * for requesting software probe data.
+   */
+  interface TestExecutionManagerViewer
+  {
+    exception NotFound { };
+
+    // Name of the TestExecutionManager
+    readonly attribute string name;
+
+    // Get a list of registered DataAcquisitionControllers
+    DataAcquisitionControllerSeq get_DACs ();
+
+    /// Get a single DAC from the Test Execution Manager.
+    DataAcquisitionController get_DAC (in string name)
+      raises (NotFound);
+  };
+
+  /**
+   * @interface TestExecutionManager
+   *
+   * Interface for modifying the test and execution manager's state.
+   */
+  interface TestExecutionManager : TestExecutionManagerViewer
+  {
+    exception DuplicateName { };
+    exception RegisterFailed { };
+
+    // Register a DataAcquisitionController
+    void register_DAC (in DataAcquisitionController dac)
+      raises (DuplicateName, RegisterFailed);
+
+    // Unregister a DataAcquisitionController
+    void unregister_DAC (in DataAcquisitionController dac)
+      raises (NotFound);
+  };
+  
+};
+
+#endif  // !defined _OASIS_TESTEXECUTIONMANAGER_IDL_

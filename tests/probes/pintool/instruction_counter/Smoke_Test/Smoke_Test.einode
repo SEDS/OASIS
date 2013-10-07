@@ -1,0 +1,7 @@
+Name: SmokeTest_Einode
+Uuid: 3a078e90-f018-11e0-be50-0800200c9a66
+Reconnect-Timeout: 200
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"
+  probe i1 OASIS_Instruction_Counter_Probe:create_OASIS_PIN_Instruction_Counter_Probe_Impl_Factory () "--hertz=3"

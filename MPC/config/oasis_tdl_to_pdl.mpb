@@ -1,0 +1,8 @@
+// $Id: oasis_tdl_to_pdl.mpb 1913 2011-09-16 05:28:54Z hillj $
+
+project : oasis_tdl {
+  Modify_Custom (TDL) {
+    generic_outputext = .pdl
+    commandflags += <%quote%>--selection=<%lt%>*<%gt%>.GeneratePDL<%quote%>
+  }
+}

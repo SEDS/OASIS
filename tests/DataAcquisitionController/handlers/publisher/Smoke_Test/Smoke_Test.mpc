@@ -1,0 +1,32 @@
+// $Id: Smoke_Test.mpc 2072 2011-12-01 18:18:58Z dfeiock $
+
+project (DAC_Publisher_Service_Smoke_Test_App) : aceexe, oasis_einode_core, oasis_softwareprobe_test, \
+  oasis_data_channel {
+
+  exename = DAC_Publisher_Service_Smoke_Test_App
+  install = .
+
+  pdlflags += --backend=cpp
+
+  Source_Files {
+    Smoke_Test.cpp
+    Smoke_Test_App.cpp
+  }
+
+  PDL_Files {
+    Smoke_Test_Probe.pdl
+  }
+}
+
+project (DAC_Publisher_Service_Smoke_Test_Subscriber) : \
+  oasis_tao, oasis_dac_skel, oasis_tao_publisher_service_skel, oasis_tao_datachannel_stub {
+
+  exename = DAC_Publisher_Service_Smoke_Test_Subscriber
+  install = .
+
+  Source_Files {
+    Simple_Data_Subscriber.cpp
+    Smoke_Test_Subscriber.cpp
+    subscriber.cpp
+  }
+}

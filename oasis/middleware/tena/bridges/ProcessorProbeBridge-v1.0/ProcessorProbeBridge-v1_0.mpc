@@ -1,0 +1,40 @@
+
+
+// -*- MPC -*-
+// $Id: ProcessorProbeBridge-v1_0.mpc 2134 2012-02-15 18:32:19Z dfeiock $
+
+project (ProcessorProbeBridge-v1_0) : oasis_tena_softwareprobe_bridge, oasis_tena_softwareprobe_v0_3 {
+  sharedname    = ProcessorProbeBridge-v1_0
+  dynamicflags += PROCESSORPROBEBRIDGE_V1_0_BUILD_DLL PROCESSORPROBEBRIDGE_V1_0_HAS_DLL
+
+  // For some strange reason, this macro keeps creeping into the project build
+  // specification -- even when we have disable_versioned_namespace as the 
+  // last base project. So, we are just going to manually remove this macro
+  // from the build specification!
+  macros -= ACE_HAS_VERSIONED_NAMESPACE=1
+
+  includes += ./src \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-ProcessorProbe-v1.0 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/TENA-Time-v2 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-UUID-v1 \
+              $(TENA_HOME)/$(TENA_VERSION)/include/OMs/OASIS-SoftwareProbe-v0.3
+
+  specific (prop:windows) {
+    lit_libs += libOASIS-ProcessorProbe-v1.0-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libTENA-Time-v2-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libOASIS-UUID-v1-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                libOASIS-SoftwareProbe-v0.3-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  } else {
+    lit_libs += OASIS-ProcessorProbe-v1.0-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                TENA-Time-v2-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                OASIS-UUID-v1-$(TENA_PLATFORM)-v$(TENA_VERSION) \
+                OASIS-SoftwareProbe-v0.3-$(TENA_PLATFORM)-v$(TENA_VERSION)
+  }
+
+  Source_Files {
+    src/OASIS/System/Processor/ProcessorProbe_Bridge.cpp
+    src/OASIS/System/Processor/LinuxProcessorProbe_Bridge.cpp
+    src/OASIS/System/Processor/WindowsProcessorProbe_Bridge.cpp
+    src/Software_Probe_Bridge_Manager.cpp
+  }
+}

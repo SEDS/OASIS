@@ -1,0 +1,58 @@
+
+// -*- C++ -*-
+// $Id: MemoryProbe_Impl_export.h 1752 2011-02-20 20:26:17Z hillj $
+// Definition for Win32 Export directives.
+// This file is generated automatically by generate_export_file.pl MEMORYPROBE_IMPL
+// ------------------------------
+#ifndef MEMORYPROBE_IMPL_EXPORT_H
+#define MEMORYPROBE_IMPL_EXPORT_H
+
+#include "ace/config-all.h"
+
+#if defined (ACE_AS_STATIC_LIBS) && !defined (MEMORYPROBE_IMPL_HAS_DLL)
+#  define MEMORYPROBE_IMPL_HAS_DLL 0
+#endif /* ACE_AS_STATIC_LIBS && MEMORYPROBE_IMPL_HAS_DLL */
+
+#if !defined (MEMORYPROBE_IMPL_HAS_DLL)
+#  define MEMORYPROBE_IMPL_HAS_DLL 1
+#endif /* ! MEMORYPROBE_IMPL_HAS_DLL */
+
+#if defined (MEMORYPROBE_IMPL_HAS_DLL) && (MEMORYPROBE_IMPL_HAS_DLL == 1)
+#  if defined (MEMORYPROBE_IMPL_BUILD_DLL)
+#    define MEMORYPROBE_IMPL_Export ACE_Proper_Export_Flag
+#    define MEMORYPROBE_IMPL_SINGLETON_DECLARATION(T) ACE_EXPORT_SINGLETON_DECLARATION (T)
+#    define MEMORYPROBE_IMPL_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_EXPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#  else /* MEMORYPROBE_IMPL_BUILD_DLL */
+#    define MEMORYPROBE_IMPL_Export ACE_Proper_Import_Flag
+#    define MEMORYPROBE_IMPL_SINGLETON_DECLARATION(T) ACE_IMPORT_SINGLETON_DECLARATION (T)
+#    define MEMORYPROBE_IMPL_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK) ACE_IMPORT_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#  endif /* MEMORYPROBE_IMPL_BUILD_DLL */
+#else /* MEMORYPROBE_IMPL_HAS_DLL == 1 */
+#  define MEMORYPROBE_IMPL_Export
+#  define MEMORYPROBE_IMPL_SINGLETON_DECLARATION(T)
+#  define MEMORYPROBE_IMPL_SINGLETON_DECLARE(SINGLETON_TYPE, CLASS, LOCK)
+#endif /* MEMORYPROBE_IMPL_HAS_DLL == 1 */
+
+// Set MEMORYPROBE_IMPL_NTRACE = 0 to turn on library specific tracing even if
+// tracing is turned off for ACE.
+#if !defined (MEMORYPROBE_IMPL_NTRACE)
+#  if (ACE_NTRACE == 1)
+#    define MEMORYPROBE_IMPL_NTRACE 1
+#  else /* (ACE_NTRACE == 1) */
+#    define MEMORYPROBE_IMPL_NTRACE 0
+#  endif /* (ACE_NTRACE == 1) */
+#endif /* !MEMORYPROBE_IMPL_NTRACE */
+
+#if (MEMORYPROBE_IMPL_NTRACE == 1)
+#  define MEMORYPROBE_IMPL_TRACE(X)
+#else /* (MEMORYPROBE_IMPL_NTRACE == 1) */
+#  if !defined (ACE_HAS_TRACE)
+#    define ACE_HAS_TRACE
+#  endif /* ACE_HAS_TRACE */
+#  define MEMORYPROBE_IMPL_TRACE(X) ACE_TRACE_IMPL(X)
+#  include "ace/Trace.h"
+#endif /* (MEMORYPROBE_IMPL_NTRACE == 1) */
+
+#endif /* MEMORYPROBE_IMPL_EXPORT_H */
+
+// End of auto generated file.

@@ -1,0 +1,32 @@
+// $Id: Probe_Cpp_Generator.mpc 2211 2012-07-25 12:55:51Z dfeiock $
+
+project (OASIS_PDL_Cpp_Generator) : codegenerationkit, oasis_pdl_be, oasis_lib {
+  sharedname    = OASIS_PDL_Cpp_Generator
+  dynamicflags += OASIS_PDL_CPP_GENERATOR_BUILD_DLL
+
+  after += OASIS_PDL_Schema_Generator
+  libs  += OASIS_PDL_Schema_Generator
+
+  Source_Files {
+    Stub_Attribute_Generator.cpp
+    Impl_Attribute_Generator.cpp
+    Cpp.cpp
+    Export_File_Generator.cpp
+    Flush_Generator.cpp
+    Package_Data_Generator.cpp
+    Probe_Cpp_Generator.cpp
+    Probe_Cpp_Schema_Generator.cpp
+    Recall_Generator.cpp
+    Stub_Dump_Generator.cpp
+    Impl_Dump_Generator.cpp
+    Stub_Var_Type_Generator.cpp
+    Impl_Var_Type_Generator.cpp
+    Stub_Probe_Cpp_Generator_Visitor.cpp
+    Impl_Probe_Cpp_Generator_Visitor.cpp
+    Metadata_Cpp_Generator_Visitor.cpp
+  }
+
+  Header_Files {
+    Configuration.h
+  }
+}

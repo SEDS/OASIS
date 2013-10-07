@@ -1,0 +1,15 @@
+// $Id: Handle_Registration_Test.mpc 2211 2012-07-25 12:55:51Z dfeiock $
+
+project (OASIS_Tena_Publisher_Handle_Registration_Test) : oasis_data_channel, oasis_einode_core, oasis_softwareprobe {
+  exename = OASIS_Tena_Publisher_Handle_Registration_Test
+  install = .
+
+  after += OASIS_Foo_v1.0 Foo_Test_Probe
+
+  Source_Files {
+    ../Foo.cpp
+    ../FooImpl.cpp
+    ../Foo_Metadata.cpp
+    driver.cpp
+  }
+}

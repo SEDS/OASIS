@@ -1,0 +1,6 @@
+// $Id: oasis_tao_stub.mpb 1863 2011-08-19 18:39:59Z hillj $
+
+project : requires_tao, taolib, oasis_common {
+  after += OASIS_Tao_stub
+  libs  += OASIS_Tao_stub
+}

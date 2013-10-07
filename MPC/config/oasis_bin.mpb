@@ -1,0 +1,5 @@
+// $Id: oasis_bin.mpb 1712 2010-11-23 03:50:53Z hillj $
+
+project : oasis_common {
+  install = $(OASIS_ROOT)/bin
+}

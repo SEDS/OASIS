@@ -1,0 +1,46 @@
+// $Id: NetworkProbe.mpc 2051 2011-11-16 14:38:29Z dfeiock $
+
+project (OASIS_NetworkProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_NetworkProbe_stub
+  dynamicflags += OASIS_NETWORKPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_NETWORKPROBE_STUB_Export \
+              --export-file=NetworkProbe_stub_export.h
+
+  PDL_Files {
+    NetworkProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_NetworkProbe) : boost_base, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_NetworkProbe
+  dynamicflags += NETWORKPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_NetworkProbe_stub
+  libs  += OASIS_NetworkProbe_stub
+
+  specific (prop:windows) {
+    lit_libs += iphlpapi
+  }
+
+  Source_Files {
+    NetworkProbe_Impl.cpp
+
+    conditional (!prop:windows) {
+      Procnetdev_Parser.cpp
+    }
+  }
+
+  Header_Files {
+
+  }
+}

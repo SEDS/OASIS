@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+  This file defines a plugin, including the capabilities defined by the plugin
+  and the dependencies between different capabilities of templates in a
+  plugin.  For example, if a RemoteMethodsImplementation is generated for an
+  SDO "Foo", then a RemoteMethodsImplementation is required for the superclass
+  of Foo and any SDOs contained in Foo, and a LocalMethodsImplementation is
+  required for any referenced local classes.  Whether any additional code is
+  generated to satisfy these requirements depend on other parameters in the
+  code generation request.
+
+    The "for" attribute provides a transform from the current objects to 0 or
+    more related objects.  These are the bean attributes on the current node,
+    e.g. referencedMessages calls (node).getReferencedMessages().  These methods
+    return the directly referenced objects, not the (for example) messages
+    referenced by the messages referenced by the...
+
+    Certain capabilites are private - they are never exposed by a component.
+    All the capabilities relating to how something is built are "private"
+    capabilities to specify templates that are used to create the component.
+    They are never part of the bundled component, so are not exposed in the
+    exported view of the component.
+
+  No matter what you are generating, you must have an
+  implementation for any referenced local classes or messages.
+  'referenced' includes 'contained' as well as types used as arguments
+-->
+
+<!-- cgelement_factory defines the factory that will be used to load the
+     other elements from the jar to create CGElements.  The factory is
+     passed each element, and returns a CGelement or null if the element
+     should be ignored.  The factory may do other processing on elements that
+     do not correspond to templates.
+
+     capability_predicate is a class that provides a CapabilityPredicate,
+     which is used by the parser to validate the appliesTo strings, and by
+     the Plugin to return a list of capabilities that apply to a node -->
+
+<plugin
+    name="OASIS"
+    version="1.0"
+    cgelementFactory="tena.omc.plugin.freemarker.FreemarkerCGElementFactory"
+    capabilityPredicate="tena.omc.plugin.DefaultCapabilityPredicate"
+    pluginNodeMap="tena.omc.plugin.apiv6.APIv6_NodeMap"
+    capabilityNamespace="oasis"
+    defaultComponentType="userApplication">
+
+  <capability name="GeneratePDL" display="pdl" appliesTo="ObjectModelNode"/>
+  <capability name="GenerateBridge" display="bridge" appliesTo="ObjectModelNode,ClassNode"/>
+</plugin>

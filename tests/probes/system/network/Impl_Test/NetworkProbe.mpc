@@ -1,0 +1,13 @@
+// $Id: NetworkProbe.mpc 2007 2011-10-11 12:54:21Z dfeiock $
+
+project (OASIS_NetworkProbe_Test) : oasis_data_channel, oasis_softwareprobe {
+  exename = driver
+  install = .
+
+  after += OASIS_NetworkProbe_stub OASIS_NetworkProbe
+  libs  += OASIS_NetworkProbe_stub OASIS_NetworkProbe
+
+  Source_Files {
+    driver.cpp
+  }
+}

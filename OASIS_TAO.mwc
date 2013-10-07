@@ -1,0 +1,6 @@
+// $Id: OASIS_TAO.mwc 2059 2011-11-18 17:23:10Z hillj $
+
+workspace (OASIS_TAO) {
+  $(OASIS_ROOT)/OASIS.mwc
+  $(TAO_ROOT)/TAO_ACE.mwc
+}

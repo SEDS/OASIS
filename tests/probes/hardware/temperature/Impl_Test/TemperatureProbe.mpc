@@ -1,0 +1,15 @@
+// $Id: TemperatureProbe.mpc 2055 2011-11-17 18:23:05Z dfeiock $
+
+project (OASIS_TemperatureProbe_Test) : oasis_data_channel, oasis_softwareprobe {
+  exename = driver
+  install = .
+
+  after += OASIS_TemperatureProbe_stub OASIS_TemperatureProbe
+  libs  += OASIS_TemperatureProbe_stub OASIS_TemperatureProbe
+
+  Source_Files {
+    conditional (!prop:windows) {
+      driver.cpp
+    }
+  }
+}

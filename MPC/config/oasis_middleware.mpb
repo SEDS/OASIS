@@ -1,0 +1,6 @@
+// $Id: oasis_middleware.mpb 2085 2011-12-31 07:49:04Z hillj $
+
+project : oasis_common {
+  after += OASIS_Middleware
+  libs  += OASIS_Middleware
+}

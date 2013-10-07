@@ -1,0 +1,5 @@
+// $Id: oasis_taoidldefaults.mpb 1863 2011-08-19 18:39:59Z hillj $
+
+project : requires_tao, taoidldefaults {
+  idlflags += -I $(OASIS_ROOT)
+}

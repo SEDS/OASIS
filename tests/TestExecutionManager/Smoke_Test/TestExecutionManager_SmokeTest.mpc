@@ -1,0 +1,13 @@
+// $Id: TestExecutionManager_SmokeTest.mpc 1967 2011-10-03 17:48:26Z hillj $
+
+project (OASIS_TestExecutionManager_SmokeTest) : oasis_testexecutionmanager_stub, \
+                                                 oasis_dac_stub, \
+                                                 oasis_bin {
+  exename = OASIS_TestExecutionManager_SmokeTest
+  install = .
+
+  Source_Files {
+    Smoke_Test.cpp
+    Smoke_Test_App.cpp
+  }
+}

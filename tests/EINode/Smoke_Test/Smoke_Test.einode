@@ -1,0 +1,6 @@
+Name: SmokeTest_Einode
+Uuid: 6429FC2A-0A40-4BB5-BF7F-A0FB19B1BFA8
+
+DataChannel:
+  dynamic TaoChannel Service_Object * OASIS_Tao_DataChannel_Client:_make_OASIS_Tao_Data_Channel_Client () "-ORBInitRef DataChannel=corbaloc:iiop:localhost:20000/DataChannel --run-orb"
+  probe h1 OASIS_HeartbeatProbe:create_OASIS_HeartbeatProbe_Impl_Factory () " "

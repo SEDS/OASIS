@@ -1,0 +1,6 @@
+// $Id: oasis_data_channel.mpb 1858 2011-08-18 03:13:41Z hillj $
+
+project {
+  after += OASIS_Data_Channel
+  libs  += OASIS_Data_Channel
+}

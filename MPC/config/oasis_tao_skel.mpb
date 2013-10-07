@@ -1,0 +1,5 @@
+// $Id: oasis_tao_skel.mpb 1863 2011-08-19 18:39:59Z hillj $
+
+project : portableserver, oasis_tao_stub {
+
+}

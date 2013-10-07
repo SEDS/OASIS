@@ -1,0 +1,42 @@
+// $Id: SwitchProbe.mpc 2214 2012-08-10 15:00:08Z dfeiock $
+
+project (OASIS_SwitchProbe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib {
+  sharedname    = OASIS_SwitchProbe_stub
+  dynamicflags += OASIS_SWITCHPROBE_STUB_BUILD_DLL
+
+  pdlflags += --backend=cpp \
+              --export-macro=OASIS_SWITCHPROBE_STUB_Export \
+              --export-file=SwitchProbe_stub_export.h
+
+  PDL_Files {
+    SwitchProbe.pdl
+  }
+
+  Source_Files {
+
+  }
+
+  Header_Files {
+
+  }
+}
+
+project (OASIS_SwitchProbe) : requires_snmp, boost_base, oasis_softwareprobe, oasis_lib {
+  sharedname    = OASIS_SwitchProbe
+  dynamicflags += SWITCHPROBE_IMPL_BUILD_DLL
+
+  after += OASIS_SwitchProbe_stub
+  libs  += OASIS_SwitchProbe_stub
+  libs  += netsnmp
+  includes += /usr/lib
+
+  Source_Files {
+    OID.cpp
+    Snmp_Wrapper.cpp
+    SwitchProbe_Impl.cpp
+  }
+
+  Header_Files {
+
+  }
+}

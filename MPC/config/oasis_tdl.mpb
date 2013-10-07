@@ -1,0 +1,16 @@
+// $Id: oasis_tdl.mpb 1913 2011-09-16 05:28:54Z hillj $
+
+project : tena_base {
+  specific {
+    oasis_tdl_dep = $(OASIS_ROOT)/etc/tena-omc/oasis_omc-v0.1.jar
+  }
+
+  Define_Custom (TDL) {
+    automatic         = 1
+    dependent         = $(OASIS_TDL_DEP)
+    command           = $(OASIS_ROOT)/bin/oasis_omc
+    inputext          = .tdl
+
+    keyword tdlflags  = commandflags
+  }
+}

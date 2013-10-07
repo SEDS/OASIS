@@ -1,0 +1,18 @@
+// $Id: client.mpc 2035 2011-11-01 14:08:23Z dfeiock $
+
+project (OASIS_Command_Injector_Test_Client) : oasis_data_channel, oasis_pdl, oasis_einode_core, \
+                                               oasis_softwareprobe, oasis_bin {
+
+  exename = OASIS_Command_Injector_Test_Client
+  install = .
+
+  pdlflags += --backend=cpp
+
+  Source_Files {
+    client.cpp
+  }
+
+  PDL_Files {
+    Dummy_Probe.pdl
+  }
+}

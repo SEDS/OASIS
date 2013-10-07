@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title></title>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Data_Point_Reader.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Data_Point_Reader_Factory.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Cdr_Writer.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Probe.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Cdr_Reader.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/UUID.js"></script>
+    <script type="text/javascript" language="javascript" src="Client_Side_Scripts/Header.js"></script>
+
+    <script type="text/javascript" language="javascript">
+      var WEBSOCKET_URL = "ws://localhost:8080/";
+        
+
+      var temLocation;
+      var menuData;
+      var accessedProbes = new Array();
+      var ws;
+
+      window.onload = function()
+      {
+        if ("WebSocket" in window)
+        {
+          ws = new WebSocket(WEBSOCKET_URL);
+          ws.binaryType = "arraybuffer";
+
+          ws.onmessage = function(evt)
+          {
+            if (0 < accessedProbes.length)
+            {
+              var probeHeader = new Header();
+              var index = probeHeader.read_header(evt.data, true);
+
+              for (var i = 0; i < accessedProbes.length; i++)
+              {
+                if (probeHeader.name() == accessedProbes[i].name)
+                  accessedProbes[i].refresh(evt.data, index);
+              }
+            }
+          }
+        }
+      }
+
+      function connect()
+      {
+        temLocation = document.getElementById("txtTEMLocation").value;
+        getMenuData();
+        window.setInterval(getMenuData, 30000);
+      }
+
+      function getMenuData()
+      {
+        //alert("Update_Menu");
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+          var menuUpdateXhr = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+          menuUpdateXhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        menuUpdateXhr.onreadystatechange = function()
+        {
+          if (menuUpdateXhr.readyState == 4 && menuUpdateXhr.status == 200)
+          {
+            var temp = JSON.parse(menuUpdateXhr.responseText);
+            if (temp != menuData)
+            {
+              menuData = temp;
+              showDacs(menuData);
+            }
+          }
+        }
+        var url = "Menu_Data.ashx" + "?" + "temLocation=" + temLocation;
+        menuUpdateXhr.open("GET", url, true);
+        menuUpdateXhr.send();
+      }
+
+      function showDacs(menuData)
+      {
+        var lbl = document.getElementById('lblAvailableDacs');
+        lbl.setAttribute('style', 'visibility:visible');
+
+        var dacList = document.getElementById('lstDacs');
+        dacList.innerHTML = "";
+        dacList.setAttribute('style', 'visibility:visible');
+
+        var probeList = document.getElementById('lstProbes');
+        probeList.setAttribute('style', 'visibility:hidden');
+        probeList.innerHTML = "";
+
+        var btn = document.getElementById('btnGetData');
+        btn.setAttribute('style', 'visibility:hidden');
+
+        for (i = 0; i < menuData.Dacs.length; i++)
+        {
+          var option = document.createElement('option');
+          option.setAttribute('id', menuData.Dacs[i].Name);
+          option.appendChild(document.createTextNode(menuData.Dacs[i].Name));
+
+          dacList.appendChild(option);
+        }
+      }
+
+      function getProbesNames(event)
+      {
+        // listbox node that holds dac names
+        var lst;
+        if (event == null)
+          lst = event.srcElement; // I.E.
+        else
+          lst = event.target; // FireFox
+
+        var probeList = document.getElementById('lstProbes');
+        probeList.innerHTML = "";
+        probeList.setAttribute('style', 'visibility:visible');
+
+        // as we are allowing to select only one DAC, selectedOptions
+        // collection will always have one element.
+        // If you want to know more about then lst.selectedIndex property
+        // is useful;
+        var dacName = lst.selectedOptions[0].id;
+
+        for (i = 0; i < menuData.Dacs.length; i++)
+        {
+          if (dacName == menuData.Dacs[i].Name)
+          {
+            for (j = 0; j < menuData.Dacs[i].Probes.length; j++)
+            {
+              var option = document.createElement('option');
+
+              var opt_id = menuData.Dacs[i].Name
+                          + " "
+                          + menuData.Dacs[i].Probes[j].Einode_Name
+                          + " "
+                          + menuData.Dacs[i].Probes[j].Name;
+              option.setAttribute('id', opt_id);
+              option.appendChild(document.createTextNode(menuData.Dacs[i].Probes[j].Name));
+              probeList.appendChild(option);
+            }
+
+            break;
+          }
+        }
+      }
+
+      function enableButton()
+      {
+        var btn = document.getElementById('btnGetData');
+        btn.setAttribute('style', 'visibility:visible');
+      }
+
+      function generateTable()
+      {
+        var probeInstance = document.getElementById('lstProbes').selectedOptions[0];
+        var dacEinodeProbe = probeInstance.id.split(" ");
+
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+          var getSchemaXhr = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+          getSchemaXhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        getSchemaXhr.onreadystatechange = function()
+        {
+          if (getSchemaXhr.readyState == 4 && getSchemaXhr.status == 200)
+            buildTable(getSchemaXhr.responseText, dacEinodeProbe);
+        }
+
+        var url = "Probe_Schema.ashx?DacName="
+                  + dacEinodeProbe[0] + "&EinodeName=" + dacEinodeProbe[1]
+                  + "&ProbeName=" + dacEinodeProbe[2];
+        getSchemaXhr.open("GET", url, true);
+        getSchemaXhr.send()
+      }
+
+      function buildTable(schema, dacEinodeProbe)
+      {
+        parser = new DOMParser();
+        xmlDoc = parser.parseFromString(schema, "text/xml");
+        xmlDomRoot = xmlDoc.documentElement;
+
+        var probe = new Probe(xmlDomRoot,
+                              dacEinodeProbe,
+                              document.getElementById('appbody'),
+                              ws);
+
+        register(dacEinodeProbe);
+        // Storing the values dac, einode and probe name so we can identify
+        // registered probe. Other use of these values is to identify table
+        // belong to particular probe because table ids follow following
+        // syntax: EinodeName<BlankSpace>ProbeName
+        accessedProbes.push(probe);
+        probe.buildTable(xmlDomRoot);
+        //probe.drawTable();
+      }
+
+      function register(dacEinodeProbe)
+      {
+        var message = new Uint8Array(256);
+        var writer = new Cdr_Writer(message.buffer, true);
+        writer.write_int8(0x01);
+        writer.write_string(dacEinodeProbe[1], dacEinodeProbe[1].length);
+        writer.write_string(dacEinodeProbe[2], dacEinodeProbe[2].length);
+
+        try
+        {
+          ws.send(message.buffer);
+        }
+        catch (exception)
+        {
+          alert(exception.message);
+        }
+      }
+
+      function unregister (event)
+      {
+        var btn;
+        if (event == null)
+          btn = event.srcElement; // I.E.
+        else
+          btn = event.target; // FireFox
+
+        var dacName, einodeName, probeName;
+        var dacEinodeProbe = btn.id.split(" ");
+        dacName = dacEinodeProbe[0];
+        einodeName = dacEinodeProbe[1];
+        probeName = dacEinodeProbe[2];
+
+        var message = new Uint8Array(256);
+        var writer = new Cdr_Writer(message.buffer, true);
+        writer.write_int8(0x02);
+        writer.write_string(einodeName, einodeName.length);
+        writer.write_string(probeName, probeName.length);
+
+        try
+        {
+          ws.send(message.buffer);
+        }
+        catch (exception)
+        {
+          alert(exception.message);
+        }
+
+        // Need to remove from array which keeps track of
+        // probes client is watching at this point
+        for (var i = 0; i < accessedProbes.length; i++)
+        {
+          if (einodeName == accessedProbes[i].einodeName)
+          {
+            if (probeName == accessedProbes[i].name)
+            {
+              accessedProbes.splice(i, 1);
+              break;
+            }
+          }
+        }
+        var appBodyDiv = document.getElementById('appbody');
+        var probeDivId = dacName + " " + einodeName + " " + probeName + " " + "probeDiv";
+        var probeDiv = document.getElementById(probeDivId);
+        appBodyDiv.removeChild(probeDiv);
+      }
+
+      //
+      //
+      //
+      function changeHeartz (event)
+      {
+        var btn;
+        if (event == null)
+          btn = event.srcElement; // I.E.
+        else
+          btn = event.target; // FireFox
+
+        var dacName, einodeName, probeName;
+        var dacEinodeProbe = btn.id.split(" ");
+        dacName = dacEinodeProbe[0];
+        einodeName = dacEinodeProbe[1];
+        probeName = dacEinodeProbe[2];
+
+        var id = dacName + " " + einodeName + " " + probeName + " " + "hertzText";
+        var txtHertzCtrl = document.getElementById(id);
+        var hertz = txtHertzCtrl.value.toString();
+
+        var message = new Uint8Array(256);
+        var writer = new Cdr_Writer(message.buffer, true);
+        writer.write_int8(0x03);
+        writer.write_string(einodeName, einodeName.length);
+        writer.write_string(probeName, probeName.length);
+        writer.write_string(hertz, hertz.length);
+
+        try
+        {
+          ws.send(message.buffer);
+        }
+        catch (exception)
+        {
+          alert(exception.message);
+        }
+      }
+    </script>
+</head>
+<body>
+<div id="appheader">
+  <lable>Enter TEM Location :</lable>
+  <input type="text" id="txtTEMLocation" size="50px" value=""/>
+  <input type="button" id="btnGetSchema" value="Get DACs" onclick="connect()" />
+  <br/><br/>
+  <div id="menuDiv">
+    <lable id="lblAvailableDacs" style="visibility:hidden">Available DACs : </lable>
+    <select id="lstDacs" style="visibility:hidden" size="5" onchange="getProbesNames(event)"></select>
+    <select id="lstProbes" style="visibility:hidden" size="5" onchange="enableButton()"></select>
+    <input id="btnGetData" type="button" style="visibility:hidden" value="Get Data" onclick="generateTable()"/>
+  </div>
+</div>
+
+<div id="appbody"></div>
+</body>
+</html>
