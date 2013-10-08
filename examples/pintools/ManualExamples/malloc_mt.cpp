@@ -30,7 +30,8 @@ public:
 
   void handle_analyze (int size, THREADID thr_id)
   {
-    OASIS::Pin::Guard guard (this->lock_, thr_id + 1);
+    this->lock_.owner (thr_id + 1);
+    OASIS::Pin::Guard <OASIS::Pin::Lock> guard (this->lock_);
 
     fprintf (this->file_, "thread %d entered malloc(%d)\n", thr_id, size);
     fflush (this->file_);
