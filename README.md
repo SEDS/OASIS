@@ -3,6 +3,14 @@ OASIS
 
 Open-source Architecture for Software Instrumentation of Systems
 
+Technologies & Frameworks
+-------------------------
+
+The following technologies and architectures are contained within
+the OASIS project:
+
+* Pin ++
+
 Building from Sources
 ---------------------
 
