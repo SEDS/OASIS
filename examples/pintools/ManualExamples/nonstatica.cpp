@@ -25,25 +25,30 @@ class nonstatica : public OASIS::Pin::Image_Tool <nonstatica>
 public:
   void handle_instrument (const OASIS::Pin::Image & img)
   {
-    for (OASIS::Pin::Section sec = img.section_head (); sec.valid (); sec.next ())
+    for (OASIS::Pin::Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
+         sec_iter != sec_iter_end;
+         ++ sec_iter)
     {
-      for (OASIS::Pin::Routine rtn = sec.routine_head (); rtn.valid (); rtn.next ())
+      for (OASIS::Pin::Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
+           rtn_iter != rtn_iter_end;
+           ++ rtn_iter)
       {
         std::cout <<
-          "  Rtn: " << std::setw (8) << std::hex << rtn.address () <<
-          " " << rtn.name () << std::endl;
+          "  Rtn: " << std::setw (8) << std::hex << rtn_iter->address () <<
+          " " << rtn_iter->name () << std::endl;
 
         std::string path;
         int line;
-        this->get_source_location (rtn.address (), NULL, &line, &path);
+        this->get_source_location (rtn_iter->address (), NULL, &line, &path);
 
         if (path != "")
           std::cout << "File " << path << " Line " << line << std::endl;
 
-        OASIS::Pin::Routine_Guard guard (rtn);
+        using OASIS::Pin::Routine_Guard;
+        Routine_Guard guard (*rtn_iter);
 
         using OASIS::Pin::Ins;
-        Ins::iterator_type ins_iter = rtn.instruction_head ();
+        Ins::iterator_type ins_iter = rtn_iter->instruction_head ();
 
         if (!ins_iter->is_valid ())
           continue;

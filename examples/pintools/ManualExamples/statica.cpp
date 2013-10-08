@@ -38,18 +38,22 @@ int main (INT32 argc, CHAR ** argv)
   std::cout << hex;
   rtn_internal_range_list.clear ();
 
-  for (Section sec = img.section_head (); sec.valid (); sec.next ())
+  for (Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
+       sec_iter != sec_iter_end;
+       ++ sec_iter)
   {
-    std::cout << "Section: " << std::setw (8) << sec.address () << " " << sec.name () << std::endl;
+    std::cout << "Section: " << std::setw (8) << sec_iter->address () << " " << sec_iter->name () << std::endl;
 
-    for (Routine rtn = sec.routine_head (); rtn.valid (); rtn.next ())
+    for (Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
+         rtn_iter != rtn_iter_end;
+         ++ rtn_iter)
     {
-      std::cout << "  Rtn: " << std::setw (8) << hex << rtn.address () << " " << rtn.name () << endl;
+      std::cout << "  Rtn: " << std::setw (8) << hex << rtn_iter->address () << " " << rtn_iter->name () << endl;
 
       std::string path;
       INT32 line;
 
-      Tool::get_source_location (rtn.address (), 0, &line, &path);
+      Tool::get_source_location (rtn_iter->address (), 0, &line, &path);
 
       if (path != "")
         std::cout << "File " << path << " Line " << line << std::endl;
@@ -57,8 +61,8 @@ int main (INT32 argc, CHAR ** argv)
       using OASIS::Pin::Routine_Guard;
       using OASIS::Pin::Ins;
 
-      Routine_Guard guard (rtn);
-      Ins::iterator_type ins_iter = rtn.instruction_head ();
+      Routine_Guard guard (*rtn_iter);
+      Ins::iterator_type ins_iter = rtn_iter->instruction_head ();
 
       if (!ins_iter->is_valid ())
         continue;
