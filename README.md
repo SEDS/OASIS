@@ -5,11 +5,11 @@ The Open-source Architecture for Software Instrumentation of Systems
 is a R&D framework for exploring and understanding the challenges 
 associated with instrumenting software systems in real-time.
 
-Technologies & Frameworks
+Frameworks & Technologies
 -------------------------
 
-The following technologies and architectures are contained within
-the OASIS project:
+The following frameworks and technologies and architectures are implemented 
+in the OASIS project:
 
 * Pin ++
 
