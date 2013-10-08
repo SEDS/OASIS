@@ -20,8 +20,6 @@ Building from Sources
 
 The script will **download** all required source files, **build** them, 
 and install them in their correct location within the **target directory**. 
-The script will also generate a file named **configure.bat**, which needs 
-to be executed each time you start a new console shell. This batch file 
-will initialize the correct environment variables. If you do not execute 
-the batch file each time you start a new console, then Visual Studio will 
-not know where to locate the build dependencies.
+The script will also generate a file named **configure.[bat|sh]**, which needs 
+to be executed each time you start a new console shell. This script file 
+will initialize the correct environment variables.
