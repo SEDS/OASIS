@@ -8,8 +8,8 @@ Building from Sources
 
 We assume you have the following already installed on your machine:
 
-* [Python3](http://www.activestate.com/activepython/downloads) on your machine. (Python 2.x will not work)
-* [Perl](http://www.activestate.com/activeperl) on your machine.
+* [Python3](http://www.activestate.com/activepython/downloads) (Python 2.x will not work)
+* [Perl](http://www.activestate.com/activeperl)
 * [GIT] (http://git-scm.com/downloads)
 
 Checkout our custom Python3 build scripts from the Git repo:
