@@ -58,28 +58,30 @@ int main (INT32 argc, CHAR ** argv)
       using OASIS::Pin::Ins;
 
       Routine_Guard guard (rtn);
-      Ins ins = rtn.instruction_head ();
+      Ins::iterator_type ins_iter = rtn.instruction_head ();
 
-      if (!ins.valid ())
+      if (!ins_iter->is_valid ())
         continue;
 
       RTN_INTERNAL_RANGE rtn_internal_range;
-      rtn_internal_range.start = ins.address ();
-      rtn_internal_range.end = rtn_internal_range.start + ins.size ();
+      rtn_internal_range.start = ins_iter->address ();
+      rtn_internal_range.end = rtn_internal_range.start + ins_iter->size ();
 
-      Ins last_ins = Ins::invalid;
+      Ins::iterator_type last_ins (Ins::invalid);
 
-      for ( ; ins.valid (); ins.next ())
+      for (Ins::iterator_type ins_iter_end = ins_iter.make_end ();
+           ins_iter != ins_iter_end;
+           ++ ins_iter)
       {
-        std::cout << "    " << std::setw(8) << hex << ins.address () << " " << ins.disassemble () << endl;
+        std::cout << "    " << std::setw(8) << hex << ins_iter->address () << " " << ins_iter->disassemble () << endl;
 
-        if (last_ins.valid ())
+        if (last_ins->valid ())
         {
-          ADDRINT last_addr = last_ins.address ();
-          ADDRINT curr_addr = ins.address ();
+          ADDRINT last_addr = last_ins->address ();
+          ADDRINT curr_addr = ins_iter->address ();
 
-          USIZE last_size = last_ins.size ();
-          USIZE curr_size = ins.size ();
+          USIZE last_size = last_ins->size ();
+          USIZE curr_size = ins_iter->size ();
 
           if (last_addr + last_size == curr_addr)
           {
@@ -116,7 +118,7 @@ int main (INT32 argc, CHAR ** argv)
           }
         }
 
-        last_ins = ins;
+        last_ins = ins_iter;
       }
 
       rtn_internal_range_list.clear();

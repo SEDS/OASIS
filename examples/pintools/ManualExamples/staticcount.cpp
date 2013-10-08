@@ -24,8 +24,14 @@ public:
       {
         OASIS::Pin::Routine_Guard guard (rtn);
 
-        for (OASIS::Pin::Ins ins = rtn.instruction_head (); ins.is_valid (); ins.next ())
+        using OASIS::Pin::Ins;
+
+        for (Ins::iterator_type iter = rtn.instruction_head (), iter_end = iter.make_end ();
+             iter != iter_end;
+             ++ iter)
+        {
           ++ count;
+        }
       }
     }
 

@@ -6,6 +6,15 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+
+struct address_range
+{
+  ADDRINT start;
+  ADDRINT end;
+};
+
+typedef std::vector <address_range> list_type;
+
 /**
  * @class nonstatica
  *
@@ -14,14 +23,6 @@
 class nonstatica : public OASIS::Pin::Image_Tool <nonstatica>
 {
 public:
-  struct address_range
-  {
-    ADDRINT start;
-    ADDRINT end;
-  };
-
-  typedef std::vector <address_range> list_type;
-
   void handle_instrument (const OASIS::Pin::Image & img)
   {
     for (OASIS::Pin::Section sec = img.section_head (); sec.valid (); sec.next ())
@@ -40,25 +41,32 @@ public:
           std::cout << "File " << path << " Line " << line << std::endl;
 
         OASIS::Pin::Routine_Guard guard (rtn);
-        OASIS::Pin::Ins first_instruction = rtn.instruction_head ();
 
-        if (!first_instruction.is_valid ())
+        using OASIS::Pin::Ins;
+        Ins::iterator_type ins_iter = rtn.instruction_head ();
+
+        if (!ins_iter->is_valid ())
           continue;
 
         address_range range;
-        range.start = first_instruction.address ();
-        range.end = range.start + first_instruction.size ();
-        OASIS::Pin::Ins lastIns = OASIS::Pin::Ins::invalid;
+        range.start = ins_iter->address ();
+        range.end = range.start + ins_iter->size ();
 
-        for (OASIS::Pin::Ins ins = rtn.instruction_head (); ins.is_valid (); ins.next ())
+        Ins::iterator_type last_ins (Ins::invalid);
+
+        for (Ins::iterator_type ins_iter_end = ins_iter.make_end ();
+             ins_iter != ins_iter_end;
+             ++ ins_iter)
         {
-          std::cout << "    " << std::setw (8) << std::hex << ins.address ()
-            << " " << ins.disassemble () << std::endl;
-          if (lastIns.is_valid ())
+          std::cout
+            << "    " << std::setw (8) << std::hex << ins_iter->address ()
+            << " " << ins_iter->disassemble () << std::endl;
+
+          if (last_ins->is_valid ())
           {
-            if ((lastIns.address () + lastIns.size ()) == ins.address ())
+            if ((last_ins->address () + last_ins->size ()) == ins_iter->address ())
             {
-              range.end = ins.address () + ins.size ();
+              range.end = ins_iter->address () + ins_iter->size ();
             }
             else
             {
@@ -73,7 +81,7 @@ public:
                    ri != this->range_list_.end ();
                    ri++)
               {
-                if ((ins.address () >= ri->start) && (ins.address () < ri->end))
+                if ((ins_iter->address () >= ri->start) && (ins_iter->address () < ri->end))
                 {
                   std::cout
                     << "***Error - above instruction already appreared in this RTN" << std::endl
@@ -84,11 +92,13 @@ public:
                   std::exit (1);
                 }
               }
-              range.start = ins.address ();
-              range.end = ins.address () + ins.size ();
+
+              range.start = ins_iter->address ();
+              range.end = range.start + ins_iter->size ();
             }
           }
-          lastIns = ins;
+
+          last_ins = ins_iter;
         }
 
         this->range_list_.clear ();

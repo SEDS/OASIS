@@ -89,7 +89,7 @@ public:
 class emudiv : public OASIS::Pin::Instruction_Tool <emudiv>
 {
 public:
-  void handle_instrument (const OASIS::Pin::Ins_Ref & ins)
+  void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     if (ins.mnemonic () == "DIV")
     {

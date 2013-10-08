@@ -98,7 +98,7 @@ public:
 
   }
 
-  void handle_instrument (const OASIS::Pin::Ins_Ref & ins)
+  void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     if (ins.is_syscall () && ins.has_fall_through ())
     {

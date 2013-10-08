@@ -12,6 +12,8 @@
 
 Debug/
 Release/
+Static_Debug/
+Static_Release/
 
 # Output Files
 
