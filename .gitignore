@@ -16,6 +16,13 @@ Release/
 Static_Debug/
 Static_Release/
 
+# Temp Files
+*~
+
+# Build Files
+GNUmakefile*
+Makefile*
+.depend*
 
 # Output Files
 
