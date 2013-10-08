@@ -9,7 +9,7 @@ Building from Sources
 1. Install [Python3](http://www.activestate.com/activepython/downloads) on your machine. (Python 2.x will not work)
 1. Install [Perl](http://www.activestate.com/activeperl) on your machine.
 1. Install [GIT] (http://git-scm.com/downloads)
-1. Checkout our custom Python3 [build scripts] from Git repo.
+1. Checkout our custom Python3 build scripts from the Git repo.
 
     `%> git clone git@github.iu.edu/SEDS/bczar.git`
 
