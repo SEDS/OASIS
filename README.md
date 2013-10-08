@@ -1,7 +1,9 @@
 OASIS
 =====
 
-Open-source Architecture for Software Instrumentation of Systems
+The Open-source Architecture for Software Instrumentation of Systems 
+is a R&D framework for exploring and understanding the challenges 
+associated with instrumenting software systems in real-time.
 
 Technologies & Frameworks
 -------------------------
