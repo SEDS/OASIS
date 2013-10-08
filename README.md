@@ -6,15 +6,18 @@ Open-source Architecture for Software Instrumentation of Systems
 Building from Sources
 ---------------------
 
-1. Install [Python3](http://www.activestate.com/activepython/downloads) on your machine. (Python 2.x will not work)
-2. Install [Perl](http://www.activestate.com/activeperl) on your machine.
-3. Install [GIT] (http://git-scm.com/downloads)
-4. Checkout our custom Python3 build scripts from the Git repo:
+We assume you have the following already installed on your machine:
+
+* [Python3](http://www.activestate.com/activepython/downloads) on your machine. (Python 2.x will not work)
+* [Perl](http://www.activestate.com/activeperl) on your machine.
+* [GIT] (http://git-scm.com/downloads)
+
+Checkout our custom Python3 build scripts from the Git repo:
 
     %> git clone git@github.iu.edu/SEDS/bczar.git
 
-4. Lastly, execute the **download** and **build** commands using the build scripts 
-   from the **developer command prompt**:
+Execute the **download** and **build** commands using the build scripts 
+from the **developer command prompt**:
 
     %> python3 bczar.py --include=OASIS --prefix=[target directory] [command]
 
