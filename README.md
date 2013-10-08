@@ -8,8 +8,8 @@ associated with instrumenting software systems in real-time.
 Frameworks & Technologies
 -------------------------
 
-The following frameworks and technologies and architectures are implemented 
-in the OASIS project:
+The following frameworks and technologies are contained within
+the OASIS project:
 
 * Pin ++
 
