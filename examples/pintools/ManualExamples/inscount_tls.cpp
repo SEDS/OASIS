@@ -78,14 +78,14 @@ public:
   {
     // Visit every block in the trace, and attach a counter.
     docount * callback = new docount[trace.num_bbl ()];
-    docount * iter = callback;
+    docount * callback_iter = callback;
 
-    for (OASIS::Pin::Bbl bbl = trace.bbl_head ();
-         bbl.is_valid ();
-         bbl.next ())
+    for (OASIS::Pin::Bbl::iterator_type bbl_iter = trace.bbl_head (), bbl_iter_end = bbl_iter.make_end ();
+         bbl_iter != bbl_iter_end;
+         ++ bbl_iter)
     {
-      iter->init (&this->tls_, bbl.ins_count ());
-      bbl.insert_call (IPOINT_ANYWHERE, iter ++);
+      callback_iter->init (&this->tls_, bbl_iter->ins_count ());
+      bbl_iter->insert_call (IPOINT_ANYWHERE, callback_iter ++);
     }
   }
 

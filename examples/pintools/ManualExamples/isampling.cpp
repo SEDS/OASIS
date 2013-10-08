@@ -72,7 +72,7 @@ public:
 
   }
 
-  void handle_instrument (const OASIS::Pin::Ins_Ref & ins)
+  void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     ins.insert_if_call (IPOINT_BEFORE, &this->countdown_);
     ins.insert_then_call (IPOINT_BEFORE, &this->printip_);

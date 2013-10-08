@@ -42,7 +42,7 @@ private:
 class detach : public OASIS::Pin::Instruction_Tool <detach>
 {
 public:
-  void handle_instrument (const OASIS::Pin::Ins_Ref & ins)
+  void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     ins.insert_call (IPOINT_BEFORE, &this->callback_);
   }
