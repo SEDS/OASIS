@@ -29,7 +29,8 @@ Checkout our custom Python3 build scripts from the Git repo:
 Execute the **download** and **build** commands using the build scripts 
 from the **developer command prompt**:
 
-    %> python3 bczar.py --include=OASIS --prefix=[target directory] [command]
+    %> python3 bczar.py --include=OASIS --prefix=[target directory] download
+    %> python3 bczar.py --include=OASIS --prefix=[target directory] build
 
 The script will **download** all required source files, **build** them, 
 and install them in their correct location within the **target directory**. 
