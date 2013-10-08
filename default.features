@@ -1,9 +1,0 @@
-xerces3=1
-boost=1
-tao=1
-sqlite3=1
-tena=0
-versioned_namespace=0
-intel64=0
-ia32=1
-oasis_inline=1

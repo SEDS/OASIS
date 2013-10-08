@@ -1,27 +1,38 @@
 OASIS
 =====
 
-Open-source Architecture for Software Instrumentation of Systems
+The Open-source Architecture for Software Instrumentation of Systems 
+is a R&D framework for exploring and understanding the challenges 
+associated with instrumenting software systems in real-time.
+
+Frameworks & Technologies
+-------------------------
+
+The following frameworks and technologies and architectures are implemented 
+in the OASIS project:
+
+* Pin ++
 
 Building from Sources
 ---------------------
 
-1. Install [Python3](http://www.activestate.com/activepython/downloads) on your machine. (Python 2.x will not work)
-1. Install [Perl](http://www.activestate.com/activeperl) on your machine.
-1. Install [GIT] (http://git-scm.com/downloads)
-1. Checkout our custom Python3 [build scripts] from Git repo.
+We assume you have the following already installed on your machine:
 
-    `%> git clone git@github.iu.edu/SEDS/bczar.git`
+* [Python3](http://www.activestate.com/activepython/downloads) (Python 2.x will not work)
+* [Perl](http://www.activestate.com/activeperl)
+* [GIT] (http://git-scm.com/downloads)
 
-1. Lastly, execute the **download** and **build** commands using the build scripts 
-   from the **developer command prompt**
+Checkout our custom Python3 build scripts from the Git repo:
 
-    `%> python3 bczar.py --include=OASIS --prefix=[target directory] [command]`
+    %> git clone git@github.iu.edu/SEDS/bczar.git
+
+Execute the **download** and **build** commands using the build scripts 
+from the **developer command prompt**:
+
+    %> python3 bczar.py --include=OASIS --prefix=[target directory] [command]
 
 The script will **download** all required source files, **build** them, 
 and install them in their correct location within the **target directory**. 
-The script will also generate a file named **configure.bat**, which needs 
-to be executed each time you start a new console shell. This batch file 
-will initialize the correct environment variables. If you do not execute 
-the batch file each time you start a new console, then Visual Studio will 
-not know where to locate the build dependencies.
+The script will also generate a file named **configure.[bat|sh]**, which needs 
+to be executed each time you start a new console shell. This script file 
+will initialize the correct environment variables.

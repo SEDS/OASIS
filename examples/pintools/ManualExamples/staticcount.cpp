@@ -18,14 +18,29 @@ public:
   {
     int count = 0;
 
-    for (OASIS::Pin::Section sec = img.section_head (); sec.valid (); sec.next ())
-    {
-      for (OASIS::Pin::Routine rtn = sec.routine_head (); rtn.valid (); rtn.next ())
-      {
-        OASIS::Pin::Routine_Guard guard (rtn);
+    using OASIS::Pin::Section;
 
-        for (OASIS::Pin::Ins ins = rtn.instruction_head (); ins.is_valid (); ins.next ())
+    for (Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
+         sec_iter != sec_iter_end;
+         ++ sec_iter)
+    {
+      using OASIS::Pin::Routine;
+
+      for (Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
+           rtn_iter != rtn_iter_end;
+           ++ rtn_iter)
+      {
+        using OASIS::Pin::Routine_Guard;
+        using OASIS::Pin::Ins;
+
+        Routine_Guard guard (*rtn_iter);
+
+        for (Ins::iterator_type iter = rtn_iter->instruction_head (), iter_end = iter.make_end ();
+             iter != iter_end;
+             ++ iter)
+        {
           ++ count;
+        }
       }
     }
 
