@@ -119,12 +119,14 @@ public:
     item_t callbacks (trace.num_bbl ());
     docount * callback = callbacks.callbacks_;
 
-    for (OASIS::Pin::Bbl bbl = trace.bbl_head ();
-         bbl.is_valid ();
-         bbl.next ())
+    using OASIS::Pin::Bbl;
+
+    for (Bbl::iterator_type iter = trace.bbl_head (), iter_end = iter.make_end ();
+         iter != iter_end;
+         ++ iter)
     {
-      callback->ins_count (bbl.ins_count ());
-      bbl.insert_call (IPOINT_BEFORE, callback ++);
+      callback->ins_count (iter->ins_count ());
+      iter->insert_call (IPOINT_BEFORE, callback ++);
     }
 
     this->traces_.push_back (callbacks);

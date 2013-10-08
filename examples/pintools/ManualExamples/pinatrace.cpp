@@ -72,7 +72,7 @@ public:
 
   }
 
-  void handle_instrument (const OASIS::Pin::Ins_Ref & ins)
+  void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     // Instruments memory accesses using a predicated call, i.e.
     // the instrumentation is called iff the instruction will actually be executed.

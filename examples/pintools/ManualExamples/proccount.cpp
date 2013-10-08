@@ -87,8 +87,12 @@ public:
     this->rtn_count_.push_back (rc);
     rtn.insert_call (IPOINT_BEFORE, rc);
 
-    for (Ins ins = rtn.instruction_head (); ins.is_valid (); ins.next ())
-      ins.insert_call (IPOINT_BEFORE, rc->docount_.get ()); // Need to increment icount_;
+    for (Ins::iterator_type iter = rtn.instruction_head (), iter_end = iter.make_end ();
+         iter != iter_end;
+         ++ iter)
+    {
+      iter->insert_call (IPOINT_BEFORE, rc->docount_.get ());
+    }
   }
 
   void handle_fini (INT32)

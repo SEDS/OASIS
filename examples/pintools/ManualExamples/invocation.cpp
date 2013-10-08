@@ -73,26 +73,34 @@ public:
 
   void handle_instrument (const OASIS::Pin::Image & img)
   {
-    for (OASIS::Pin::Section sec = img.section_head (); sec.valid (); sec.next ())
+    for (OASIS::Pin::Section::iterator_type sec_iter, sec_iter_end = sec_iter.make_end ();
+         sec_iter != sec_iter_end;
+         ++ sec_iter)
     {
       // RTN_InsertCall () and INS_InsertCall () are executed in order of
       // appearance.  In the code sequence below, the IPOINT_AFTER is
       // executed before the IPOINT_BEFORE.
 
-      for (OASIS::Pin::Routine rtn = sec.routine_head (); rtn.valid (); rtn.next ())
+      for (OASIS::Pin::Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
+           rtn_iter != rtn_iter.make_end ();
+           ++ rtn_iter)
       {
         // IPOINT_AFTER is implemented by instrumenting each return
         // instruction in a routine.  Pin tries to find all return
         // instructions, but success is not guaranteed.
-        rtn.insert_call (IPOINT_AFTER, &this->after_);
+        rtn_iter->insert_call (IPOINT_AFTER, &this->after_);
 
         // Examine each instruction in the routine.
-        for (OASIS::Pin::Ins ins = rtn.instruction_head (); ins.is_valid (); ins.next ())
+        using OASIS::Pin::Ins;
+
+        for (Ins::iterator_type iter = rtn_iter->instruction_head (), iter_end = iter.make_end ();
+             iter != iter_end;
+             ++ iter)
         {
-          if (ins.is_return ())
+          if (iter->is_return ())
           {
-            ins.insert_call (IPOINT_BEFORE, &this->before_);
-            ins.insert_call (IPOINT_TAKEN_BRANCH, &this->taken_);
+            iter->insert_call (IPOINT_BEFORE, &this->before_);
+            iter->insert_call (IPOINT_TAKEN_BRANCH, &this->taken_);
           }
         }
       }
