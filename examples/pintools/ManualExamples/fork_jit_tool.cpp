@@ -4,7 +4,6 @@
 #include "pin++/Tool.h"
 #include "pin++/Pintool.h"
 #include "pin++/Guard.h"
-#include "pin++/Lock.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -29,8 +28,7 @@ public:
   {
     do
     {
-      this->lock_.owner (thr_id + 1);
-      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_);
+      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_, thr_id + 1);
       std::cerr << "TOOL: Before fork." << std::endl;
     } while (false);
 
@@ -58,8 +56,7 @@ public:
   {
     do
     {
-      this->lock_.owner (thr_id + 1);
-      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_);
+      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_, thr_id + 1);
       std::cerr << "TOOL: After fork in parent." << std::endl;
     } while (false);
 
@@ -92,8 +89,7 @@ public:
   {
     do
     {
-      this->lock_.owner (thr_id + 1);
-      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_);
+      OASIS::Pin::Guard <OASIS::Pin::Lock> (this->lock_, thr_id + 1);
       std::cerr << "TOOL: After fork in child." << std::endl;
     } while (false);
 
