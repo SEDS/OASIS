@@ -32,12 +32,12 @@ def find_pintools (path):
 
   for root, dirs, files in os.walk (path):
     for file in files:
-      if (os.name == 'postix') and file.endswith ('.so'):
+      if file.endswith ('.so') and (os.name == 'posix'):
         pintools.append (os.path.join (root, file))
-      else if (os.name == 'nt') and file.endswith ('.dll'):
+      elif (os.name == 'nt') and file.endswith ('.dll'):
         pintools.append (os.path.join (root, file))
-      else if (os.name == 'mac') and file.endswith ('.dylib'):
-        pintools.app[end (os.path.join (root, file))
+      elif (os.name == 'mac') and file.endswith ('.dylib'):
+        pintools.append (os.path.join (root, file))
 
     for dir in dirs:
       pintools.extend (find_pintools (dir))
@@ -48,12 +48,10 @@ def find_pintools (path):
 # Remove paths
 #
 def remove_paths (list):
-  result = []
-
+  results = []
   for item in list:
-    result.append (os.path.split (item)[-1])
-
-  return result
+    results.append (os.path.split (item)[-1])
+  return results
 
 #
 # Match pintools
