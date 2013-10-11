@@ -32,8 +32,12 @@ def find_pintools (path):
 
   for root, dirs, files in os.walk (path):
     for file in files:
-      if file.endswith ('.so'):
+      if (os.name == 'postix') and file.endswith ('.so'):
         pintools.append (os.path.join (root, file))
+      else if (os.name == 'nt') and file.endswith ('.dll'):
+        pintools.append (os.path.join (root, file))
+      else if (os.name == 'mac') and file.endswith ('.dylib'):
+        pintools.app[end (os.path.join (root, file))
 
     for dir in dirs:
       pintools.extend (find_pintools (dir))
@@ -109,7 +113,7 @@ def run_pintool (pintool, command):
 
   # Run the command
   start = time.time ()
-  # Had to use shell=True for trailing arguements (i.e. '1>/dev/null &2>1')
+  # Had to use shell=True for trailing arguments (i.e. '1>/dev/null &2>1')
   subprocess.call (cmd, shell=True)
   end = time.time ()
   return end - start
@@ -126,14 +130,19 @@ def main ():
     print ("Error: No binaries specified")
     sys.exit (1)
 
-  # Find all the pintools which have been compiled in $PIN_ROOT/source/tools
+  # Find all the pintools which have been compiled in the pin directory
+  print ('INFO: Finding native pintools in <%s>' % (args.pindir))
   native_pintools = find_pintools (args.pindir)
 
-  # Find all the pintools which have been compiled in the test directory
+  # Find all the pintools which have been compiled in the pin++ directory
+  print ('INFO: Finding pin++ pintools in <%s>' % (args.pinppdir))
   pinpp_pintools = find_pintools (args.pinppdir)
 
   # Match the pin++ pintools to the native pintools, since pintool names are different
   pintools = match_pintools (native_pintools, pinpp_pintools)
+  if not pintools:
+    print ('ERROR: No matching native and pin++ pintools found, are they compiled?')
+    sys.exit (1)
 
   # Build up the list of binaries
   binaries = []
