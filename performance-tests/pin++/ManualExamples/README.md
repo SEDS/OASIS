@@ -1,5 +1,11 @@
+This script looks in the pinppdir and pindir paths and 
+identifies all libraries.  Libraries are then matched via 
+filename (i.e. inscount.so matches with libinscount.so).  
+Only the pintools which have matching native and pin++ 
+implementations are tested.
+
 Basic Usage
------------
+------------
 
 Use the script as follows:
 
@@ -9,8 +15,7 @@ Example:
 
     %> python3 run_test.py --binary ls
 
-Supported Arguments
---------------------
+### Supported Arguments
 
 The script supports the following arguments:
 
@@ -21,8 +26,7 @@ The script supports the following arguments:
 * binary\_file - File with one binary per line to test
 * iterations - Number of times to test the pintools
 
-Output Format
--------------
+### Output Format
 
 The output file is a CSV format.  Each row contains:
 
@@ -34,17 +38,8 @@ The output file is a CSV format.  Each row contains:
 * difference - Time difference (pin++ - native)
 * difference\_percent - difference as a percentage
 
-Pintool Detection
------------------
-
-This script looks in the pinppdir and pindir paths and 
-identifies all libraries.  Libraries are then matched via 
-filename (i.e. inscount.so matches with libinscount.so).  
-Only the pintools which have matching native and pin++ 
-implementations are tested.
-
-Emulab
-------
+Running in Emulab
+------------------
 
 There is an experiment named 'pinpp' in the OASIS project.  
 This experiment can be used for using this script. Most 
