@@ -93,7 +93,7 @@ public:
   {
     do
     {
-      OASIS::Pin::Guard guard (this->lock_, thr_id + 1);
+      OASIS::Pin::Guard <OASIS::Pin::Lock> guard (this->lock_, thr_id + 1);
       ++ this->num_threads_;
     } while (false);
 

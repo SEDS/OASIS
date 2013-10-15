@@ -3,7 +3,6 @@
 #include "pin++/Image_Tool.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
-#include "pin++/Lock.h"
 #include "pin++/Guard.h"
 #include "pin++/Routine.h"
 
@@ -30,7 +29,7 @@ public:
 
   void handle_analyze (int size, THREADID thr_id)
   {
-    OASIS::Pin::Guard guard (this->lock_, thr_id + 1);
+    OASIS::Pin::Guard <OASIS::Pin::Lock> guard (this->lock_, thr_id + 1);
 
     fprintf (this->file_, "thread %d entered malloc(%d)\n", thr_id, size);
     fflush (this->file_);
