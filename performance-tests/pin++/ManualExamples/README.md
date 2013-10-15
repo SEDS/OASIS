@@ -41,13 +41,13 @@ Running in Emulab
 ------------------
 
 There is an experiment named **pinpp** in the OASIS project. This 
-experiment can be used for using this script. Most of the 
-configuration has been automated.  After swapping the experiment 
-in, do the following:
+experiment can be used to run this script. Most of the configuration 
+has been automated.  After swapping the experiment in, do the 
+following:
 
     %> sudo bash /proj/OASIS/exp/pinpp/bin/install_packages.sh
     %> sudo chown -R [userid]:OASIS /opt
-    %> . /proj/OASIS/exp/pinpp/bin/deploy.sh
+    %> source /proj/OASIS/exp/pinpp/bin/deploy.sh
 
-At this time, all dependencies for PIN should be successfully 
-installed.  You will need to build the native pintools manually.
+At this time, all dependencies for Pin will be installed. Assuming you
+have already built the examples, you can run the script as stated above.
