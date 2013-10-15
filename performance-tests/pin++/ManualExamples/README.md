@@ -1,7 +1,7 @@
 Basic Usage
 -----------
 
-    %> python3 run_test.py --binary ls
+    %> python3 run_test.py --binary [executable]
 
 Arguments
 ---------
