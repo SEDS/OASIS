@@ -1,7 +1,13 @@
 Basic Usage
 -----------
 
+Run the test as follows:
+
     %> python3 run_test.py --binary [executable]
+    
+Example:    
+
+    %> python3 run_test.py --binary ls
 
 Arguments
 ---------
