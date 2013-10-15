@@ -3,16 +3,16 @@ Basic Usage
 
 Use the script as follows:
 
-    %> python3 run_test.py --binary [executable]
+    %> python3 run_test.py [arguments]
     
 Example:    
 
     %> python3 run_test.py --binary ls
 
-Arguments
----------
+Supported Arguments
+--------------------
 
-The following arguments are supported:
+The script supports the following arguments:
 
 * outfile - Result output filename
 * pinppdir - Pin++ pintool directory
@@ -37,15 +37,23 @@ The output file is a CSV format.  Each row contains:
 Pintool Detection
 -----------------
 
-This script looks in the pinppdir and pindir paths and identifies all libraries.  Libraries are then matched via filename (i.e. inscount.so matches with libinscount.so).  Only the pintools which have matching native and pin++ implementations are tested.
+This script looks in the pinppdir and pindir paths and 
+identifies all libraries.  Libraries are then matched via 
+filename (i.e. inscount.so matches with libinscount.so).  
+Only the pintools which have matching native and pin++ 
+implementations are tested.
 
 Emulab
 ------
 
-There is an experiment named 'pinpp' in the OASIS project.  This experiment can be used for using this script.  Most of the configuration has been automated.  After swapping the experiment in, do the following:
+There is an experiment named 'pinpp' in the OASIS project.  
+This experiment can be used for using this script. Most 
+of the configuration has been automated.  After swapping 
+the experiment in, do the following:
 
     %> sudo bash /proj/OASIS/exp/pinpp/bin/install_packages.sh
     %> sudo chown -R [userid]:OASIS /opt
     %> . /proj/OASIS/exp/pinpp/bin/deploy.sh
 
-At this time, all dependencies for PIN should be successfully installed.  You will need to build the native pintools manually.
+At this time, all dependencies for PIN should be successfully 
+installed.  You will need to build the native pintools manually.
