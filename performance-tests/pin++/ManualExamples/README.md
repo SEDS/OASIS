@@ -1,8 +1,3 @@
-RUN TEST
-========
-
-This python script will run performance tests of any pintools which are compiled for native PIN as well as pin++.
-
 Basic Usage
 -----------
 
