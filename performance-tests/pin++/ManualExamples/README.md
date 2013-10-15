@@ -1,7 +1,7 @@
 Basic Usage
 -----------
 
-Run the test as follows:
+Use the script as follows:
 
     %> python3 run_test.py --binary [executable]
     
