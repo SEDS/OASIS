@@ -2,18 +2,12 @@
 
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
-#include "pin++/Trace_Tool.h"
+#include "pin++/Buffer.h"
+#include "pin++/Trace_Instrument.h"
 
 #include <fstream>
-#include <iostream>
 #include <list>
-#include <vector>
 
-/**
- * @class docount
- *
- * Callback that increments the counter.
- */
 class docount : public OASIS::Pin::Callback0 <docount>
 {
 public:
@@ -34,11 +28,6 @@ public:
     this->ins_count_ = count;
   }
 
-  UINT64 ins_count (void) const
-  {
-    return this->ins_count_;
-  }
-
   UINT64 count (void) const
   {
     return this->ins_count_ * this->count_;
@@ -49,90 +38,27 @@ private:
   UINT64 ins_count_;
 };
 
-/**
- * @class icount
- *
- * Pin tool that counts the number of instructions in a program.
- */
-class icount : public OASIS::Pin::Trace_Tool <icount>
+class Trace : public OASIS::Pin::Trace_Instrument <Trace>
 {
 public:
-  struct item_t
-  {
-    item_t (void)
-      : count_ (0),
-        callbacks_ (0)
-    {
-
-    }
-
-    item_t (int count)
-      : count_ (count),
-        callbacks_ (new docount[count])
-    {
-
-    }
-
-    item_t (const item_t & rhs)
-      : count_ (rhs.count_),
-        callbacks_ (rhs.callbacks_)
-    {
-
-    }
-
-    ~item_t (void)
-    {
-
-    }
-
-    item_t & operator = (item_t & rhs)
-    {
-      this->callbacks_ = rhs.callbacks_;
-      this->count_ = rhs.count_;
-
-      return *this;
-    }
-
-    UINT64 count (void) const
-    {
-      if (0 == this->count_)
-        return 0;
-
-      UINT64 value = 0;
-      docount * iter = this->callbacks_, * iter_end = this->callbacks_ + this->count_;
-
-      for (; iter != iter_end; ++ iter)
-        value += iter->count ();
-
-      return value;
-    }
-
-    int count_;
-    docount * callbacks_;
-  };
-
-  typedef std::list < item_t > list_type;
-
   void handle_instrument (const OASIS::Pin::Trace & trace)
   {
     // Allocate a callback for each BBL.
-    item_t callbacks (trace.num_bbl ());
-    docount * callback = callbacks.callbacks_;
+    item_type item (trace.num_bbl ());
+    item_type::iterator callback = item.begin ();
 
     using OASIS::Pin::Bbl;
 
-    for (Bbl::iterator_type iter = trace.bbl_head (), iter_end = iter.make_end ();
-         iter != iter_end;
-         ++ iter)
+    for (Bbl::iterator_type iter = trace.bbl_head (), iter_end = iter.make_end (); iter != iter_end; ++ iter)
     {
       callback->ins_count (iter->ins_count ());
       iter->insert_call (IPOINT_BEFORE, callback ++);
     }
 
-    this->traces_.push_back (callbacks);
+    this->traces_.push_back (item);
   }
 
-  void handle_fini (INT32)
+  UINT64 count (void) const
   {
     list_type::const_iterator
       iter = this->traces_.begin (),
@@ -141,16 +67,42 @@ public:
     UINT64 count = 0;
 
     for (; iter != iter_end; ++ iter)
-      count += iter->count ();
+    {
+      for (item_type::const_iterator item_iter = iter->begin (), item_iter_end = iter->end ();
+           item_iter != item_iter_end;
+           ++ item_iter)
+      {
+        count += item_iter->count ();
+      }
+    }
 
+    return count;
+  }
+
+private:
+  typedef OASIS::Pin::Buffer <docount> item_type;
+  typedef std::list <item_type> list_type;
+
+  list_type traces_;
+};
+
+class inscount : public OASIS::Pin::Tool <inscount>
+{
+public:
+  inscount (void)
+  {
+    this->register_fini_callback ();
+  }
+
+  void handle_fini (INT32)
+  {
     std::ofstream fout ("inscount.out");
-    fout <<  "Count " << count << std::endl;
-
+    fout <<  "Count " << this->trace_.count () << std::endl;
     fout.close ();
   }
 
 private:
-  list_type traces_;
+  Trace trace_;
 };
 
 //
@@ -158,5 +110,5 @@ private:
 //
 int main (int argc, char * argv [])
 {
-  OASIS::Pin::Pintool <icount> (argc, argv).start_program ();
+  OASIS::Pin::Pintool <inscount> (argc, argv).start_program ();
 }

@@ -1,16 +1,11 @@
 // $Id: inscount0.cpp 2285 2013-09-18 05:24:04Z hillj $
 
 #include "pin++/Callback.h"
-#include "pin++/Instruction_Tool.h"
+#include "pin++/Instruction_Instrument.h"
 #include "pin++/Pintool.h"
 
 #include <fstream>
 
-/**
- * @class docount
- *
- * Callback that increments the counter.
- */
 class docount : public OASIS::Pin::Callback0 <docount>
 {
 public:
@@ -31,12 +26,7 @@ private:
   UINT64 count_;
 };
 
-/**
- * @class icount
- *
- * Pin tool that counts the number of instructions in a program.
- */
-class icount : public OASIS::Pin::Instruction_Tool <icount>
+class Instruction : public OASIS::Pin::Instruction_Instrument <Instruction>
 {
 public:
   void handle_instrument (const OASIS::Pin::Ins & ins)
@@ -44,22 +34,37 @@ public:
     ins.insert_call (IPOINT_BEFORE, &this->callback_);
   }
 
-  void handle_fini (INT32 code)
+  const docount & callback (void) const
   {
-    std::ofstream fout ("inscount.out");
-    fout <<  "Count " << this->callback_.count () << std::endl;
-
-    fout.close ();
+    return this->callback_;
   }
 
 private:
   docount callback_;
 };
 
-//
-// main
-//
+class inscount : public OASIS::Pin::Tool <inscount>
+{
+public:
+  inscount (void)
+  {
+    this->register_fini_callback ();
+  }
+
+  void handle_fini (INT32 code)
+  {
+    std::ofstream fout ("inscount.out");
+    fout.setf (ios::showbase);
+    fout <<  "Count " << this->instruction_.callback ().count () << std::endl;
+
+    fout.close ();
+  }
+
+private:
+  Instruction instruction_;
+};
+
 int main (int argc, char * argv [])
 {
-  OASIS::Pin::Pintool <icount> (argc, argv).start_program ();
+  OASIS::Pin::Pintool <inscount> (argc, argv).start_program ();
 }
