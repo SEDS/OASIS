@@ -1,8 +1,7 @@
-This script looks in the pinppdir and pindir paths and 
-identifies all libraries.  Libraries are then matched via 
-filename (i.e. inscount.so matches with libinscount.so).  
-Only the pintools which have matching native and pin++ 
-implementations are tested.
+This script is used to compare the performance of a native Pintool
+and a Pin++ Pintool. The script works by locating the native Pintool
+that matches the corresponding Pin++ implementation, and executing
+the instrumenting the specified binary.
 
 Basic Usage
 ------------
