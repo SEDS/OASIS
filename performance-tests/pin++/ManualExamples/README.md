@@ -14,9 +14,9 @@ Example:
 
     %> python3 run_test.py --binary ls
 
-### Supported Arguments
+### Command-line Arguments
 
-The script supports the following arguments:
+The command-line arguments for the script are:
 
 * outfile - Result output filename
 * pinppdir - Pin++ pintool directory
@@ -40,10 +40,10 @@ The output file is a CSV format.  Each row contains:
 Running in Emulab
 ------------------
 
-There is an experiment named 'pinpp' in the OASIS project.  
-This experiment can be used for using this script. Most 
-of the configuration has been automated.  After swapping 
-the experiment in, do the following:
+There is an experiment named **pinpp** in the OASIS project. This 
+experiment can be used for using this script. Most of the 
+configuration has been automated.  After swapping the experiment 
+in, do the following:
 
     %> sudo bash /proj/OASIS/exp/pinpp/bin/install_packages.sh
     %> sudo chown -R [userid]:OASIS /opt
