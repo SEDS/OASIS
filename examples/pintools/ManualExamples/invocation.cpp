@@ -1,6 +1,6 @@
 // $Id: invocation.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 #include "pin++/Callback.h"
 #include "pin++/Context.h"
@@ -59,7 +59,7 @@ private:
 /**
  * @class invocation
  */
-class invocation : public OASIS::Pin::Image_Tool <invocation>
+class invocation : public OASIS::Pin::Image_Instrument <invocation>
 {
 public:
   invocation (void)

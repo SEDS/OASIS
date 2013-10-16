@@ -1,6 +1,6 @@
 // $Id: imageload.cpp 2266 2013-09-10 14:08:35Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 
 #include <fstream>
@@ -8,7 +8,7 @@
 /**
  * @class imageload
  */
-class imageload : public OASIS::Pin::Image_Tool <imageload>
+class imageload : public OASIS::Pin::Image_Instrument <imageload>
 {
 public:
   imageload (void)

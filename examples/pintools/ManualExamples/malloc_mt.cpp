@@ -1,6 +1,6 @@
 // $Id: malloc_mt.cpp 2300 2013-10-05 05:33:16Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 #include "pin++/Lock.h"
@@ -44,7 +44,7 @@ private:
 /**
  * @class malloc_mt
  */
-class malloc_mt : public OASIS::Pin::Image_Tool <malloc_mt>
+class malloc_mt : public OASIS::Pin::Image_Instrument <malloc_mt>
 {
 public:
   malloc_mt (void)

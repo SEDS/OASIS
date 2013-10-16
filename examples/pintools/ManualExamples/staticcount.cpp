@@ -1,6 +1,6 @@
 // $Id: staticcount.cpp 2278 2013-09-15 20:12:52Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 
 #include <iostream>
@@ -11,7 +11,7 @@
  * Pin tool that prints a log of the image load and unload events
  * along with static instruction counts for each image
  */
-class staticcount : public OASIS::Pin::Image_Tool <staticcount>
+class staticcount : public OASIS::Pin::Image_Instrument <staticcount>
 {
 public:
   void handle_instrument (const OASIS::Pin::Image & img)

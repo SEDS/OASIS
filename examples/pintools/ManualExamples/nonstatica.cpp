@@ -1,6 +1,6 @@
 // $Id: nonstatica.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 
 #include <iostream>
@@ -20,7 +20,7 @@ typedef std::vector <address_range> list_type;
  *
  * Pin tool that detaches Pin from an application
  */
-class nonstatica : public OASIS::Pin::Image_Tool <nonstatica>
+class nonstatica : public OASIS::Pin::Image_Instrument <nonstatica>
 {
 public:
   void handle_instrument (const OASIS::Pin::Image & img)
