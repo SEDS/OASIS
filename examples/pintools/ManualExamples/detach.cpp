@@ -63,7 +63,4 @@ private:
   Instruction inst_;
 };
 
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <detach> (argc, argv).start_program ();
-}
+DECLARE_PINTOOL (detach);
