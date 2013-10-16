@@ -34,9 +34,9 @@ public:
     ins.insert_call (IPOINT_BEFORE, &this->callback_);
   }
 
-  const docount & callback (void) const
+  UINT64 count (void) const
   {
-    return this->callback_;
+    return this->callback_.count ();
   }
 
 private:
@@ -53,18 +53,21 @@ public:
 
   void handle_fini (INT32 code)
   {
-    std::ofstream fout ("inscount.out");
+    std::ofstream fout (outfile_.Value ().c_str ());
     fout.setf (ios::showbase);
-    fout <<  "Count " << this->instruction_.callback ().count () << std::endl;
+    fout <<  "Count " << this->instruction_.count () << std::endl;
 
     fout.close ();
   }
 
 private:
   Instruction instruction_;
+
+  /// @{ KNOBS
+  static KNOB <string> outfile_;
+  /// @}
 };
 
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <inscount> (argc, argv).start_program ();
-}
+KNOB <string> inscount::outfile_ (KNOB_MODE_WRITEONCE, "pintool", "o", "inscount.out", "specify output file name");
+
+DECLARE_PINTOOL (inscount);

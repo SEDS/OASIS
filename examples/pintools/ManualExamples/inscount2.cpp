@@ -104,9 +104,12 @@ public:
 
 private:
   Trace trace_;
+
+  /// @{ KNOBS
+  static KNOB <string> outfile_;
+  /// @}
 };
 
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <inscount> (argc, argv).start_program ();
-}
+KNOB <string> inscount::outfile_ (KNOB_MODE_WRITEONCE, "pintool", "o", "inscount.out", "specify output file name");
+
+DECLARE_PINTOOL (inscount);
