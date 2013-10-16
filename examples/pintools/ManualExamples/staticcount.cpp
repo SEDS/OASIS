@@ -5,19 +5,12 @@
 
 #include <iostream>
 
-/**
- * @class staticcount
- *
- * Pin tool that prints a log of the image load and unload events
- * along with static instruction counts for each image
- */
-class staticcount : public OASIS::Pin::Image_Instrument <staticcount>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
   void handle_instrument (const OASIS::Pin::Image & img)
   {
     int count = 0;
-
     using OASIS::Pin::Section;
 
     for (Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
@@ -48,10 +41,16 @@ public:
   }
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class staticcount : public OASIS::Pin::Tool <staticcount>
 {
-  OASIS::Pin::Pintool <staticcount> (argc, argv, true).start_program ();
-}
+public:
+  staticcount (void)
+  {
+    this->init_symbols ();
+  }
+
+private:
+  Instrument inst_;
+};
+
+DECLARE_PINTOOL (staticcount)
