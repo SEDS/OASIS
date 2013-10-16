@@ -2,13 +2,13 @@
 
 #include <stdio.h>
 
-#if defined(TARGET_MAC)
+#if defined (TARGET_MAC)
 #include <sys/syscall.h>
-#elif !defined(TARGET_WINDOWS)
+#elif !defined (TARGET_WINDOWS)
 #include <syscall.h>
 #endif
 
-#include "pin++/Instruction_Tool.h"
+#include "pin++/Instruction_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 #include "pin++/Context.h"
@@ -76,7 +76,7 @@ public:
 
   inline void handle_analyze (ADDRINT ret)
   {
-    fprintf (this->file_, "returns: 0x%lx\n", (unsigned long)ret);
+    fprintf (this->file_, " returns: 0x%lx\n", (unsigned long)ret);
     fflush (this->file_);
   }
 
@@ -84,16 +84,12 @@ private:
   FILE * file_;
 };
 
-/**
- * @class strace
- */
-class strace : public OASIS::Pin::Instruction_Tool <strace>
+class Instrument : public OASIS::Pin::Instruction_Instrument <Instrument>
 {
 public:
-  strace (void)
-    : file_ (::fopen ("strace.out", "w")),
-      syscall_before_ (file_),
-      syscall_after_ (file_)
+  Instrument (FILE * file)
+    : syscall_before_ (file),
+      syscall_after_ (file)
   {
 
   }
@@ -108,42 +104,59 @@ public:
     }
   }
 
-  void handle_syscall_entry (THREADID thr_index, OASIS::Pin::Context & ctx, SYSCALL_STANDARD std)
+  Syscall_Before & syscall_before (void)
   {
-    this->syscall_before_.handle_analyze (ctx.get_reg (REG_INST_PTR),
-                                          ctx.get_syscall_number (std),
-                                          ctx.get_syscall_argument (std, 0),
-                                          ctx.get_syscall_argument (std, 1),
-                                          ctx.get_syscall_argument (std, 2),
-                                          ctx.get_syscall_argument (std, 3),
-                                          ctx.get_syscall_argument (std, 4),
-                                          ctx.get_syscall_argument (std, 5));
+    return this->syscall_before_;
   }
 
-  void handle_syscall_exit (THREADID thr_index, OASIS::Pin::Context & ctx, SYSCALL_STANDARD std)
+  Syscall_After & syscall_after (void)
   {
-    this->syscall_after_.handle_analyze (ctx.get_syscall_return (std));
-  }
-
-  void handle_fini (INT32)
-  {
-    ::fprintf (this->file_, "#eof\n");
-    ::fclose (this->file_);
+    return this->syscall_after_;
   }
 
 private:
-  FILE * file_;
   Syscall_Before syscall_before_;
   Syscall_After syscall_after_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class strace : public OASIS::Pin::Tool <strace>
 {
-  OASIS::Pin::Pintool <strace> (argc, argv)
-    .enable_syscall_entry ()
-    .enable_syscall_exit ()
-    .start_program ();
-}
+public:
+  strace (void)
+    : file_ (fopen ("strace.out", "w")),
+      inst_ (file_)
+  {
+    this->enable_fini_callback ();
+    this->enable_syscall_entry_callback ();
+    this->enable_syscall_exit_callback ();
+  }
+
+  void handle_syscall_entry (THREADID thr_index, OASIS::Pin::Context & ctx, SYSCALL_STANDARD std)
+  {
+    this->inst_.syscall_before ().handle_analyze (ctx.get_reg (REG_INST_PTR),
+                                                  ctx.get_syscall_number (std),
+                                                  ctx.get_syscall_argument (std, 0),
+                                                  ctx.get_syscall_argument (std, 1),
+                                                  ctx.get_syscall_argument (std, 2),
+                                                  ctx.get_syscall_argument (std, 3),
+                                                  ctx.get_syscall_argument (std, 4),
+                                                  ctx.get_syscall_argument (std, 5));
+  }
+
+  void handle_syscall_exit (THREADID thr_index, OASIS::Pin::Context & ctx, SYSCALL_STANDARD std)
+  {
+    this->inst_.syscall_after ().handle_analyze (ctx.get_syscall_return (std));
+  }
+
+  void handle_fini (INT32)
+  {
+    fprintf (this->file_, "#eof\n");
+    fclose (this->file_);
+  }
+
+private:
+  FILE * file_;
+  Instrument inst_;
+};
+
+DECLARE_PINTOOL (strace)
