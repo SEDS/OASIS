@@ -1,7 +1,7 @@
 // $Id: emudiv.cpp 2308 2013-10-07 15:23:19Z dfeiock $
 
 #include "pin++/Callback.h"
-#include "pin++/Instruction_Tool.h"
+#include "pin++/Instruction_Instrument.h"
 #include "pin++/Pintool.h"
 #include "pin++/Try_Block.h"
 
@@ -56,8 +56,8 @@ public:
     UINT64 dividend = *((ADDRINT *)pGdx);
     dividend <<= 32;
     dividend += *((ADDRINT *)pGax);
-    *((ADDRINT *)pGax) = dividend / divisor;
-    *((ADDRINT *)pGdx) = dividend % divisor;
+    *((ADDRINT *)pGax) = static_cast <ADDRINT> (dividend / divisor);
+    *((ADDRINT *)pGdx) = static_cast <ADDRINT> (dividend % divisor);
   }
 };
 
@@ -65,7 +65,6 @@ class Emulate_Mem_Divide :
   public OASIS::Pin::Callback6 <Emulate_Mem_Divide, IARG_REG_REFERENCE, IARG_REG_REFERENCE, IARG_MEMORYREAD_EA, IARG_MEMORYREAD_SIZE, IARG_CONTEXT, IARG_THREAD_ID>
 {
 public:
-  inline
   void handle_analyze (PIN_REGISTER * pGdx, PIN_REGISTER * pGax, ADDRINT pDivisor, unsigned int opSize, CONTEXT * ctxt, THREADID thr_id)
   {
     ADDRINT divisor = 0;
@@ -76,8 +75,8 @@ public:
     dividend <<= 32;
     dividend += *((ADDRINT *)pGax);
 
-    *((ADDRINT *)pGax) = dividend / divisor;
-    *((ADDRINT *)pGdx) = dividend % divisor;
+    *((ADDRINT *)pGax) = static_cast <ADDRINT> (dividend / divisor);
+    *((ADDRINT *)pGdx) = static_cast <ADDRINT> (dividend % divisor);
   }
 };
 
@@ -86,7 +85,7 @@ public:
  *
  * Pin tool that counts the number of instructions in a program.
  */
-class emudiv : public OASIS::Pin::Instruction_Tool <emudiv>
+class Instrument : public OASIS::Pin::Instruction_Instrument <Instrument>
 {
 public:
   void handle_instrument (const OASIS::Pin::Ins & ins)
@@ -103,21 +102,24 @@ public:
     }
   }
 
-  inline
-  EXCEPT_HANDLING_RESULT handle_internal_exception (THREADID, OASIS::Pin::Exception & ex, PHYSICAL_CONTEXT *)
-  {
-    std::cout << "GlobalHandler: Caught unexpected exception. " << ex << std::endl;
-    return EHR_UNHANDLED;
-  }
-
 private:
   Emulate_Mem_Divide emulate_mem_divide_;
   Emulate_Int_Divide emulate_int_divide_;
 };
 
-int main (int argc, char * argv [])
+class emudiv : public OASIS::Pin::Tool <emudiv>
 {
-  OASIS::Pin::Pintool <emudiv> (argc, argv)
-    .enable_internal_exception_handler ()
-    .start_program ();
-}
+public:
+  emudiv (void)
+  {
+    this->enable_internal_exception_handler_callback ();
+  }
+
+  EXCEPT_HANDLING_RESULT handle_internal_exception (THREADID, OASIS::Pin::Exception & ex, PHYSICAL_CONTEXT *)
+  {
+    std::cout << "GlobalHandler: Caught unexpected exception. " << ex << std::endl;
+    return EHR_UNHANDLED;
+  }
+};
+
+DECLARE_PINTOOL (emudiv);
