@@ -48,7 +48,7 @@ class inscount : public OASIS::Pin::Tool <inscount>
 public:
   inscount (void)
   {
-    this->register_fini_callback ();
+    this->enable_fini_callback ();
   }
 
   void handle_fini (INT32 code)
