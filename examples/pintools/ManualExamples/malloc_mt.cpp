@@ -15,9 +15,6 @@
   #define MALLOC "malloc"
 #endif
 
-/**
- * @class Before_Malloc
- */
 class Before_Malloc :
   public OASIS::Pin::Callback2 <Before_Malloc, IARG_FUNCARG_ENTRYPOINT_VALUE, IARG_THREAD_ID>
 {
@@ -41,14 +38,11 @@ private:
   OASIS::Pin::Lock & lock_;
 };
 
-/**
- * @class malloc_mt
- */
 class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
-  Instrument (FILE * file)
-    : before_malloc_ (file, lock_)
+  Instrument (FILE * file, OASIS::Pin::Lock & lock)
+    : before_malloc_ (file, lock)
   {
 
   }
@@ -68,7 +62,6 @@ public:
   }
 
 private:
-  OASIS::Pin::Lock lock_;
   Before_Malloc before_malloc_;
 };
 
@@ -77,7 +70,7 @@ class malloc_mt : public OASIS::Pin::Tool <malloc_mt>
 public:
   malloc_mt (void)
     : file_ (fopen ("malloc_mt.out", "w")),
-      inst_ (file_)
+      inst_ (file_, lock_)
   {
     this->enable_fini_callback ();
     this->enable_thread_start_callback ();
@@ -89,8 +82,23 @@ public:
     fclose (this->file_);
   }
 
+  void handle_thread_start (THREADID thr_id, OASIS::Pin::Context & ctxt, INT32 code)
+  {
+    OASIS::Pin::Guard guard (this->lock_, thr_id + 1);
+    fprintf (this->file_, "thread begin %d\n", thr_id);
+    fflush (this->file_);
+  }
+
+  void handle_thread_fini (THREADID thr_id, const OASIS::Pin::Const_Context & ctxt, INT32 code)
+  {
+    OASIS::Pin::Guard guard (this->lock_, thr_id + 1);
+    fprintf (this->file_, "thread end %d code %d\n",thr_id, code);
+    fflush (this->file_);
+  }
+
 private:
   FILE * file_;
+  OASIS::Pin::Lock lock_;
   Instrument inst_;
 };
 

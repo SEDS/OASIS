@@ -115,10 +115,4 @@ private:
   Malloc_After malloc_after_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <malloctrace> (argc, argv, true).start_program ();
-}
+DECLARE_PINTOOL (malloctrace)
