@@ -1,14 +1,11 @@
 // $Id: itrace.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Instruction_Tool.h"
+#include "pin++/Instruction_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 
 #include <stdio.h>
 
-/**
- * @class printip
- */
 class printip : public OASIS::Pin::Callback1 <printip, IARG_INST_PTR>
 {
 public:
@@ -26,15 +23,11 @@ private:
   FILE * file_;
 };
 
-/**
- * @class itrace
- */
-class itrace : public OASIS::Pin::Instruction_Tool <itrace>
+class Instrument : public OASIS::Pin::Instruction_Instrument <Instrument>
 {
 public:
-  itrace (void)
-    : file_ (fopen ("itrace.out", "w")),
-      printip_ (file_)
+  Instrument (FILE * file)
+    : printip_ (file)
   {
 
   }
@@ -42,6 +35,19 @@ public:
   void handle_instrument (const OASIS::Pin::Ins & ins)
   {
     ins.insert_call (IPOINT_BEFORE, &this->printip_);
+  }
+
+private:
+  printip printip_;
+};
+
+class itrace : public OASIS::Pin::Tool <itrace>
+{
+public:
+  itrace (void)
+    : file_ (fopen ("itrace.out", "w"))
+  {
+
   }
 
   void handle_fini (INT32)
@@ -52,13 +58,6 @@ public:
 
 private:
   FILE * file_;
-  printip printip_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <itrace> (argc, argv).start_program ();
-}
+DECLARE_PINTOOL (itrace)
