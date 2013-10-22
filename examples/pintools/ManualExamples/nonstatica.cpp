@@ -15,12 +15,7 @@ struct address_range
 
 typedef std::vector <address_range> list_type;
 
-/**
- * @class nonstatica
- *
- * Pin tool that detaches Pin from an application
- */
-class nonstatica : public OASIS::Pin::Image_Instrument <nonstatica>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
   void handle_instrument (const OASIS::Pin::Image & img)
@@ -39,7 +34,8 @@ public:
 
         std::string path;
         int line;
-        this->get_source_location (rtn_iter->address (), NULL, &line, &path);
+
+        PIN_GetSourceLocation (rtn_iter->address (), NULL, &line, &path);
 
         if (path != "")
           std::cout << "File " << path << " Line " << line << std::endl;
@@ -115,10 +111,10 @@ private:
   list_type range_list_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class nonstatica : public OASIS::Pin::Tool <nonstatica>
 {
-  OASIS::Pin::Pintool <nonstatica> (argc, argv, true).start_program ();
-}
+private:
+  Instrument inst_;
+};
+
+DECLARE_PINTOOL (nonstatica)
