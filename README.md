@@ -1,15 +1,15 @@
 OASIS
 =====
 
-The Open-source Architecture for Software Instrumentation of Systems 
+The _Open-source Architecture for Software Instrumentation of Systems (OASIS)_ 
 is a R&D framework for exploring and understanding the challenges 
 associated with instrumenting software systems in real-time.
 
 Frameworks & Technologies
 -------------------------
 
-The following frameworks and technologies and architectures are implemented 
-in the OASIS project:
+The following frameworks and technologies are contained within
+the OASIS project:
 
 * Pin ++
 
@@ -29,7 +29,8 @@ Checkout our custom Python3 build scripts from the Git repo:
 Execute the **download** and **build** commands using the build scripts 
 from the **developer command prompt**:
 
-    %> python3 bczar.py --include=OASIS --prefix=[target directory] [command]
+    %> python3 bczar.py --include=OASIS --prefix=[target directory] download
+    %> python3 bczar.py --include=OASIS --prefix=[target directory] build
 
 The script will **download** all required source files, **build** them, 
 and install them in their correct location within the **target directory**. 

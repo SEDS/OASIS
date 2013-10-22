@@ -1,6 +1,6 @@
 //$Id: Memory_Footprint.mpc 2245 2013-09-06 23:20:23Z hillj $
 
-project (OASIS_Memory_Footprint_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, oasis_perf_no_payload {
+project (OASIS_Memory_Footprint_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, oasis_perf_no_payload, disabled {
   sharedname    = OASIS_Memory_Footprint_Probe_stub
   dynamicflags += OASIS_MEMORY_FOOTPRINT_PROBE_STUB_BUILD_DLL
 
@@ -22,7 +22,7 @@ project (OASIS_Memory_Footprint_Probe_stub) : oasis_softwareprobe, oasis_pdl, oa
   }
 }
 
-project (OASIS_Memory_Footprint_Probe) : oasis_pintool, oasis_softwareprobe, oasis_lib {
+project (OASIS_Memory_Footprint_Probe) : oasis_pintool, oasis_softwareprobe, oasis_lib, disabled{
   sharedname    = OASIS_Memory_Footprint_Probe
   dynamicflags += MEMORY_FOOTPRINT_PROBE_IMPL_BUILD_DLL
 
