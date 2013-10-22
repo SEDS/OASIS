@@ -44,12 +44,11 @@ private:
 /**
  * @class malloc_mt
  */
-class malloc_mt : public OASIS::Pin::Image_Instrument <malloc_mt>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
-  malloc_mt (void)
-    : file_ (::fopen ("malloc_mt.out", "w")),
-      before_malloc_ (file_, lock_)
+  Instrument (FILE * file)
+    : before_malloc_ (file, lock_)
   {
 
   }
@@ -68,24 +67,31 @@ public:
     }
   }
 
-  void handle_fini (INT32)
-  {
-    ::fclose (this->file_);
-  }
-
 private:
-  FILE * file_;
   OASIS::Pin::Lock lock_;
   Before_Malloc before_malloc_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class malloc_mt : public OASIS::Pin::Tool <malloc_mt>
 {
-  OASIS::Pin::Pintool <malloc_mt> (argc, argv, true)
-    .enable_thread_start ()
-    .enable_thread_fini ()
-    .start_program ();
-}
+public:
+  malloc_mt (void)
+    : file_ (fopen ("malloc_mt.out", "w")),
+      inst_ (file_)
+  {
+    this->enable_fini_callback ();
+    this->enable_thread_start_callback ();
+    this->enable_thread_fini_callback ();
+  }
+
+  void handle_fini (INT32)
+  {
+    fclose (this->file_);
+  }
+
+private:
+  FILE * file_;
+  Instrument inst_;
+};
+
+DECLARE_PINTOOL (malloc_mt)
