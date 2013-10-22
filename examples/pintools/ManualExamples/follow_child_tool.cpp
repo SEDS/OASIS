@@ -8,7 +8,7 @@
 class follow_child_tool : public OASIS::Pin::Tool <follow_child_tool>
 {
 public:
-  void handle_init (int argc, char * argv [])
+  follow_child_tool (void)
   {
     this->enable_follow_child_process_callback ();
   }
@@ -20,7 +20,4 @@ public:
   }
 };
 
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <follow_child_tool> (argc, argv).start_program ();
-}
+DECLARE_PINTOOL (follow_child_tool)
