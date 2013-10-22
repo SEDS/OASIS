@@ -127,7 +127,8 @@ class inscount_tls : public OASIS::Pin::Tool <inscount_tls>
 public:
   inscount_tls (void)
   {
-    this->register_fini_callback ();
+    this->init_symbols ();
+    this->enable_fini_callback ();
   }
 
   void handle_fini (INT32)
@@ -145,9 +146,4 @@ private:
   Trace trace_;
 };
 
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <inscount_tls> (argc, argv)
-    .init_symbols ()
-    .start_program ();
-}
+DECLARE_PINTOOL (inscount_tls)

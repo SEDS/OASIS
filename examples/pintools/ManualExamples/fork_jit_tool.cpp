@@ -110,7 +110,7 @@ private:
  *
  * Pin tool that registers callbacks around fork ().
  */
-class fork_jit_tool : public OASIS::Pin::Tool
+class fork_jit_tool : public OASIS::Pin::Tool <fork_jit_tool>
 {
 public:
   fork_jit_tool (void)
@@ -118,9 +118,6 @@ public:
     before_ (lock_, parent_pid_),
     after_parent_ (lock_, parent_pid_),
     after_child_ (lock_, parent_pid_)
-  { }
-
-  void handle_init (int argc, char * argv [])
   {
     this->add_fork_function (FPOINT_BEFORE, &this->before_);
     this->add_fork_function (FPOINT_AFTER_IN_PARENT, &this->after_parent_);
