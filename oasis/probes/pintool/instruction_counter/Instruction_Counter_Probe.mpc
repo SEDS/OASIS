@@ -1,6 +1,6 @@
 //$Id: Instruction_Counter_Probe.mpc 2242 2013-08-22 15:38:08Z dfeiock $
 
-project (OASIS_Instruction_Counter_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, oasis_perf_no_payload {
+project (OASIS_Instruction_Counter_Probe_stub) : oasis_softwareprobe, oasis_pdl, oasis_lib, oasis_perf_no_payload, disabled {
   sharedname    = OASIS_Instruction_Counter_Probe_stub
   dynamicflags += OASIS_INSTRUCTION_COUNTER_PROBE_STUB_BUILD_DLL
 
@@ -23,7 +23,7 @@ project (OASIS_Instruction_Counter_Probe_stub) : oasis_softwareprobe, oasis_pdl,
 }
 
 project (OASIS_Instruction_Counter_Probe) : oasis_pintool, oasis_softwareprobe,\
-                                            oasis_lib {
+                                            oasis_lib, disabled {
   sharedname    = OASIS_Instruction_Counter_Probe
   dynamicflags += INSTRUCTION_COUNTER_PROBE_IMPL_BUILD_DLL
 

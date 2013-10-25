@@ -1,6 +1,6 @@
 // $Id: isampling.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Instruction_Tool.h"
+#include "pin++/Instruction_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 
@@ -57,17 +57,13 @@ private:
   INT32 & count_;
 };
 
-/**
- * @class isampling
- */
-class isampling : public OASIS::Pin::Instruction_Tool <isampling>
+class Instrument : public OASIS::Pin::Instruction_Instrument <Instrument>
 {
 public:
-  isampling (void)
-    : file_ (::fopen ("isampling.out", "w")),
-      count_ (0),
+  Instrument (FILE * file)
+    : count_ (0),
       countdown_ (count_),
-      printip_ (file_, count_)
+      printip_ (file, count_)
   {
 
   }
@@ -78,6 +74,23 @@ public:
     ins.insert_then_call (IPOINT_BEFORE, &this->printip_);
   }
 
+private:
+  INT32 count_;
+
+  countdown countdown_;
+  printip printip_;
+};
+
+class isampling : public OASIS::Pin::Tool <isampling>
+{
+public:
+  isampling (void)
+    : file_ (::fopen ("isampling.out", "w")),
+      inst_ (file_)
+  {
+    this->enable_fini_callback ();
+  }
+
   void handle_fini (INT32)
   {
     fprintf (this->file_, "#eof\n");
@@ -86,16 +99,7 @@ public:
 
 private:
   FILE * file_;
-  INT32 count_;
-
-  countdown countdown_;
-  printip printip_;
+  Instrument inst_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <isampling> (argc, argv).start_program ();
-}
+DECLARE_PINTOOL (isampling)

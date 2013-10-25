@@ -1,6 +1,6 @@
 // $Id: invocation.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 #include "pin++/Callback.h"
 #include "pin++/Context.h"
@@ -56,17 +56,13 @@ private:
   std::ofstream & fout_;
 };
 
-/**
- * @class invocation
- */
-class invocation : public OASIS::Pin::Image_Tool <invocation>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
-  invocation (void)
-    : fout_ ("invocation.out"),
-      before_ (fout_),
-      after_ (fout_),
-      taken_ (fout_)
+  Instrument (std::ofstream & fout)
+    : before_ (fout),
+      after_ (fout),
+      taken_ (fout)
   {
 
   }
@@ -108,6 +104,21 @@ public:
 
   }
 
+private:
+  before before_;
+  after after_;
+  taken taken_;
+};
+
+class invocation : public OASIS::Pin::Tool <invocation>
+{
+public:
+  invocation (void)
+    : fout_ ("invocation.out")
+  {
+    this->enable_fini_callback ();
+  }
+
   void handle_fini (INT32)
   {
     this->fout_.close ();
@@ -115,15 +126,6 @@ public:
 
 private:
   std::ofstream fout_;
-  before before_;
-  after after_;
-  taken taken_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <invocation> (argc, argv, true).start_program ();
-}
+DECLARE_PINTOOL (invocation)

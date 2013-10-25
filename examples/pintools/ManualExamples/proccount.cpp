@@ -1,6 +1,6 @@
 // $Id: proccount.cpp 2281 2013-09-16 13:41:50Z dfeiock $
 
-#include "pin++/Routine_Tool.h"
+#include "pin++/Routine_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 #include "pin++/Section.h"
@@ -56,17 +56,10 @@ public:
   }
 };
 
-/**
- * @class proccount
- */
-class proccount : public OASIS::Pin::Routine_Tool <proccount>
+class Instrument : public OASIS::Pin::Routine_Instrument <Instrument>
 {
 public:
-  proccount (void)
-    : fout_ ("proccount.out")
-  {
-
-  }
+  typedef std::list <routine_count *> list_type;
 
   void handle_instrument (const OASIS::Pin::Routine & rtn)
   {
@@ -80,11 +73,19 @@ public:
     // The RTN goes away when the image is unloaded, so save it now
     // because we need it in the fini
     rc->name_ = rtn.name ();
-    rc->image_ = StripPath (Image (Section (rtn.section ()).image ()).name ().c_str ());
+
+    const std::string & image_name = rtn.section ().image ().name ();
+#if defined (TARGET_WINDOWS)
+    rc->image_ = image_name.substr (image_name.find_last_of ('\\') + 1);
+#else
+    rc->image_ = image_name.substr (image_name.find_last_of ('/') + 1);
+#endif
     rc->address_ = rtn.address ();
 
     // Add the counter to the listing.
     this->rtn_count_.push_back (rc);
+
+    OASIS::Pin::Routine_Guard guard (rtn);
     rtn.insert_call (IPOINT_BEFORE, rc);
 
     for (Ins::iterator_type iter = rtn.instruction_head (), iter_end = iter.make_end ();
@@ -93,6 +94,25 @@ public:
     {
       iter->insert_call (IPOINT_BEFORE, rc->docount_.get ());
     }
+  }
+
+  const list_type & rtn_count (void) const
+  {
+    return this->rtn_count_;
+  }
+
+private:
+  list_type rtn_count_;
+};
+
+class proccount : public OASIS::Pin::Tool <proccount>
+{
+public:
+  proccount (void)
+    : fout_ ("proccount.out")
+  {
+    this->init_symbols ();
+    this->enable_fini_callback ();
   }
 
   void handle_fini (INT32)
@@ -104,9 +124,9 @@ public:
       << setw (12) << "Calls" << " "
       << setw (12) << "Instructions" << endl;
 
-    std::list <routine_count *>::const_iterator
-      iter = this->rtn_count_.begin (),
-      iter_end = this->rtn_count_.end ();
+    Instrument::list_type::const_iterator
+      iter = this->inst_.rtn_count ().begin (),
+      iter_end = this->inst_.rtn_count ().end ();
 
     for (; iter != iter_end; ++ iter)
     {
@@ -125,28 +145,9 @@ public:
   }
 
 private:
-  static const char * StripPath (const char * path)
-  {
-#if defined (TARGET_WINDOWS)
-    const char * file = strrchr (path,'\\');
-#else
-    const char * file = strrchr (path,'/');
-#endif
-
-    if (file)
-      return file +1 ;
-    else
-      return path;
-  }
+  Instrument inst_;
 
   std::ofstream fout_;
-  std::list <routine_count *> rtn_count_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <proccount> (argc, argv, true).start_program ();
-}
+DECLARE_PINTOOL (proccount);

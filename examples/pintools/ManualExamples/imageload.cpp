@@ -1,18 +1,15 @@
 // $Id: imageload.cpp 2266 2013-09-10 14:08:35Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 
 #include <fstream>
 
-/**
- * @class imageload
- */
-class imageload : public OASIS::Pin::Image_Tool <imageload>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
-  imageload (void)
-    : fout_ ("imageload.out")
+  Instrument (std::ofstream & fout)
+    : fout_ (fout)
   {
 
   }
@@ -33,13 +30,22 @@ public:
   }
 
 private:
-  std::ofstream fout_;
+  std::ofstream & fout_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class imageload : public OASIS::Pin::Tool <imageload>
 {
-  OASIS::Pin::Pintool <imageload> (argc, argv, true).start_program ();
-}
+public:
+  imageload (void)
+    : fout_ ("imageload.out"),
+      inst_ (fout_)
+  {
+
+  }
+
+private:
+  std::ofstream fout_;
+  Instrument inst_;
+};
+
+DECLARE_PINTOOL (imageload)

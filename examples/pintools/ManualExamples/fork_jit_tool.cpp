@@ -32,7 +32,7 @@ public:
       std::cerr << "TOOL: Before fork." << std::endl;
     } while (false);
 
-    this->parent_pid_ = OASIS::Pin::Tool::current ()->get_pid ();
+    this->parent_pid_ = PIN_GetPid ();
   }
 
 private:
@@ -60,7 +60,7 @@ public:
       std::cerr << "TOOL: After fork in parent." << std::endl;
     } while (false);
 
-    if (OASIS::Pin::Tool::current ()->get_pid () != this->parent_pid_)
+    if (PIN_GetPid () != this->parent_pid_)
     {
       std::cerr << "PIN_GetPid () fails in parent process" << std::endl;
       exit (-1);
@@ -93,7 +93,7 @@ public:
       std::cerr << "TOOL: After fork in child." << std::endl;
     } while (false);
 
-    if ((OASIS::Pin::Tool::current ()->get_pid () == this->parent_pid_) || (getppid () != this->parent_pid_))
+    if ((PIN_GetPid () == this->parent_pid_) || (getppid () != this->parent_pid_))
     {
       std::cerr << "PIN_GetPid () failes in child process" << std::endl;
       exit (-1);
@@ -105,22 +105,13 @@ private:
   pid_t & parent_pid_;
 };
 
-/**
- * @class fork_jit_tool
- *
- * Pin tool that registers callbacks around fork ().
- */
-class fork_jit_tool : public OASIS::Pin::Tool
+class fork_jit_tool : public OASIS::Pin::Tool <fork_jit_tool>
 {
 public:
   fork_jit_tool (void)
-  : OASIS::Pin::Tool (),
-    before_ (lock_, parent_pid_),
+  : before_ (lock_, parent_pid_),
     after_parent_ (lock_, parent_pid_),
     after_child_ (lock_, parent_pid_)
-  { }
-
-  void handle_init (int argc, char * argv [])
   {
     this->add_fork_function (FPOINT_BEFORE, &this->before_);
     this->add_fork_function (FPOINT_AFTER_IN_PARENT, &this->after_parent_);
@@ -137,10 +128,4 @@ private:
   afterForkInChild after_child_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <fork_jit_tool> (argc, argv, true).start_program ();
-}
+DECLARE_PINTOOL (fork_jit_tool)

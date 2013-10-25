@@ -1,6 +1,6 @@
 // $Id: malloctrace.cpp 2282 2013-09-17 13:38:10Z hillj $
 
-#include "pin++/Image_Tool.h"
+#include "pin++/Image_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
 
@@ -62,7 +62,7 @@ private:
 /**
  * @class malloctrace
  */
-class malloctrace : public OASIS::Pin::Image_Tool <malloctrace>
+class malloctrace : public OASIS::Pin::Image_Instrument <malloctrace>
 {
 public:
   malloctrace (void)
@@ -115,10 +115,4 @@ private:
   Malloc_After malloc_after_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
-{
-  OASIS::Pin::Pintool <malloctrace> (argc, argv, true).start_program ();
-}
+DECLARE_PINTOOL (malloctrace)

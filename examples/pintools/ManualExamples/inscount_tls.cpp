@@ -1,9 +1,10 @@
 // $Id: inscount_tls.cpp 2286 2013-09-19 18:40:30Z hillj $
 
+#include "pin++/Buffer.h"
 #include "pin++/Callback.h"
 #include "pin++/Guard.h"
 #include "pin++/Lock.h"
-#include "pin++/Trace_Tool.h"
+#include "pin++/Trace_Instrument.h"
 #include "pin++/Pintool.h"
 #include "pin++/TLS.h"
 
@@ -17,22 +18,16 @@
 // This avoids the false sharing problem.
 #define PADSIZE 56  // 64 byte line size: 64-8
 
-// a running count of the instructions
 class thread_data_t
 {
 public:
   thread_data_t (void)
-    : count_ (0) {}
+    : count_ (0) { }
 
   UINT64 count_;
   UINT8 pad_[PADSIZE];
 };
 
-/**
- * @class docount
- *
- * Callback that increments the counter.
- */
 class docount : public OASIS::Pin::Callback1 <docount, IARG_THREAD_ID>
 {
 public:
@@ -56,19 +51,13 @@ public:
 
 private:
   OASIS::Pin::TLS <thread_data_t> * tls_;
-
   UINT64 ins_count_;
 };
 
-/**
- * @class inscount_tls
- *
- * Pin tool that counts the number of instructions in a program.
- */
-class inscount_tls : public OASIS::Pin::Trace_Tool <inscount_tls>
+class Trace : public OASIS::Pin::Trace_Instrument <Trace>
 {
 public:
-  inscount_tls (void)
+  Trace (void)
     : num_threads_ (0)
   {
 
@@ -77,16 +66,18 @@ public:
   void handle_instrument (const OASIS::Pin::Trace & trace)
   {
     // Visit every block in the trace, and attach a counter.
-    docount * callback = new docount[trace.num_bbl ()];
-    docount * callback_iter = callback;
+    item_type item (trace.num_bbl ());
+    item_type::iterator callback = item.begin ();
 
     for (OASIS::Pin::Bbl::iterator_type bbl_iter = trace.bbl_head (), bbl_iter_end = bbl_iter.make_end ();
          bbl_iter != bbl_iter_end;
          ++ bbl_iter)
     {
-      callback_iter->init (&this->tls_, bbl_iter->ins_count ());
-      bbl_iter->insert_call (IPOINT_ANYWHERE, callback_iter ++);
+      callback->init (&this->tls_, bbl_iter->ins_count ());
+      bbl_iter->insert_call (IPOINT_ANYWHERE, callback ++);
     }
+
+    this->traces_.push_back (item);
   }
 
   void handle_thread_start (THREADID thr_id, OASIS::Pin::Context & ctxt, INT32 flags)
@@ -111,20 +102,48 @@ public:
     fout.close ();
   }
 
+  inline int num_threads (void) const
+  {
+    return this->num_threads_;
+  }
+
+  inline const OASIS::Pin::TLS <thread_data_t> & tls (void) const
+  {
+    return this->tls_;
+  }
+
 private:
+  typedef OASIS::Pin::Buffer <docount> item_type;
+  typedef std::list <item_type> list_type;
+
   OASIS::Pin::TLS <thread_data_t> tls_;
-
   OASIS::Pin::Lock lock_;
-
   int num_threads_;
+  list_type traces_;
 };
 
-//
-// main
-//
-int main (int argc, char * argv [])
+class inscount_tls : public OASIS::Pin::Tool <inscount_tls>
 {
-  OASIS::Pin::Pintool <inscount_tls> (argc, argv, true)
-    .enable_thread_start ()
-    .start_program ();
-}
+public:
+  inscount_tls (void)
+  {
+    this->init_symbols ();
+    this->enable_fini_callback ();
+  }
+
+  void handle_fini (INT32)
+  {
+    std::ofstream fout ("inscount_tls.out");
+    fout << "Total number of threads = " << this->trace_.num_threads () << endl;
+
+    for (INT32 t = 0; t < this->trace_.num_threads (); t ++)
+      fout << "Count[" << decstr (t) << "]= " << this->trace_.tls ().get (t)->count_ << std::endl;
+
+    fout.close ();
+  }
+
+private:
+  Trace trace_;
+};
+
+DECLARE_PINTOOL (inscount_tls)
