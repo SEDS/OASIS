@@ -1,9 +1,9 @@
 // $Id: inscount2.cpp 2286 2013-09-19 18:40:30Z hillj $
 
-#include "pin++/Buffer.h"
-#include "pin++/Trace_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
+#include "pin++/Buffer.h"
+#include "pin++/Trace_Instrument.h"
 
 #include <fstream>
 #include <list>
@@ -47,7 +47,9 @@ public:
     item_type item (trace.num_bbl ());
     item_type::iterator callback = item.begin ();
 
-    for (OASIS::Pin::Bbl::iterator_type iter = trace.bbl_head (), iter_end = iter.make_end ();
+    using OASIS::Pin::Bbl;
+
+    for (Bbl::iterator_type iter = trace.bbl_head (), iter_end = iter.make_end ();
          iter != iter_end;
          ++ iter)
     {
