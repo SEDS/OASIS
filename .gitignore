@@ -1,5 +1,4 @@
 # Micrsoft Files
-
 *.vcproj
 *.vcproj.*
 *.sln
@@ -23,9 +22,9 @@ Static_Release/
 GNUmakefile*
 Makefile*
 .depend*
+default.features
 
 # Output Files
-
 *.out
 
 # Compiled Object files
