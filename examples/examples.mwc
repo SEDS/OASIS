@@ -1,0 +1,7 @@
+// $Id: OASIS.mwc 2245 2013-09-06 23:20:23Z hillj $
+
+workspace {
+  cmdline += -include $OASIS_ROOT/MPC/config \
+             -include $ADBC_ROOT/MPC/config \
+             -feature_file $OASIS_ROOT/default.features
+}
