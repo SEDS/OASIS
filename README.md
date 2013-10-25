@@ -11,7 +11,7 @@ Frameworks & Technologies
 The following frameworks and technologies are contained within
 the OASIS project:
 
-* [Pin ++](wiki#pin-documentation)
+* [Pin ++](https://github.iu.edu/SEDS/OASIS/wiki#pin-documentation)
 
 Building from Sources
 ---------------------
