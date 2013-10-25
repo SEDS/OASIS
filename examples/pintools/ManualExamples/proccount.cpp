@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string.h>
 #include <list>
+#include <memory>
 
 class routine_count : public OASIS::Pin::Callback0 <routine_count>
 {
