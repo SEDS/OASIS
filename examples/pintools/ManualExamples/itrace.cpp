@@ -45,9 +45,10 @@ class itrace : public OASIS::Pin::Tool <itrace>
 {
 public:
   itrace (void)
-    : file_ (fopen ("itrace.out", "w"))
+    : file_ (fopen ("itrace.out", "w")),
+      instrument_ (this->file_)
   {
-
+    this->enable_fini_callback ();
   }
 
   void handle_fini (INT32)
@@ -58,6 +59,7 @@ public:
 
 private:
   FILE * file_;
+  Instrument instrument_;
 };
 
 DECLARE_PINTOOL (itrace)
