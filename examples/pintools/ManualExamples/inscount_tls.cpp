@@ -129,6 +129,7 @@ public:
   {
     this->init_symbols ();
     this->enable_fini_callback ();
+    this->enable_thread_start_callback ();
   }
 
   void handle_fini (INT32)
@@ -140,6 +141,11 @@ public:
       fout << "Count[" << decstr (t) << "]= " << this->trace_.tls ().get (t)->count_ << std::endl;
 
     fout.close ();
+  }
+
+  void handle_thread_start (THREADID thr_id, OASIS::Pin::Context & ctxt, INT32 flags)
+  {
+    this->trace_.handle_thread_start (thr_id, ctxt, flags);
   }
 
 private:
