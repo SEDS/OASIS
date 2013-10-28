@@ -104,7 +104,7 @@ public:
     : file_ (fopen ("pinatrace.out", "w")),
       inst_ (file_)
   {
-
+    this->enable_fini_callback ();
   }
 
   void handle_fini (INT32)
