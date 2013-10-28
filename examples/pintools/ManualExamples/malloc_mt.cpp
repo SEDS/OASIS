@@ -71,6 +71,7 @@ public:
     : file_ (fopen ("malloc_mt.out", "w")),
       inst_ (file_, lock_)
   {
+    this->init_symbols ();
     this->enable_fini_callback ();
     this->enable_thread_start_callback ();
     this->enable_thread_fini_callback ();

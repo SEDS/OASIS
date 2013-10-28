@@ -62,11 +62,11 @@ private:
 /**
  * @class malloctrace
  */
-class malloctrace : public OASIS::Pin::Image_Instrument <malloctrace>
+class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 {
 public:
-  malloctrace (void)
-    : file_ ("malloctrace.out"),
+  Instrument (std::ofstream & file)
+    : file_ (file),
       free_before_ (file_, FREE),
       malloc_before_ (file_, MALLOC),
       malloc_after_ (file_)
@@ -102,6 +102,25 @@ public:
     }
   }
 
+private:
+  std::ofstream & file_;
+
+  Arg1_Before free_before_;
+  Arg1_Before malloc_before_;
+  Malloc_After malloc_after_;
+};
+
+class malloctrace : public OASIS::Pin::Tool <malloctrace>
+{
+public:
+  malloctrace (void)
+    : file_ ("malloctrace.out"),
+      inst_ (file_)
+  {
+    this->init_symbols ();
+    this->enable_fini_callback ();
+  }
+
   void handle_fini (INT32)
   {
     this->file_.close ();
@@ -109,10 +128,7 @@ public:
 
 private:
   std::ofstream file_;
-
-  Arg1_Before free_before_;
-  Arg1_Before malloc_before_;
-  Malloc_After malloc_after_;
+  Instrument inst_;
 };
 
 DECLARE_PINTOOL (malloctrace)
