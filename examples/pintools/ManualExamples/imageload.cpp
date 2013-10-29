@@ -19,16 +19,6 @@ public:
     this->fout_ << "Loading " << img.name () << ", Image id = " << img.id () << std::endl;
   }
 
-  void handle_unload (const OASIS::Pin::Image & img)
-  {
-    this->fout_ << "Unloading " << img.name () << std::endl;
-  }
-
-  void handle_fini (INT32)
-  {
-    this->fout_.close ();
-  }
-
 private:
   std::ofstream & fout_;
 };
@@ -40,7 +30,18 @@ public:
     : fout_ ("imageload.out"),
       inst_ (fout_)
   {
+    this->enable_unload_callback ();
+    this->enable_fini_callback ();
+  }
 
+  void handle_unload (const OASIS::Pin::Image & img)
+  {
+    this->fout_ << "Unloading " << img.name () << std::endl;
+  }
+
+  void handle_fini (INT32)
+  {
+    this->fout_.close ();
   }
 
 private:
