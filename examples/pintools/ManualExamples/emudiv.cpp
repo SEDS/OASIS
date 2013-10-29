@@ -13,7 +13,7 @@ class Divide_Handler :
 {
 public:
   Divide_Handler (THREADID thr_id, CONTEXT * ctx)
-    : Try_Block (thr_id),
+    : OASIS::Pin::Try_Block <Divide_Handler> (thr_id),
       ctx_ (ctx)
   {
 
