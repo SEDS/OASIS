@@ -18,7 +18,8 @@
  * @class Record_Memory_Read
  */
 class Record_Memory_Read :
-  public OASIS::Pin::Callback2 <Record_Memory_Read, IARG_INST_PTR, IARG_MEMORYOP_EA>
+public OASIS::Pin::Callback <Record_Memory_Read (OASIS::Pin::ARG_INST_PTR,
+                                                 OASIS::Pin::ARG_MEMORYOP_EA) >
 {
 public:
   Record_Memory_Read (FILE * file)
@@ -40,7 +41,8 @@ private:
  * @class Record_Memory_Write
  */
 class Record_Memory_Write :
-  public OASIS::Pin::Callback2 <Record_Memory_Write, IARG_INST_PTR, IARG_MEMORYOP_EA>
+  public OASIS::Pin::Callback <Record_Memory_Write (OASIS::Pin::ARG_INST_PTR,
+                                                    OASIS::Pin::ARG_MEMORYOP_EA) >
 {
 public:
   Record_Memory_Write (FILE * file)

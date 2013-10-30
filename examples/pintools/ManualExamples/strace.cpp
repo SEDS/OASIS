@@ -17,9 +17,14 @@
  * @class Syscall_Before
  */
 class Syscall_Before :
-  public OASIS::Pin::Callback8 <Syscall_Before, IARG_INST_PTR, IARG_SYSCALL_NUMBER,
-                                IARG_SYSARG_VALUE, IARG_SYSARG_VALUE, IARG_SYSARG_VALUE,
-                                IARG_SYSARG_VALUE, IARG_SYSARG_VALUE, IARG_SYSARG_VALUE>
+  public OASIS::Pin::Callback <Syscall_Before (OASIS::Pin::ARG_INST_PTR,
+                                               OASIS::Pin::ARG_SYSCALL_NUMBER,
+                                               OASIS::Pin::ARG_SYSARG_VALUE,
+                                               OASIS::Pin::ARG_SYSARG_VALUE,
+                                               OASIS::Pin::ARG_SYSARG_VALUE,
+                                               OASIS::Pin::ARG_SYSARG_VALUE,
+                                               OASIS::Pin::ARG_SYSARG_VALUE,
+                                               OASIS::Pin::ARG_SYSARG_VALUE) >
 {
 public:
   Syscall_Before (FILE * file)
@@ -65,7 +70,7 @@ private:
  * @class Syscall_After
  */
 class Syscall_After :
-  public OASIS::Pin::Callback1 <Syscall_After, IARG_SYSRET_VALUE>
+  public OASIS::Pin::Callback <Syscall_After (OASIS::Pin::ARG_SYSRET_VALUE)>
 {
 public:
   Syscall_After (FILE * file)
