@@ -28,7 +28,7 @@ public:
   UINT8 pad_[PADSIZE];
 };
 
-class docount : public OASIS::Pin::Callback1 <docount, IARG_THREAD_ID>
+class docount : public OASIS::Pin::Callback < docount (OASIS::Pin::ARG_THREAD_ID) >
 {
 public:
   docount (void)

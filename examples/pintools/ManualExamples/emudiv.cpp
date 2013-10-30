@@ -45,7 +45,11 @@ private:
 };
 
 class Emulate_Int_Divide :
-  public OASIS::Pin::Callback5 <Emulate_Int_Divide, IARG_REG_REFERENCE, IARG_REG_REFERENCE, IARG_REG_VALUE, IARG_CONTEXT, IARG_THREAD_ID>
+public OASIS::Pin::Callback <Emulate_Int_Divide (OASIS::Pin::ARG_REG_REFERENCE,
+                                                 OASIS::Pin::ARG_REG_REFERENCE,
+                                                 OASIS::Pin::ARG_REG_VALUE,
+                                                 OASIS::Pin::ARG_CONTEXT,
+                                                 OASIS::Pin::ARG_THREAD_ID) >
 {
 public:
   inline
@@ -62,7 +66,12 @@ public:
 };
 
 class Emulate_Mem_Divide :
-  public OASIS::Pin::Callback6 <Emulate_Mem_Divide, IARG_REG_REFERENCE, IARG_REG_REFERENCE, IARG_MEMORYREAD_EA, IARG_MEMORYREAD_SIZE, IARG_CONTEXT, IARG_THREAD_ID>
+public OASIS::Pin::Callback <Emulate_Mem_Divide (OASIS::Pin::ARG_REG_REFERENCE,
+                                                 OASIS::Pin::ARG_REG_REFERENCE,
+                                                 OASIS::Pin::ARG_MEMORYREAD_EA,
+                                                 OASIS::Pin::ARG_MEMORYREAD_SIZE,
+                                                 OASIS::Pin::ARG_CONTEXT,
+                                                 OASIS::Pin::ARG_THREAD_ID) >
 {
 public:
   void handle_analyze (PIN_REGISTER * pGdx, PIN_REGISTER * pGax, ADDRINT pDivisor, unsigned int opSize, CONTEXT * ctxt, THREADID thr_id)

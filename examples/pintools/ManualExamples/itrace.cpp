@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-class printip : public OASIS::Pin::Callback1 <printip, IARG_INST_PTR>
+class printip : public OASIS::Pin::Callback <printip (OASIS::Pin::ARG_INST_PTR) >
 {
 public:
   printip (FILE * file)

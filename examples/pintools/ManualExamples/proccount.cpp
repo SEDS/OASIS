@@ -13,10 +13,10 @@
 #include <list>
 #include <memory>
 
-class routine_count : public OASIS::Pin::Callback0 <routine_count>
+class routine_count : public OASIS::Pin::Callback <routine_count (void)>
 {
 public:
-  class docount : public OASIS::Pin::Callback0 <docount>
+  class docount : public OASIS::Pin::Callback <docount (void)>
   {
   public:
     docount (routine_count & rc)

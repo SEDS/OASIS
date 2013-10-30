@@ -8,7 +8,7 @@
 #include <fstream>
 #include <iostream>
 
-class taken : public OASIS::Pin::Callback1 <taken, IARG_CONTEXT>
+class taken : public OASIS::Pin::Callback <taken (OASIS::Pin::ARG_CONTEXT) >
 {
 public:
   taken (ofstream & fout)
@@ -26,7 +26,7 @@ private:
   std::ofstream & fout_;
 };
 
-class before : public OASIS::Pin::Callback1 <before, IARG_CONTEXT>
+class before : public OASIS::Pin::Callback <before (OASIS::Pin::ARG_CONTEXT) >
 {
 public:
   before (ofstream & fout)
@@ -41,7 +41,7 @@ private:
   std::ofstream & fout_;
 };
 
-class after : public OASIS::Pin::Callback1 <after, IARG_CONTEXT>
+class after : public OASIS::Pin::Callback <after (OASIS::Pin::ARG_CONTEXT) >
 {
 public:
   after (ofstream & fout)

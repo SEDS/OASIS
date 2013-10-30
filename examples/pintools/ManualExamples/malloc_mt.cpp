@@ -15,7 +15,8 @@
 #endif
 
 class Before_Malloc :
-  public OASIS::Pin::Callback2 <Before_Malloc, IARG_FUNCARG_ENTRYPOINT_VALUE, IARG_THREAD_ID>
+public OASIS::Pin::Callback <Before_Malloc (OASIS::Pin::ARG_FUNCARG_ENTRYPOINT_VALUE,
+                                            OASIS::Pin::ARG_THREAD_ID) >
 {
 public:
   Before_Malloc (FILE * file, OASIS::Pin::Lock & lock)
