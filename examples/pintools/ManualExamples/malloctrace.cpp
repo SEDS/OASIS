@@ -18,7 +18,7 @@
  * @class Arg1_Before
  */
 class Arg1_Before :
-  public OASIS::Pin::Callback1 <Arg1_Before, IARG_FUNCARG_ENTRYPOINT_VALUE>
+public OASIS::Pin::Callback <Arg1_Before (OASIS::Pin::ARG_FUNCARG_ENTRYPOINT_VALUE)>
 {
 public:
   Arg1_Before (std::ofstream & file, const char * name)
@@ -42,7 +42,7 @@ private:
  * @class Malloc_After
  */
 class Malloc_After :
-  public OASIS::Pin::Callback1 <Malloc_After, IARG_FUNCRET_EXITPOINT_VALUE>
+public OASIS::Pin::Callback <Malloc_After (OASIS::Pin::ARG_FUNCRET_EXITPOINT_VALUE)>
 {
 public:
   Malloc_After (std::ofstream & file)
