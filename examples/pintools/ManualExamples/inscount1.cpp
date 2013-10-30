@@ -8,7 +8,7 @@
 #include <fstream>
 #include <list>
 
-class docount : public OASIS::Pin::Callback0 <docount>
+class docount : public OASIS::Pin::Callback <docount (void)>
 {
 public:
   docount (void)
