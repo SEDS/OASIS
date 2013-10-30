@@ -17,7 +17,7 @@ typedef int pid_t;
  *
  * Callback that gets parent pids before fork calls.
  */
-class beforeFork : public OASIS::Pin::Callback0 <beforeFork>
+class beforeFork : public OASIS::Pin::Callback <beforeFork (void)>
 {
 public:
   beforeFork (OASIS::Pin::Lock & lock, pid_t & parent_pid)
@@ -45,7 +45,7 @@ private:
  *
  * Callback that verifies parent PIDs
  */
-class afterForkInParent : public OASIS::Pin::Callback0 <afterForkInParent>
+class afterForkInParent : public OASIS::Pin::Callback <afterForkInParent (void)>
 {
 public:
   afterForkInParent (OASIS::Pin::Lock & lock, pid_t & parent_pid)
@@ -78,7 +78,7 @@ private:
  *
  * Callback that verifies child PIDs
  */
-class afterForkInChild : public OASIS::Pin::Callback0 <afterForkInChild>
+class afterForkInChild : public OASIS::Pin::Callback <afterForkInChild (void)>
 {
 public:
   afterForkInChild (OASIS::Pin::Lock & lock, pid_t & parent_pid)

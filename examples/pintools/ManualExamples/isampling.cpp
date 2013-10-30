@@ -10,7 +10,7 @@
 /**
  * @class countdown
  */
-class countdown : public OASIS::Pin::Callback0 <countdown>
+class countdown : public OASIS::Pin::Callback <countdown (void)>
 {
 public:
   countdown (INT32 & count)
@@ -31,7 +31,7 @@ private:
 /**
  * @class printip
  */
-class printip : public OASIS::Pin::Callback1 <printip, IARG_INST_PTR>
+class printip : public OASIS::Pin::Callback <printip (OASIS::Pin::ARG_INST_PTR) >
 {
 public:
   static const INT32 N = 100000;
