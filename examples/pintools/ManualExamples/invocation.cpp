@@ -69,26 +69,33 @@ public:
 
   void handle_instrument (const OASIS::Pin::Image & img)
   {
-    for (OASIS::Pin::Section::iterator_type sec_iter, sec_iter_end = sec_iter.make_end ();
+    using OASIS::Pin::Section;
+
+    for (Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
          sec_iter != sec_iter_end;
          ++ sec_iter)
     {
+      using OASIS::Pin::Routine;
+
       // RTN_InsertCall () and INS_InsertCall () are executed in order of
       // appearance.  In the code sequence below, the IPOINT_AFTER is
       // executed before the IPOINT_BEFORE.
 
-      for (OASIS::Pin::Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
+      for (Routine::iterator_type rtn_iter = sec_iter->routine_head (), rtn_iter_end = rtn_iter.make_end ();
            rtn_iter != rtn_iter.make_end ();
            ++ rtn_iter)
       {
+        using OASIS::Pin::Routine_Guard;
+        using OASIS::Pin::Ins;
+
+        Routine_Guard guard (*rtn_iter);
+
         // IPOINT_AFTER is implemented by instrumenting each return
         // instruction in a routine.  Pin tries to find all return
         // instructions, but success is not guaranteed.
         rtn_iter->insert_call (IPOINT_AFTER, &this->after_);
 
         // Examine each instruction in the routine.
-        using OASIS::Pin::Ins;
-
         for (Ins::iterator_type iter = rtn_iter->instruction_head (), iter_end = iter.make_end ();
              iter != iter_end;
              ++ iter)
@@ -114,8 +121,10 @@ class invocation : public OASIS::Pin::Tool <invocation>
 {
 public:
   invocation (void)
-    : fout_ ("invocation.out")
+    : fout_ ("invocation.out"),
+      inst_ (fout_)
   {
+    this->init_symbols ();
     this->enable_fini_callback ();
   }
 
@@ -126,6 +135,7 @@ public:
 
 private:
   std::ofstream fout_;
+  Instrument inst_;
 };
 
 DECLARE_PINTOOL (invocation)
