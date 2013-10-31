@@ -113,6 +113,12 @@ private:
 
 class nonstatica : public OASIS::Pin::Tool <nonstatica>
 {
+public:
+  nonstatica (void)
+  {
+    this->init_symbols ();
+  }
+
 private:
   Instrument inst_;
 };
