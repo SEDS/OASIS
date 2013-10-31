@@ -19,7 +19,7 @@ public:
 
   void handle_analyze (const OASIS::Pin::Context & ctx)
   {
-    this->fout_ << "Taken: IP = " << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
+    this->fout_ << "Taken: IP = 0x" << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
   }
 
 private:
@@ -34,7 +34,7 @@ public:
 
   void handle_analyze (const OASIS::Pin::Context & ctx)
   {
-    this->fout_ << "Before: IP = " << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
+    this->fout_ << "Before: IP = 0x" << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
   }
 
 private:
@@ -49,7 +49,7 @@ public:
 
   void handle_analyze (const OASIS::Pin::Context & ctx)
   {
-    this->fout_ << "After: IP = " << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
+    this->fout_ << "After: IP = 0x" << hex << ctx.get_reg (REG_INST_PTR) << dec << endl;
   }
 
 private:
