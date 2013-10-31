@@ -104,7 +104,7 @@ public:
     if (ins.is_syscall () && ins.has_fall_through ())
     {
       // Arguments and syscall number is only available before
-      //ins.insert_call (IPOINT_BEFORE, &this->syscall_before_, 0, 1, 2, 3, 4, 5);
+      ins.insert_call (IPOINT_BEFORE, &this->syscall_before_, 0, 1, 2, 3, 4, 5);
       ins.insert_call (IPOINT_AFTER, &this->syscall_after_);
     }
   }
