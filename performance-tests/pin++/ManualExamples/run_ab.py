@@ -24,6 +24,7 @@ def parse_args ():
   parser.add_argument ('--url', default=None, type=str, help='URL to test with apache benchmark.')
   parser.add_argument ('--requests', default=[1, 10, 100, 1000, 10000, 100000], type=int, nargs='+', help='Space-separated list of the number of requests to test.')
   parser.add_argument ('--concurrency', default=[1, 10, 100, 1000], type =int, nargs='+', help='Space-separated list of the number of clients to test.')
+  parser.add_argument ('--iterations', default=10, type=int, help='Number of iterations to time for each pintool')
 
   return parser.parse_args ()
 
@@ -82,19 +83,38 @@ def match_pintools (native, pinpp):
 #
 # Start apache
 #
-def start_apache (pintool, apache_conf):
-  # Runs apache in foreground so we can attach the pintool to it
-  # Example: $PIN_ROOT/pin -t pintool.so -- /usr/sbin/apachectl -f apache_conf -DFOREGROUND
+def start_apache (apache_conf):
+  # Runs apache in foreground
+  # Example: /usr/sbin/apachectl -f apache_conf -DFOREGROUND
   path = os.path.abspath (os.path.dirname (apache_conf))
-  cmd = ' '.join ([os.path.join (os.environ['PIN_ROOT'], 'pin'),
-         '-t',
-         pintool,
-         '--',
-         'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)])
+  cmd = 'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)
 
   # Use setsid to put child processes into a process group so they will
   # all terminate at the same time
   return subprocess.Popen (cmd, cwd=path, shell=True, preexec_fn=os.setsid)
+
+#
+# Children pids
+#
+def children_pids (pid):
+  proc = subprocess.Popen ('ps -o pid,ppid ax | grep "%d"' % pid, shell=True, stdout=subprocess.PIPE)
+  pidppid = [x.split() for x in proc.communicate()[0].split("\n") if x]
+
+  return list(int(p) for p, pp in pidppid if int(pp) == pid)
+
+#
+# Attach children
+#
+def attach_children (process, pintool):
+  for child in children_pids (process.pid):
+    print ('INFO: Attaching pin to child process <%s> of parent <%s>' % (child, process.pid))
+    cmd = ' '.join ([os.path.join (os.environ['PIN_ROOT'], 'pin'),
+                     '-pid',
+                     '%s' % child,
+                     '-t',
+                     pintool])
+
+    subprocess.call (cmd, shell=True)
 
 #
 # Run ab
@@ -144,7 +164,7 @@ def main ():
   # Open the file and write the header
   outfile = open (args.outfile, 'w')
   writer = csv.writer (outfile)
-  writer.writerow (['Pintool', 'Concurrency', 'Requests', 'Native', 'Pin++', 'Difference', 'Difference_Percent']) 
+  writer.writerow (['Pintool', 'Concurrency', 'Requests', 'Iteration', 'Native', 'Pin++', 'Difference', 'Difference_Percent']) 
 
   # Compiled regex to get the average time per request across
   # all concurrent requests
@@ -157,34 +177,39 @@ def main ():
         continue
 
       for native, pinpp in pintools:
-        tool_name = os.path.split (native)[-1]
-        print ('INFO: Executing pintool <%s>' % (tool_name))
+        for iteration in range (1, args.iterations + 1):
+          tool_name = os.path.split (native)[-1]
+          print ('INFO: Executing pintool <%s>, iteration <%s>'
+                 % (tool_name, iteration))
 
-        # Get native results
-        process = start_apache (native, args.apache_conf)
-        time.sleep (1)
-        native_output = run_ab (args.url, concurrency, requests)
-        os.killpg (process.pid, signal.SIGTERM)
-        time.sleep (1)
+          # Get native results
+          process = start_apache (args.apache_conf)
+          time.sleep (2)
+          attach_children (process, native)
+          native_output = run_ab (args.url, concurrency, requests)
+          os.killpg (process.pid, signal.SIGTERM)
+          time.sleep (2)
 
-        # Get pin++ results
-        process = start_apache (native, args.apache_conf)
-        time.sleep (1)
-        pinpp_output = run_ab (args.url, concurrency, requests)
-        os.killpg (process.pid, signal.SIGTERM)
-        time.sleep (1)
+          # Get pin++ results
+          process = start_apache (args.apache_conf)
+          time.sleep (2)
+          attach_children (process, pinpp)
+          pinpp_output = run_ab (args.url, concurrency, requests)
+          os.killpg (process.pid, signal.SIGTERM)
+          time.sleep (2)
 
-        # Find the average time per request
-        native_time = float (time_per_request.search (native_output).group (1))
-        pinpp_time = float (time_per_request.search (pinpp_output).group (1))
+          # Find the average time per request
+          native_time = float (time_per_request.search (native_output).group (1))
+          pinpp_time = float (time_per_request.search (pinpp_output).group (1))
 
-        # Write the results
-        writer.writerow ([tool_name,
-                          concurrency,
-                          requests,
-                          native_time,
-                          pinpp_time,
-                          pinpp_time - native_time,
-                          pinpp_time * 100 / native_time - 100])
+          # Write the results
+          writer.writerow ([tool_name,
+                            concurrency,
+                            requests,
+                            iteration,
+                            native_time,
+                            pinpp_time,
+                            pinpp_time - native_time,
+                            pinpp_time * 100 / native_time - 100])
 
 main ()
