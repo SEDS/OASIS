@@ -9,6 +9,7 @@ import sys
 import subprocess
 import csv
 import signal
+import re
 
 #
 # Parse args
@@ -89,7 +90,7 @@ def start_apache (pintool, apache_conf):
          '-t',
          pintool,
          '--',
-         'apachectl -d . -f %s -e info -DFOREGROUND' % (apache_conf)])
+         'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)])
 
   # Use setsid to put child processes into a process group so they will
   # all terminate at the same time
@@ -147,7 +148,7 @@ def main ():
 
   # Compiled regex to get the average time per request across
   # all concurrent requests
-  time_per_request = re.compile ('Time per request:\s+(\d\.\d*) \[.*\] \(mean, across')
+  time_per_request = re.compile ('Time per request:\s+(\d+\.\d+) \[.*\] \(mean, across')
 
   # Execute the test
   for concurrency in args.concurrency:
@@ -164,16 +165,18 @@ def main ():
         time.sleep (1)
         native_output = run_ab (args.url, concurrency, requests)
         os.killpg (process.pid, signal.SIGTERM)
+        time.sleep (1)
 
         # Get pin++ results
         process = start_apache (native, args.apache_conf)
         time.sleep (1)
         pinpp_output = run_ab (args.url, concurrency, requests)
         os.killpg (process.pid, signal.SIGTERM)
+        time.sleep (1)
 
         # Find the average time per request
-        native_time = time_per_request.search (native_output).group (1)
-        pinpp_time = time_per_request.search (pinpp_output).group (1)
+        native_time = float (time_per_request.search (native_output).group (1))
+        pinpp_time = float (time_per_request.search (pinpp_output).group (1))
 
         # Write the results
         writer.writerow ([tool_name,
