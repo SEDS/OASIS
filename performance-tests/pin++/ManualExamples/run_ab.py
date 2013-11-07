@@ -20,7 +20,6 @@ def parse_args ():
   parser.add_argument ('--outfile', default='results.csv', type=str, help='Output file. Defaults to results.csv')
   parser.add_argument ('--pinppdir', default=os.environ['OASIS_ROOT'] + '/examples/pintools', type=str, help='Pin++ pintool directory. Defaults to $OASIS_ROOT/examples/pintools')
   parser.add_argument ('--pindir', default=os.environ['PIN_ROOT'] + '/source/tools', type=str, help='Native pintool directory.  Defaults to $PIN_ROOT/source/tools')
-  parser.add_argument ('--apache_conf', default='/etc/apache2/apache2.conf', type=str, help='Full path to apache config.  Defaults to /etc/apache2/apache2.conf')
   parser.add_argument ('--url', default=None, type=str, help='URL to test with apache benchmark.')
   parser.add_argument ('--requests', default=[1, 10, 100, 1000, 10000, 100000], type=int, nargs='+', help='Space-separated list of the number of requests to test.')
   parser.add_argument ('--concurrency', default=[1, 10, 100, 1000], type =int, nargs='+', help='Space-separated list of the number of clients to test.')
@@ -81,22 +80,38 @@ def match_pintools (native, pinpp):
   return results
 
 #
+# apache running
+#
+def apache_running ():
+  # Run apachectl to see if apache is running
+  cmd = 'apachectl status'
+  dead_text = 'w3m: Can\'t load http://localhost:80/server-status.\n'
+  output = subprocess.check_output (cmd, shell=True, stderr=subprocess.STDOUT)
+  return dead_text != output 
+
+#
 # Start apache
 #
-def start_apache (pintool, apache_conf):
-  # Runs apache in foreground
-  # Example: /usr/sbin/apachectl -f apache_conf -DFOREGROUND
-  path = os.path.abspath (os.path.dirname (apache_conf))
+def start_apache (pintool):
+  print ('INFO: Starting apache')
   cmd = ' '.join ([os.path.join (os.environ['PIN_ROOT'], 'pin'),
                    '-follow_execv',
                    '-t',
                    pintool,
                    '--',
-                   'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)])
+                   'apachectl start 1>/dev/null 2>&1'])
 
-  # Use setsid to put child processes into a process group so they will
-  # all terminate at the same time
-  return subprocess.Popen (cmd, cwd=path, shell=True, preexec_fn=os.setsid)
+  # Check that apache is responding prior to returning
+  while (apache_running () == False):
+    subprocess.call (cmd, shell=True)
+
+#
+# Stop apache
+#
+def stop_apache ():
+  print ('INFO: Stopping apache')
+  while (apache_running () == True):
+    subprocess.call ('apachectl stop 1>/dev/null 2>&1', shell=True)
 
 #
 # Run ab
@@ -115,8 +130,14 @@ def run_ab (url, concurrency, requests):
 #  print (repr (cmd))
 
   # Run the command
-  return subprocess.check_output (cmd, shell=True)
+  output = subprocess.check_output (cmd, shell=True)
 
+  # If the output has a warning (i.e. unreliable results, redo the test)
+  if ('WARNING' in output):
+    print ('WARN: Unreliable results found, redoing test')
+    return run_ab (url, concurrency, requests)
+
+  return output
 #
 # Main entry point for the application
 #
@@ -165,18 +186,16 @@ def main ():
                  % (tool_name, iteration))
 
           # Get native results
-          process = start_apache (native, args.apache_conf)
-          time.sleep (2)
+          start_apache (native)
+          run_ab (args.url, 1, 1)
           native_output = run_ab (args.url, concurrency, requests)
-          os.killpg (process.pid, signal.SIGTERM)
-          time.sleep (2)
+          stop_apache ()
 
           # Get pin++ results
-          process = start_apache (pinpp, args.apache_conf)
-          time.sleep (2)
+          start_apache (pinpp)
+          run_ab (args.url, 1, 1)
           pinpp_output = run_ab (args.url, concurrency, requests)
-          os.killpg (process.pid, signal.SIGTERM)
-          time.sleep (2)
+          stop_apache ()
 
           # Find the average time per request
           native_time = float (time_per_request.search (native_output).group (1))
