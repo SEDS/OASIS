@@ -83,38 +83,20 @@ def match_pintools (native, pinpp):
 #
 # Start apache
 #
-def start_apache (apache_conf):
+def start_apache (pintool, apache_conf):
   # Runs apache in foreground
   # Example: /usr/sbin/apachectl -f apache_conf -DFOREGROUND
   path = os.path.abspath (os.path.dirname (apache_conf))
-  cmd = 'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)
+  cmd = ' '.join ([os.path.join (os.environ['PIN_ROOT'], 'pin'),
+                   '-follow_execv',
+                   '-t',
+                   pintool,
+                   '--',
+                   'apachectl -d . -f %s -e info -DFOREGROUND 1>/dev/null 2>&1' % (apache_conf)])
 
   # Use setsid to put child processes into a process group so they will
   # all terminate at the same time
   return subprocess.Popen (cmd, cwd=path, shell=True, preexec_fn=os.setsid)
-
-#
-# Children pids
-#
-def children_pids (pid):
-  proc = subprocess.Popen ('ps -o pid,ppid ax | grep "%d"' % pid, shell=True, stdout=subprocess.PIPE)
-  pidppid = [x.split() for x in proc.communicate()[0].split("\n") if x]
-
-  return list(int(p) for p, pp in pidppid if int(pp) == pid)
-
-#
-# Attach children
-#
-def attach_children (process, pintool):
-  for child in children_pids (process.pid):
-    print ('INFO: Attaching pin to child process <%s> of parent <%s>' % (child, process.pid))
-    cmd = ' '.join ([os.path.join (os.environ['PIN_ROOT'], 'pin'),
-                     '-pid',
-                     '%s' % child,
-                     '-t',
-                     pintool])
-
-    subprocess.call (cmd, shell=True)
 
 #
 # Run ab
@@ -183,17 +165,15 @@ def main ():
                  % (tool_name, iteration))
 
           # Get native results
-          process = start_apache (args.apache_conf)
+          process = start_apache (native, args.apache_conf)
           time.sleep (2)
-          attach_children (process, native)
           native_output = run_ab (args.url, concurrency, requests)
           os.killpg (process.pid, signal.SIGTERM)
           time.sleep (2)
 
           # Get pin++ results
-          process = start_apache (args.apache_conf)
+          process = start_apache (pinpp, args.apache_conf)
           time.sleep (2)
-          attach_children (process, pinpp)
           pinpp_output = run_ab (args.url, concurrency, requests)
           os.killpg (process.pid, signal.SIGTERM)
           time.sleep (2)
