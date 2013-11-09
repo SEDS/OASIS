@@ -9,15 +9,15 @@
 class new_malloc : public OASIS::Pin::Replacement_Routine <new_malloc, void * (int)>
 {
 public:
-  static void * execute (UINT32 arg0)
+  static void * execute (param1_type n)
   {
     std::cout
       << "NewMalloc ("
       << std::hex << ADDRINT (new_malloc::original_funcptr ()) << ", "
-      << std::dec << arg0 << ")"
+      << std::dec << n << ")"
       << std::endl << flush;
 
-    return new_malloc::call_original (arg0);
+    return new_malloc::call_original (n);
   }
 };
 
