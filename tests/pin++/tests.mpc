@@ -1,0 +1,11 @@
+// $Id$
+
+project (Replacement_Routine_Compile_Test) : oasis_pintool {
+  sharedname = Replacement_Routine_Compile_Test
+  libout = .
+  dllout = .
+
+  Source_Files {
+    Replacement_Routine_Compile_Test.cpp
+  }
+}
