@@ -8,6 +8,7 @@ import argparse
 import sys
 import subprocess
 import csv
+import re
 
 #
 # Parse args
@@ -18,8 +19,9 @@ def parse_args ():
   parser.add_argument ('--outfile', default='results.csv', type=str, help='Output file. Defaults to results.csv')
   parser.add_argument ('--pinppdir', default=os.environ['OASIS_ROOT'] + '/examples/pintools', type=str, help='Pin++ pintool directory. Defaults to $OASIS_ROOT/examples/pintools')
   parser.add_argument ('--pindir', default=os.environ['PIN_ROOT'] + '/source/tools', type=str, help='Native pintool directory.  Defaults to $PIN_ROOT/source/tools')
-  parser.add_argument ('--publisher', default=None, type=str, help='Full command to execute the publisher (including args)')
-  parser.add_argument ('--subscriber', default=None, type=str, help='Full command to execute the subscriber (including args)')
+  parser.add_argument ('--latency', default=False, action='store_true', help='Flag to run the latency performance test')
+  parser.add_argument ('--throughput', default=False, action='store_true', help='Flag to run the throughput performance test')
+  parser.add_argument ('--arch', default=None, type=str, help='Architecture used to build the tests (rtiddsgen)')
   parser.add_argument ('--iterations', default=10, type=int, help='Number of iterations to time for each pintool')
 
   return parser.parse_args ()
@@ -109,11 +111,24 @@ def run_sub (pintool, command):
   #print (repr (cmd))
 
   # Run the command
-  start = time.time ()
   # Had to use shell=True for trailing arguments (i.e. '1>/dev/null &2>1')
   subprocess.call (cmd, shell=True)
-  end = time.time ()
-  return end - start
+
+#
+# Parse the provided output from the publisher to get the average execution time
+#
+def get_time (output, regex):
+  # DEBUG: Check the output
+  #print (output)
+  results = []
+
+  for line in output.splitlines ():
+    match = regex.match (line)
+    if match:
+      results.append (float (match.group (1)))
+
+  # Average all results
+  return float (sum (results))/len (results) if len (results) > 0 else float ('nan')
 
 #
 # Main entry point for the application
@@ -123,9 +138,36 @@ def main ():
   args = parse_args ()
 
   # Check for pub and sub commands
-  if (not args.publisher or not args.subscriber):
-    print ("Error: Publisher or Subscriber commands not provided")
+  if (not args.latency and not args.throughput):
+    print ("Error: No performance test provided, must set --latency or --throughput")
     sys.exit (1)
+
+  # Check for arch
+  if (not args.arch):
+    print ("Error: --arch required")
+    sys.exit (1)
+
+  # Build the commands to run
+  commands = []
+  rti_dir = os.path.join (os.environ['NDDSHOME'], 'example', 'CPP', 'performance')
+
+  if (args.latency):
+    bins = (os.path.join (rti_dir, 'latency', 'objs', args.arch,
+            'Latency_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -numIter 10000 -minSize 1024 -maxSize 1024'),
+            os.path.join (rti_dir, 'latency', 'objs', args.arch,
+            'Latency_subscriber -domainId 88 -cookie 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null'),
+            re.compile ('\s*\d+,\s*\d+\.\d,\s*(\d+\.\d)'),
+            'latency')
+    commands.append (bins)
+
+  if (args.throughput):
+    bins = (os.path.join (rti_dir, 'throughput', 'objs', args.arch,
+            'Throughput_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -duration 30 -size 1024 -demand 5000:1000:5000'),
+            os.path.join (rti_dir, 'throughput', 'objs', args.arch,
+            'Throughput_subscriber -domainId 88 -participantId 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null'),
+            re.compile ('\s*\d+,\s*\d+,\s*\d+,\s*(\d+\.\d)'),
+            'throughput')
+    commands.append (bins)
 
   # Find all the pintools which have been compiled in the pin directory
   print ('INFO: Finding native pintools in <%s>' % (args.pindir))
@@ -148,27 +190,28 @@ def main ():
 
   # Execute the test
   for native, pinpp in pintools:
-    for iteration in range (1, args.iterations + 1):
-      tool_name = os.path.split (native)[-1]
-      print ('INFO: Executing pintool <%s>, iteration <%s>'
-             % (tool_name, iteration))
+    for (pub_cmd, sub_cmd, result_col, label) in commands:
+      for iteration in range (1, args.iterations + 1):
+        tool_name = os.path.split (native)[-1]
+        print ('INFO: Executing pintool <%s>, iteration <%s>'
+               % (tool_name, iteration))
 
-      # Run native
-      pub = run_pub (native, args.publisher)
-      native_time = run_sub (native, args.subscriber)
-      print (repr (pub.communicate ()))
+        # Run native
+        pub = run_pub (native, pub_cmd)
+        run_sub (native, sub_cmd)
+        native_time = get_time (pub.communicate ()[0], result_col)
 
-      # Run pinpp
-      pub = run_pub (pinpp, args.publisher)
-      pinpp_time = run_sub (pinpp, args.subscriber)
-      print (repr (pub.communicate ()))
+        # Run pinpp
+        pub = run_pub (pinpp, pub_cmd)
+        run_sub (pinpp, sub_cmd)
+        pinpp_time = get_time (pub.communicate ()[0], result_col)
 
-      # Write the results
-      writer.writerow ([tool_name,
-                        command,
-                        iteration,
-                        native_time,
-                        pinpp_time,
-                        pinpp_time - native_time,
-                        pinpp_time * 100 / native_time - 100])
+        # Write the results
+        writer.writerow ([tool_name,
+                          label,
+                          iteration,
+                          native_time,
+                          pinpp_time,
+                          pinpp_time - native_time,
+                          pinpp_time * 100 / native_time - 100])
 main ()
