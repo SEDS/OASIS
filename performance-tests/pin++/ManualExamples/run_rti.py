@@ -153,18 +153,18 @@ def main ():
 
   if (args.latency):
     bins = (os.path.join (rti_dir, 'latency', 'objs', args.arch,
-            'Latency_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -numIter 10000 -minSize 1024 -maxSize 1024'),
+            'Latency_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -numIter 10000 -minSize 1024 -maxSize 1024 2>/dev/null'),
             os.path.join (rti_dir, 'latency', 'objs', args.arch,
-            'Latency_subscriber -domainId 88 -cookie 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null'),
+            'Latency_subscriber -domainId 88 -cookie 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null 2>&1'),
             re.compile ('\s*\d+,\s*\d+\.\d,\s*(\d+\.\d)'),
             'latency')
     commands.append (bins)
 
   if (args.throughput):
     bins = (os.path.join (rti_dir, 'throughput', 'objs', args.arch,
-            'Throughput_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -duration 30 -size 1024 -demand 5000:1000:5000'),
+            'Throughput_publisher -domainId 88 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1  -subscribers 1 -duration 30 -size 1024 -demand 5000:1000:5000 2>/dev/null'),
             os.path.join (rti_dir, 'throughput', 'objs', args.arch,
-            'Throughput_subscriber -domainId 88 -participantId 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null'),
+            'Throughput_subscriber -domainId 88 -participantId 1 -nic 127.0.0.1 -transport 1 -peer 127.0.0.1 1>/dev/null 2>&1'),
             re.compile ('\s*\d+,\s*\d+,\s*\d+,\s*(\d+\.\d)'),
             'throughput')
     commands.append (bins)
