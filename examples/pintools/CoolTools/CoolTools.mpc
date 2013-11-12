@@ -1,6 +1,6 @@
 // $Id:
 
-project (Instuction_By_Function) : oasis_pintool {
+project (Instruction_By_Function) : oasis_pintool {
   sharedname    = Instruction_By_Function
 
   Source_Files {
