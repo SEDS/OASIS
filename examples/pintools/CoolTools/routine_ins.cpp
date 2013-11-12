@@ -1,8 +1,13 @@
 // $Id: staticcount.cpp 2278 2013-09-15 20:12:52Z hillj $
 
+/**
+ * Pintool which counts the number of instructions per routine per image
+ */
+
 #include "pin++/Image_Instrument.h"
 #include "pin++/Pintool.h"
 
+#include <iomanip>
 #include <iostream>
 
 class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
@@ -10,7 +15,6 @@ class Instrument : public OASIS::Pin::Image_Instrument <Instrument>
 public:
   void handle_instrument (const OASIS::Pin::Image & img)
   {
-    int count = 0;
     using OASIS::Pin::Section;
 
     for (Section::iterator_type sec_iter = img.section_head (), sec_iter_end = sec_iter.make_end ();
@@ -25,6 +29,7 @@ public:
       {
         using OASIS::Pin::Routine_Guard;
         using OASIS::Pin::Ins;
+        int count = 0;
 
         Routine_Guard guard (*rtn_iter);
 
@@ -34,10 +39,14 @@ public:
         {
           ++ count;
         }
+
+        // Output the count
+        std::cerr
+          << setw (30) << img.name () << " "
+          << setw (30) << rtn_iter->name () << " "
+          << setw (20) << count << std::endl;
       }
     }
-
-    std::cerr << "Image " << img.name () << " has " << count << " instructions" << std::endl;
   }
 };
 
@@ -47,6 +56,10 @@ public:
   staticcount (void)
   {
     this->init_symbols ();
+    std::cerr
+      << setw (30) << "Image" << " "
+      << setw (30) << "Routine" << " "
+      << setw (20) << "Instructions" << std::endl;
   }
 
 private:
