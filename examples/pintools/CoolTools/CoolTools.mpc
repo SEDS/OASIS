@@ -1,9 +1,18 @@
 // $Id:
 
-project (routine_ins) : oasis_pintool {
-  sharedname    = routine_ins
+project (Instuction_By_Function) : oasis_pintool {
+  sharedname    = Instruction_By_Function
 
   Source_Files {
-    routine_ins.cpp
+    Instruction_By_Function.cpp
+  }
+}
+
+project (libloader) {
+  exename = libloader
+  install = .
+
+  Source_Files {
+    libloader.cpp
   }
 }

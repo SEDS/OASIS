@@ -1,7 +1,8 @@
-// $Id: staticcount.cpp 2278 2013-09-15 20:12:52Z hillj $
+// $Id: Instruction_By_Function.cpp 2278 2013-09-15 20:12:52Z hillj $
 
 /**
  * Pintool which counts the number of instructions per routine per image
+ * Ouputs in CSV format to stderr
  */
 
 #include "pin++/Image_Instrument.h"
@@ -42,28 +43,24 @@ public:
 
         // Output the count
         std::cerr
-          << setw (30) << img.name () << " "
-          << setw (30) << rtn_iter->name () << " "
-          << setw (20) << count << std::endl;
+          << img.name () << "," << rtn_iter->name () << "," << count << std::endl;
       }
     }
   }
 };
 
-class staticcount : public OASIS::Pin::Tool <staticcount>
+class Instruction_By_Function: public OASIS::Pin::Tool <Instruction_By_Function>
 {
 public:
-  staticcount (void)
+  Instruction_By_Function (void)
   {
     this->init_symbols ();
     std::cerr
-      << setw (30) << "Image" << " "
-      << setw (30) << "Routine" << " "
-      << setw (20) << "Instructions" << std::endl;
+      << "Image,Routine,Instructions" << std::endl;
   }
 
 private:
   Instrument inst_;
 };
 
-DECLARE_PINTOOL (staticcount)
+DECLARE_PINTOOL (Instruction_By_Function)
