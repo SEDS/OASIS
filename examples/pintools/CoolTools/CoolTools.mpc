@@ -1,0 +1,9 @@
+// $Id:
+
+project (routine_ins) : oasis_pintool {
+  sharedname    = routine_ins
+
+  Source_Files {
+    routine_ins.cpp
+  }
+}
