@@ -1,10 +1,11 @@
 // $Id:
 
-project (Instruction_By_Function) : oasis_pintool {
-  sharedname    = Instruction_By_Function
+project (Function_Instructions) : oasis_pintool {
+  exename = Function_Instructions
+  install = .
 
   Source_Files {
-    Instruction_By_Function.cpp
+    Function_Instructions.cpp
   }
 }
 
