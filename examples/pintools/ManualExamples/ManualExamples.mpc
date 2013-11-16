@@ -152,8 +152,9 @@ project (replacesigprobed) : oasis_pintool {
   }
 }
 
-project (statica) : oasis_pintool {
-  sharedname = statica
+project (statica) : oasis_pintool_static {
+  exename = statica
+  install = .
 
   Source_Files {
     statica.cpp
