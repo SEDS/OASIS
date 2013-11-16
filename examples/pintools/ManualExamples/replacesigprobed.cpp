@@ -9,7 +9,7 @@
 class new_malloc : public OASIS::Pin::Replacement_Routine <new_malloc, void * (int)>
 {
 public:
-  static void * execute (param1_type n)
+  static return_type execute (param1_type n)
   {
     std::cout
       << "NewMalloc ("
