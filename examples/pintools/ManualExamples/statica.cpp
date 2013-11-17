@@ -18,6 +18,11 @@ vector <RTN_INTERNAL_RANGE> rtn_internal_range_list;
 class statica : OASIS::Pin::Tool <statica>
 {
 public:
+  statica (void)
+  {
+    this->init_symbols ();
+  }
+  
   int execute (void)
   {
     using OASIS::Pin::Image;

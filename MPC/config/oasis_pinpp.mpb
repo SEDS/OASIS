@@ -1,17 +1,8 @@
 // $Id: oasis_pintool.mpb 2245 2013-09-06 23:20:23Z hillj $
 
-project : requires_pin {
-  after     += pin++
-  lit_libs  += pin++
-
+project : pin, oasis_pinpp_common {
   libout = $(OASIS_ROOT)/lib
   dllout = $(OASIS_ROOT)/lib
-
-  includes += $(OASIS_ROOT)
-  libpaths += $(OASIS_ROOT)/lib
 }
 
-feature (pin) : pin {
-
-}
 
