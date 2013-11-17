@@ -76,7 +76,9 @@ project (fork_jit_tool) : oasis_pintool {
   sharedname    = fork_jit_tool
 
   Source_Files {
-    fork_jit_tool.cpp
+    conditonal (!prop:windows) {
+      fork_jit_tool.cpp
+    }
   }
 }
 
