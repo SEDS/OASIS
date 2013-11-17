@@ -1,12 +1,12 @@
 // $Id: oasis_pintool.mpb 2245 2013-09-06 23:20:23Z hillj $
 
 project {
-  after    += pin++
-  lit_libs += pin++
+  after += pin++
+  libs  += pin++
 
   includes += $(OASIS_ROOT)
   libpaths += $(OASIS_ROOT)/lib
-  
+
   specific (prop:windows) {
     macros += OASIS_PIN_HAS_DLL=0
   }
