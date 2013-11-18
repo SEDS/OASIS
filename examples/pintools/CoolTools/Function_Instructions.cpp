@@ -12,19 +12,16 @@ class Function_Instructions : OASIS::Pin::Tool <Function_Instructions>
 public:
   Function_Instructions (void)
   {
-    std::cout << "in ctor" << std::endl;
     this->init_symbols ();
   }
 
   int execute (void)
   {
-    std::cout << "in execute" << std::endl;
     using OASIS::Pin::Image;
     using OASIS::Pin::Routine;
     using OASIS::Pin::Section;
 
     Image img = Image::open (inputfile_.Value ().c_str ());
-    std::cout << "opened image" << std::endl;
 
     if (!img.valid ())
     {
@@ -75,11 +72,7 @@ private:
 
 KNOB <string> Function_Instructions::inputfile_ (KNOB_MODE_WRITEONCE, "pintool", "i", "<imagename>", "specify an image to read");
 
-//int main (INT32 argc, CHAR **argv)
 int main (int argc, char * argv [])
 {
-  std::cout << "in main" << std::endl;
-  PIN_InitSymbols ();
-  PIN_Init(argc,argv);
   return OASIS::Pin::Pintool <Function_Instructions> (argc, argv)->execute ();
 }
