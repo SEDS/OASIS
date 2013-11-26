@@ -4,6 +4,7 @@
 #include "pin++/Instruction_Instrument.h"
 #include "pin++/Pintool.h"
 #include "pin++/Try_Block.h"
+#include "pin++/Operand.h"
 
 #include <iostream>
 #include <cstdio>
@@ -101,8 +102,9 @@ public:
   {
     if (ins.mnemonic () == "DIV")
     {
-      if (ins.operand_is_reg (0))
-        ins.insert_call (IPOINT_BEFORE, &this->emulate_int_divide_, REG_GDX, REG_GAX, REG (ins.operand_reg (0)));
+      OASIS::Pin::Operand operand (ins, 0);
+      if (operand.is_reg ())
+        ins.insert_call (IPOINT_BEFORE, &this->emulate_int_divide_, REG_GDX, REG_GAX, REG (operand.reg ()));
       else
         ins.insert_call (IPOINT_BEFORE, &this->emulate_mem_divide_, REG_GDX, REG_GAX);
 
