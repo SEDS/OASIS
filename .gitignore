@@ -43,3 +43,6 @@ default.features
 *.la
 *.a
 *.lib
+
+# MacOS X Files
+.DS_Store
