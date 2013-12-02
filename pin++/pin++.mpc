@@ -1,6 +1,6 @@
 // $Id
 
-project (pin++) : requires_pin {
+project (pin++) : pin {
   staticname    = pin++
   staticflags  += OASIS_PIN_HAS_DLL=0
 
@@ -23,6 +23,7 @@ project (pin++) : requires_pin {
     Instrument.h
     Lock.h
     Mutex.h
+    Operand.h
     RW_Mutex.h
     Semaphore.h
     Prototype.h
@@ -63,6 +64,7 @@ project (pin++) : requires_pin {
     Routine.inl
     TLS.inl
     Trace.inl
+    Operand.inl
   }
 
   Template_Files {

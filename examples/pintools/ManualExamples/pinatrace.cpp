@@ -5,6 +5,7 @@
 #include "pin++/Instruction_Instrument.h"
 #include "pin++/Callback.h"
 #include "pin++/Pintool.h"
+#include "pin++/Operand.h"
 
 #if defined (TARGET_MAC)
   #define MALLOC "_malloc"
@@ -82,13 +83,13 @@ public:
     // Iterate over each memory operand of the instruction.
     for (UINT32 mem_op = 0; mem_op < operands; ++ mem_op)
     {
-      if (ins.is_memory_operand_read (mem_op))
+      if (ins [mem_op].is_memory_read ())
         ins.insert_predicated_call (IPOINT_BEFORE, &this->mem_read_, mem_op);
 
       // Note that in some architectures a single memory operand can be
       // both read and written (for instance incl (%eax) on IA-32)
       // In that case we instrument it once for read and once for write.
-      if (ins.is_memory_operand_written (mem_op))
+      if (ins [mem_op].is_memory_written ())
         ins.insert_predicated_call (IPOINT_BEFORE, &this->mem_write_, mem_op);
     }
   }
