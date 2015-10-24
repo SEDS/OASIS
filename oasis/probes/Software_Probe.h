@@ -62,7 +62,7 @@ public:
                       int byte_order);
 
   /// Dump the contents of the probe to ACE_DEUBG
-  virtual void dump (std::ostream & output) const;
+  virtual void dump (std::ostream & output);
 
   /// Get the software probe's UUID
   const ACE_Utils::UUID & uuid (void) const;
