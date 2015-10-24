@@ -54,7 +54,7 @@ public:
   const ACE_UINT32 & data_size (void) const;
 
   /// Dump the contents of the probe to ACE_DEUBG
-  virtual void dump (std::ostream & output) const;
+  virtual void dump (std::ostream & output);
 
   /// Get the software probe's metadata.
   virtual const Software_Probe_Metadata & metadata (void) const = 0;
