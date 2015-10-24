@@ -31,10 +31,10 @@ protected:
   /// Default constructor.
   Software_Probe_Impl (void);
 
+public:
   /// Destructor.
   virtual ~Software_Probe_Impl (void);
 
-public:
   /// Get the software probe's instance name.
   const ACE_CString & instance_name (void) const;
 

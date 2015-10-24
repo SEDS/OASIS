@@ -20,7 +20,7 @@ Data_Channel::Data_Channel (void)
 OASIS_INLINE
 Data_Channel::~Data_Channel (void)
 {
-
+  delete packager_;
 }
 
 //
