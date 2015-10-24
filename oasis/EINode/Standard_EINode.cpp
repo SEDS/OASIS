@@ -114,6 +114,21 @@ int Standard_EINode::init (int argc, char * argv [])
 //
 void Standard_EINode::destroy (void)
 {
+  // Cleanup probes
+  {
+    ACE_Write_Guard<ACE_RW_Thread_Mutex> guard(this->probes_.mutex());
+
+    for (SoftwareProbe_Hash_Map::iterator it = this->probes_.begin();
+         it != this->probes_.end();
+         ++it )
+    {
+  	std::auto_ptr<Software_Probe_Impl> probe(it->item());
+        it->item() = 0;
+	probe->fini();     
+    }
+  }
+  this->probes_.unbind_all();
+
   // Remove the data channel service from the EI node.
   std::string name = get_directive_name (this->config_.data_channel ().directive_);
 
@@ -154,13 +169,13 @@ load_software_probe (const Einode_Configuration::Software_Probe & probe)
   ENTRYPOINT funcptr = (ENTRYPOINT) symbol;
 
   // Create the software probe factory.
-  Software_Probe_Factory * factory = funcptr ();
+  std::auto_ptr<Software_Probe_Factory> factory(funcptr ());
 
-  if (0 == factory)
+  if (0 == factory.get())
     return -1;
 
   // Now, create the software probe using the factory.
-  Software_Probe_Impl * probe_impl = factory->create ();
+  std::auto_ptr<Software_Probe_Impl> probe_impl(factory->create ());
 
   // Initialize the software probe and register it.
   if (0 != probe_impl->init (probe.params_.c_str (), probe.name_.c_str ()))
@@ -169,11 +184,12 @@ load_software_probe (const Einode_Configuration::Software_Probe & probe)
                        probe.name_.c_str ()),
                        -1);
 
-  if (0 != this->register_probe (probe_impl))
+  if (0 != this->register_probe (probe_impl.get()))
     ACE_ERROR_RETURN ((LM_ERROR,
                        ACE_TEXT ("%T (%t) - %M - failed to register probe %s\n"),
                        probe.name_.c_str ()),
                        -1);
+  probe_impl.release();
 
   return 0;
 }
@@ -254,6 +270,8 @@ void Standard_EINode::unregister_probe (const char * name)
       ACE_ERROR ((LM_ERROR,
                   ACE_TEXT ("%T (%t) - %M - fini () failed for %s\n"),
                   probe->instance_name ().c_str ()));
+
+    delete probe;
   }
 }
 
